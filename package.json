@@ -1,36 +1,39 @@
 {
-  "name": "planingo-front",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "element-react": "^1.4.34",
-    "element-theme-default": "^1.4.13",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": ["react-app", "eslint:recommended"]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "react-hot-loader": "^4.12.14"
-  }
+	"name": "planingo-front",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"element-react": "^1.4.34",
+		"element-theme-default": "^1.4.13",
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
+		"react-scripts": "3.1.2"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"eslint:recommended"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"react-hot-loader": "^4.12.14"
+	}
 }
