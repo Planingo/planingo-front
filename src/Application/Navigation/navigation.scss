@@ -1,0 +1,14 @@
+.navigation {
+	height: 100%;
+	background-color: #ff5555;
+	// background: transparent linear-gradient(180deg, #ff5555 0%, #ffce48 100%) 0%
+	// 	0% no-repeat padding-box;
+	color: white;
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+
+	a {
+		color: white;
+	}
+}

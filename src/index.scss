@@ -1,0 +1,21 @@
+body {
+	margin: 0;
+	font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	height: 100vh !important;
+	width: 100vw !important;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+#root {
+	height: 100%;
+}
+
+* {
+	box-sizing: border-box;
+}

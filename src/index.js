@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import './index.scss'
+import './Tools/theme/index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-
-import 'element-theme-default'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

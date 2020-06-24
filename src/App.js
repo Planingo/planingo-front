@@ -1,20 +1,25 @@
 import React from 'react'
-import './App.css'
-import Switch from './Components/Switch/switch'
-import Input from './Components/Input/Input/input'
-import Button from './Components/Button/button'
+import './App.scss'
+import IntlProvider from './Tools/translation/IntlProvider'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import './App.less'
+import Account from './Account/Account'
+import Application from './Application/Application'
 
-function App() {
+const App = () => {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<Switch off="Off" on="On" label="label"></Switch>
-				<Input placeholder="This is placeholder" disabled icon="time" />
-				<Button type="primary" loading icon="time" disabled>
-					Coucou
-				</Button>
-			</header>
-		</div>
+		<IntlProvider>
+			<Router>
+				<Switch>
+					<Route basename="/auth" path="/auth">
+						<Account />
+					</Route>
+					<Route path="/">
+						<Application />
+					</Route>
+				</Switch>
+			</Router>
+		</IntlProvider>
 	)
 }
 

@@ -1,0 +1,12 @@
+.application {
+	height: 100%;
+	display: grid;
+	grid-template-columns: min-content 1fr;
+}
+
+.body {
+	padding: 1em;
+	max-width: 100%;
+	overflow: auto;
+	height: 100%;
+}

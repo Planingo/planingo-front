@@ -1,0 +1,27 @@
+.reset {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	height: 100%;
+	justify-content: center;
+	width: 50%;
+
+	.links {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	button {
+		font-family: 'DK Lemon Yellow Sun';
+	}
+
+	a {
+		margin-bottom: 22px;
+	}
+
+	h1 {
+		align-self: center;
+		font-family: 'DK Lemon Yellow Sun';
+		font-size: 3em;
+	}
+}
