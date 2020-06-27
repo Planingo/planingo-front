@@ -2,11 +2,34 @@
 	height: 100%;
 	display: grid;
 	grid-template-columns: min-content 1fr;
-}
+	grid-template-rows: min-content 1fr;
 
-.body {
-	padding: 1em;
-	max-width: 100%;
-	overflow: auto;
-	height: 100%;
+	.body {
+		height: 100%;
+		padding: 1em;
+		max-width: 100%;
+		overflow: auto;
+		.middle {
+			overflow: auto;
+			height: 100%;
+		}
+	}
+
+	.header {
+		padding: 0.5em;
+		background-color: #ffce48;
+		font-family: 'DK Lemon Yellow Sun';
+		font-size: 1.5em;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			color: black;
+		}
+	}
+
+	@media (max-width: 665px) {
+		grid-template-columns: 1fr;
+	}
 }

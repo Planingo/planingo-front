@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@ant-design/icons": "^4.2.1",
 		"@apollo/react-hooks": "^3.1.5",
 		"@craco/craco": "^5.6.4",
 		"antd": "^4.3.5",
@@ -10,6 +11,7 @@
 		"craco-less": "^1.17.0",
 		"final-form": "^4.20.0",
 		"graphql": "^15.1.0",
+		"lodash": "^4.17.15",
 		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",

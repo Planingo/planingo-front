@@ -1,6 +1,11 @@
 .professors {
-	display: flex;
-	justify-items: center;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	.professor .ant-card .ant-card-cover {
+		@media (max-width: 555px) {
+			display: none;
+		}
+	}
+
+	.ant-card {
+		height: 100%;
+	}
 }

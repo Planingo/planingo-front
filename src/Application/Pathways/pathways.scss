@@ -1,0 +1,11 @@
+.pathways {
+	.student .ant-card .ant-card-cover {
+		@media (max-width: 555px) {
+			display: none;
+		}
+	}
+
+	.ant-card {
+		height: 100%;
+	}
+}

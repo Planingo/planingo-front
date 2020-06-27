@@ -4,6 +4,9 @@ import './index.scss'
 import './Tools/theme/index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import moment from 'moment'
+import 'moment/locale/fr'
+moment.locale('fr')
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

@@ -2,23 +2,22 @@ import React from 'react'
 import './professor.scss'
 import { Card } from 'antd'
 
-const Professor = ({ firstName, lastName, modules }) => {
+const Professor = ({ data }) => {
 	const { Meta } = Card
 	return (
 		<div className="professor">
 			<Card
 				hoverable
-				style={{ width: 240 }}
 				cover={
 					<img
 						alt="example"
-						src={`https://source.unsplash.com/600x400/?personne&${firstName}${lastName}`}
+						src={`https://source.unsplash.com/600x400/?personne&${data.firstName}${data.lastName}`}
 					/>
 				}
 			>
 				<Meta
-					title={`${firstName} ${lastName}`}
-					description={modules[0].module.name}
+					title={`${data.firstName} ${data.lastName}`}
+					description={data.modules[0].module.name}
 				/>
 			</Card>
 		</div>
