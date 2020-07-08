@@ -1,0 +1,18 @@
+.constraints {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1em;
+
+	button {
+		align-self: center;
+	}
+
+	.constraint {
+		display: flex;
+		padding-bottom: 0.5em;
+		p {
+			margin: 0;
+			padding-left: 1em;
+		}
+	}
+}

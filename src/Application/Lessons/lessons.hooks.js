@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 
-export const useGetAllCompagnies = () => {
-	const result = useQuery(gql`
-		query getAllCompagnies {
+export const useGetAllStudents = () => {
+	useQuery(gql`
+		query getAllStudents {
 			student(order_by: { firstName: asc }) {
 				firstName
 				lastName

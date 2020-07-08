@@ -14,9 +14,14 @@ import {
 	TagOutlined,
 	ShopOutlined,
 } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { selectors } from '../../Account/store'
 
 const Navigation = () => {
 	const intl = useIntl()
+
+	const settings = useSelector(selectors.settings)
+
 	return (
 		<div className="navigation">
 			<div className="top">
@@ -26,38 +31,52 @@ const Navigation = () => {
 					</Link>
 				</div>
 				<div className="main">
-					<Link to="/students">
-						<UserOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
-					</Link>
-					<Link to="/professors">
-						<TeamOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
-					</Link>
+					{settings.student && (
+						<Link to="/students">
+							<UserOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
+						</Link>
+					)}
+					{settings.professor && (
+						<Link to="/professors">
+							<TeamOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
+						</Link>
+					)}
 					<Link to="/calendars">
 						<CalendarOutlined />
 						<p>{intl.formatMessage({ id: 'navigation.calendars' })}</p>
 					</Link>
-					<Link to="/pathways">
-						<ExperimentOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
-					</Link>
-					<Link to="/modules">
-						<TagsOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
-					</Link>
-					<Link to="/cours">
-						<TagOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.cours' })}</p>
-					</Link>
-					<Link to="/rooms">
-						<ShopOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
-					</Link>
-					<Link to="/compagnies">
-						<WifiOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.compagnies' })}</p>
-					</Link>
+					{settings.pathway && (
+						<Link to="/pathways">
+							<ExperimentOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
+						</Link>
+					)}
+					{settings.module && (
+						<Link to="/modules">
+							<TagsOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
+						</Link>
+					)}
+					{settings.lesson && (
+						<Link to="/lessons">
+							<TagOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.lessons' })}</p>
+						</Link>
+					)}
+					{settings.room && (
+						<Link to="/rooms">
+							<ShopOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
+						</Link>
+					)}
+					{settings.company && (
+						<Link to="/companies">
+							<WifiOutlined />
+							<p>{intl.formatMessage({ id: 'navigation.companies' })}</p>
+						</Link>
+					)}
 				</div>
 			</div>
 			<div className="settings">

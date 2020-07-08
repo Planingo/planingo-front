@@ -1,11 +1,11 @@
 import React from 'react'
-import './compagny.scss'
+import './company.scss'
 import { Card } from 'antd'
 
-const Compagny = ({ data }) => {
+const Company = ({ data }) => {
 	const { Meta } = Card
 	return (
-		<div className="compagny">
+		<div className="company">
 			<Card
 				hoverable
 				cover={
@@ -24,4 +24,4 @@ const Compagny = ({ data }) => {
 	)
 }
 
-export default Compagny
+export default Company

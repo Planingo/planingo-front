@@ -23,10 +23,11 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
 
-		a {
-			color: black;
-		}
+	.ant-breadcrumb .anticon,
+	.ant-breadcrumb {
+		font-size: 1em;
 	}
 
 	@media (max-width: 665px) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './cour.scss'
+import './lesson.scss'
 import { Card } from 'antd'
 
 const Cour = ({ data }) => {

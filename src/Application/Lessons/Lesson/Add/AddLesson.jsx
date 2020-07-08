@@ -1,5 +1,5 @@
 import React from 'react'
-import './addCour.scss'
+import './addLesson.scss'
 import { Form, Row, Col, Input, Select, DatePicker } from 'antd'
 
 const AddCour = () => {

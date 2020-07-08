@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { Input, Form, Button } from 'antd'
 import './login.scss'
 import { Form as FinalForm, Field } from 'react-final-form'
-import { useFindAccountByEmail } from '../account.hooks'
-import { useHistory } from 'react-router-dom'
+import { useLogin } from './login.hooks'
 
 const Login = () => {
 	const intl = useIntl()
-	const history = useHistory()
-	const [findAccountByEmail, { data, loading }] = useFindAccountByEmail()
 
-	useEffect(() => {
-		if (data?.account.length) history.push(`/`)
-	}, [data, history])
-
-	const onSubmit = async values => {
-		await findAccountByEmail(values)
-	}
+	const [onSubmit, loading] = useLogin()
 
 	const requiredEmail = value =>
 		value ? undefined : intl.formatMessage({ id: 'error.required' })
@@ -76,12 +67,12 @@ const Login = () => {
 							)}
 						</Field>
 						<div className="links">
-							<a className="el-link el-link--primary" href="reset">
+							<a className="el-link el-link--primary" href="../reset">
 								{intl.formatMessage({
 									id: 'form.login.forget',
 								})}
 							</a>
-							<a className="el-link el-link--primary" href="signup">
+							<a className="el-link el-link--primary" href="../signup">
 								{intl.formatMessage({
 									id: 'form.login.signup',
 								})}

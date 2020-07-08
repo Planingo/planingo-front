@@ -2,13 +2,16 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { Input, Form, Button } from 'antd'
 import './signup.scss'
+// import { useDispatch } from 'react-redux'
 import { Form as FinalForm, Field } from 'react-final-form'
 import { useHistory, Link } from 'react-router-dom'
 import { useCreateAccount } from '../account.hooks'
+// import { actions } from '../store'
 
 const Signup = () => {
 	const intl = useIntl()
 	const history = useHistory()
+	// const dispatch = useDispatch()
 	const requiredEmail = value =>
 		value ? undefined : intl.formatMessage({ id: 'error.required' })
 
@@ -32,8 +35,9 @@ const Signup = () => {
 	const createAccount = useCreateAccount()
 
 	const onSubmit = async values => {
-		const { data } = await createAccount(values)
-		history.push(`/auth/login/${data.insert_account_one.id}`)
+		const id = await createAccount(values)
+		// await dispatch(actions.createAnAccount({ values.email, id }))
+		history.push(`/auth/login/${id}`)
 	}
 
 	return (
