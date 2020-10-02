@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"@ant-design/icons": "^4.2.1",
+		"@ant-design/icons": "^4.2.2",
 		"@apollo/react-hooks": "^3.1.5",
 		"@craco/craco": "^5.6.4",
 		"antd": "^4.6.6",
