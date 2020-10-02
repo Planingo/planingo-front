@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { actions } from '../store'
 import { useDispatch } from 'react-redux'
 import { gql } from 'apollo-boost'
-import { hogwarts } from '../../Tools/Clients/graphql'
 import { useMutation } from '@apollo/react-hooks'
 
 export const useLogin = () => {
