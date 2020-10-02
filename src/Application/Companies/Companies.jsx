@@ -6,12 +6,18 @@ import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddCompany from './Company/Add/AddCompany'
+import { Spin } from 'antd'
 
 const Compagnies = () => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllCompagnies()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (

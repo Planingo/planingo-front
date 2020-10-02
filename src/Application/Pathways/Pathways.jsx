@@ -6,12 +6,18 @@ import { useGetAllPathways } from './pathways.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
+import { Spin } from 'antd'
 
 const Pathways = () => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllPathways()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (

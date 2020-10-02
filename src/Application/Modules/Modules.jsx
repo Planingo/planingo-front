@@ -6,12 +6,18 @@ import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddModule from './Module/Add/AddModule'
+import { Spin } from 'antd'
 
 const Modules = () => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllModules()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (

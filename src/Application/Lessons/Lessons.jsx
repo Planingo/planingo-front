@@ -6,12 +6,18 @@ import { useGetAllStudents } from './lessons.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
+import { Spin } from 'antd'
 
 const Lessons = () => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllStudents()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (

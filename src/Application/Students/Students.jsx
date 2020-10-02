@@ -6,14 +6,19 @@ import { useGetAllStudents } from './students.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Radio } from 'antd'
+import { Radio, Spin } from 'antd'
 import AddItem from '../Layout/Add/AddItem'
 
 const Students = ({ setIsGrid, options, isGrid }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllStudents()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (
