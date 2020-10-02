@@ -17,6 +17,7 @@ import {
 import { useSelector } from 'react-redux'
 import { selectors } from '../../Account/store'
 import { useFindSettingsByAccountId } from '../../Tools/MagicBook/Settings/settings.hooks'
+import { Spin } from 'antd'
 
 const Navigation = () => {
 	const intl = useIntl()
@@ -25,7 +26,12 @@ const Navigation = () => {
 		useSelector(selectors.accountId),
 	)
 
-	if (loading) return <p>loading....</p>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	return (
 		<div className="navigation">

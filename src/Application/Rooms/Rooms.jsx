@@ -6,12 +6,18 @@ import { useGetAllRooms } from './rooms.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
+import { Spin } from 'antd'
 
 const Rooms = () => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllRooms()
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (

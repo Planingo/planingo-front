@@ -1,7 +1,7 @@
 import React from 'react'
 import './scopes.scss'
 import { useIntl } from 'react-intl'
-import { Switch, Card, Button } from 'antd'
+import { Switch, Card, Button, Spin } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { selectors } from '../../../Account/store'
 import { useSelector } from 'react-redux'
@@ -20,7 +20,12 @@ const Scopes = () => {
 
 	const [updateSettingsById, result] = useUpdateSettingsById()
 
-	if (loading) return <p>loading....</p>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 	return (
 		<Form
 			initialValues={settings}

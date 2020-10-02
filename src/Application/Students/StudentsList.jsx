@@ -4,7 +4,7 @@ import React from 'react'
 import './students.scss'
 import AddStudent from './Student/Add/AddStudent'
 import { useGetAllStudents } from './students.hooks'
-import { Table, Radio } from 'antd'
+import { Table, Radio, Spin } from 'antd'
 import { withSize } from 'react-sizeme'
 import AddItem from '../Layout/Add/AddItem'
 
@@ -50,7 +50,12 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 		},
 	]
 
-	if (loading) return <div>Loading....</div>
+	if (loading)
+		return (
+			<div>
+				<Spin size="large" />
+			</div>
+		)
 
 	if (!data)
 		return (
