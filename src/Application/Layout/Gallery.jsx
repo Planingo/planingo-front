@@ -1,6 +1,5 @@
 import React from 'react'
 import './gallery.scss'
-import AddItem from './Add/AddItem'
 
 const Gallery = ({ loading, datas, Item, Add, title }) => {
 	if (loading) return <p>{loading}</p>

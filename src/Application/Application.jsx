@@ -12,7 +12,7 @@ import Settings from './Settings/Settings'
 import Lessons from './Lessons/Lessons'
 import Rooms from './Rooms/Rooms'
 import Companies from './Companies/Companies'
-import { Breadcrumb, Dropdown, Avatar, Menu, Radio } from 'antd'
+import { Breadcrumb, Dropdown, Avatar, Menu } from 'antd'
 import {
 	HomeOutlined,
 	AppstoreOutlined,
@@ -30,7 +30,6 @@ import DetailRoom from './Rooms/Room/Detail/DetailRoom'
 import DetailCompany from './Companies/Company/Detail/DetailCompany'
 import RoomsList from './Rooms/RoomsList'
 import StudentsList from './Students/StudentsList'
-import AddItem from './Layout/Add/AddItem'
 
 const Application = () => {
 	const intl = useIntl()
