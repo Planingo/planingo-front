@@ -1,9 +1,6 @@
 version: 2
-update_configs:
-    - package_manager: 'javascript'
-      directory: '/src'
-      update_schedule: 'monthly'
-      target_branch: master
-      default_labels:
-        - 'dependencies-front'
-        - 'dependabot'
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: weekly
