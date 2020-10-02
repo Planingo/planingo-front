@@ -5,6 +5,7 @@ import { useGetAllCompagnies } from './companies.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
+import AddCompany from './Company/Add/AddCompany'
 
 const Compagnies = () => {
 	const intl = useIntl()
@@ -15,13 +16,21 @@ const Compagnies = () => {
 	if (!data)
 		return (
 			<NoData
+				Add={AddCompany}
 				cta={intl.formatMessage({ id: 'add.company' })}
 				description={intl.formatMessage({ id: 'no.data.company' })}
+				title={intl.formatMessage({ id: 'add.company' })}
 			/>
 		)
 	return (
 		<div className="compagnies">
-			<Gallery datas={data?.company} loading={loading} Item={Company} />
+			<Gallery
+				datas={data?.company}
+				loading={loading}
+				Item={Company}
+				Add={AddCompany}
+				title={intl.formatMessage({ id: 'add.company' })}
+			/>
 		</div>
 	)
 }

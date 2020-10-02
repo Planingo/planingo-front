@@ -1,4 +1,5 @@
 .professors {
+	overflow: auto;
 	.professor .ant-card .ant-card-cover {
 		@media (max-width: 555px) {
 			display: none;

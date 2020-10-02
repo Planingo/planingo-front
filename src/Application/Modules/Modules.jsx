@@ -16,8 +16,10 @@ const Modules = () => {
 	if (!data)
 		return (
 			<NoData
+				Add={AddModule}
 				cta={intl.formatMessage({ id: 'add.module' })}
 				description={intl.formatMessage({ id: 'no.data.module' })}
+				title={intl.formatMessage({ id: 'add.module' })}
 			/>
 		)
 

@@ -16,8 +16,10 @@ const Lessons = () => {
 	if (!data)
 		return (
 			<NoData
-				cta={intl.formatMessage({ id: 'add.lessons' })}
-				description={intl.formatMessage({ id: 'no.data.lessons' })}
+				Add={AddLesson}
+				cta={intl.formatMessage({ id: 'add.lesson' })}
+				description={intl.formatMessage({ id: 'no.data.lesson' })}
+				title={intl.formatMessage({ id: 'add.lesson' })}
 			/>
 		)
 	return (
@@ -27,7 +29,7 @@ const Lessons = () => {
 				loading={loading}
 				Item={Lesson}
 				Add={AddLesson}
-				title={intl.formatMessage({ id: 'add.lessons' })}
+				title={intl.formatMessage({ id: 'add.lesson' })}
 			/>
 		</div>
 	)

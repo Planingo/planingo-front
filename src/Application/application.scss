@@ -10,8 +10,9 @@
 		max-width: 100%;
 		overflow: auto;
 		.middle {
-			overflow: auto;
 			height: 100%;
+			display: flex;
+			flex-direction: column;
 		}
 	}
 
@@ -28,6 +29,13 @@
 	.ant-breadcrumb .anticon,
 	.ant-breadcrumb {
 		font-size: 1em;
+	}
+
+	.refinement {
+		display: flex;
+		padding: 1em;
+		padding-top: 0;
+		align-items: center;
 	}
 
 	@media (max-width: 665px) {

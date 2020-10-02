@@ -16,8 +16,10 @@ const Rooms = () => {
 	if (!data)
 		return (
 			<NoData
+				Add={AddRoom}
 				cta={intl.formatMessage({ id: 'add.room' })}
 				description={intl.formatMessage({ id: 'no.data.room' })}
+				title={intl.formatMessage({ id: 'add.room' })}
 			/>
 		)
 	return (

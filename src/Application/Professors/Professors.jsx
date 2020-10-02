@@ -16,8 +16,10 @@ const Professors = () => {
 	if (!data)
 		return (
 			<NoData
+				Add={AddProfessor}
 				cta={intl.formatMessage({ id: 'add.professor' })}
 				description={intl.formatMessage({ id: 'no.data.professor' })}
+				title={intl.formatMessage({ id: 'add.professor' })}
 			/>
 		)
 	return (

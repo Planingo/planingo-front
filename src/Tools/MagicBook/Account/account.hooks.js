@@ -1,8 +1,4 @@
-import {
-	useSignup,
-	useAccountIdByEmail,
-	useCreateSettings,
-} from '../Tools/MagicBook/account'
+import { useSignup, useAccountIdByEmail, useCreateSettings } from './account'
 
 export const useCreateAccount = () => {
 	const [createAccount] = useSignup()
