@@ -1,27 +1,30 @@
 import React from 'react'
 import './lesson.scss'
 import { Card } from 'antd'
+import { Link } from 'react-router-dom'
 
-const Cour = ({ data }) => {
+const Lesson = ({ data }) => {
 	const { Meta } = Card
 	return (
-		<div className="cour">
-			<Card
-				hoverable
-				cover={
-					<img
-						alt="example"
-						src={`https://source.unsplash.com/600x400/?personne&${data.firstName}${data.lastName}`}
+		<div className="lesson">
+			<Link to={`/lessons/${data.id}`}>
+				<Card
+					hoverable
+					cover={
+						<img
+							alt="example"
+							src={`https://source.unsplash.com/600x400/?personne&${data.firstName}${data.lastName}`}
+						/>
+					}
+				>
+					<Meta
+						title={`${data.firstName} ${data.lastName}`}
+						description={data.pathway.name}
 					/>
-				}
-			>
-				<Meta
-					title={`${data.firstName} ${data.lastName}`}
-					description={data.pathway.name}
-				/>
-			</Card>
+				</Card>
+			</Link>
 		</div>
 	)
 }
 
-export default Cour
+export default Lesson

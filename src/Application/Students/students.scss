@@ -1,5 +1,13 @@
 .students {
+	flex: 1;
 	.ant-card {
 		height: 100%;
+	}
+
+	td {
+		img {
+			height: 3em;
+			width: auto;
+		}
 	}
 }

@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import './addItem.scss'
 import { Drawer, Button } from 'antd'
-import { PlusCircleOutlined } from '@ant-design/icons'
 
-const AddItem = ({ children, title }) => {
+const AddItem = ({ children, title, cta }) => {
 	const [visible, setVisible] = useState(false)
 	return (
 		<>
 			<div className="addItem">
-				<Button type="text" label="add" onClick={() => setVisible(true)}>
-					<PlusCircleOutlined />
+				<Button label="add" type="primary" onClick={() => setVisible(true)}>
+					{cta || title}
 				</Button>
 			</div>
 			<Drawer

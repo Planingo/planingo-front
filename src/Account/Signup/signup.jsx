@@ -5,7 +5,7 @@ import './signup.scss'
 // import { useDispatch } from 'react-redux'
 import { Form as FinalForm, Field } from 'react-final-form'
 import { useHistory, Link } from 'react-router-dom'
-import { useCreateAccount } from '../account.hooks'
+import { useCreateAccount } from '../../Tools/MagicBook/Account/account.hooks'
 // import { actions } from '../store'
 
 const Signup = () => {

@@ -1,9 +1,10 @@
 import React from 'react'
 import './noData.scss'
-import { Empty, Button } from 'antd'
+import { Empty } from 'antd'
 import { useIntl } from 'react-intl'
+import AddFirstItem from '../Application/Layout/Add/AddFirstItem'
 
-const NoData = ({ description, cta }) => {
+const NoData = ({ description, cta, Add, title }) => {
 	const intl = useIntl()
 	return (
 		<div className="noData">
@@ -12,7 +13,9 @@ const NoData = ({ description, cta }) => {
 					<p>{description || intl.formatMessage({ id: 'no.data' })}</p>
 				}
 			>
-				{cta && <Button type="primary">{cta}</Button>}
+				<AddFirstItem title={title} cta={cta}>
+					<Add />
+				</AddFirstItem>
 			</Empty>
 		</div>
 	)

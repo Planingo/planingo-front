@@ -58,8 +58,6 @@ const Schools = () => {
 		setLines([...lines, {}])
 	}
 
-	console.log(lines)
-
 	const [studentChecked, setStudentChecked] = useState(
 		intl.formatMessage({ id: 'settings.school.hour' }),
 	)

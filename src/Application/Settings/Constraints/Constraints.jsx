@@ -81,7 +81,7 @@ const Constraints = () => {
 			</Card>
 			<Card
 				title={intl.formatMessage({
-					id: 'settings.constraints.compagnies',
+					id: 'settings.constraints.companies',
 				})}
 			>
 				<div className="constraint">

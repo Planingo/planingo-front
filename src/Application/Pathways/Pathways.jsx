@@ -16,8 +16,10 @@ const Pathways = () => {
 	if (!data)
 		return (
 			<NoData
+				Add={AddPathway}
 				cta={intl.formatMessage({ id: 'add.pathway' })}
 				description={intl.formatMessage({ id: 'no.data.pathway' })}
+				title={intl.formatMessage({ id: 'add.pathway' })}
 			/>
 		)
 	return (

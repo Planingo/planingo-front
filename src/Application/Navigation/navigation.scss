@@ -9,6 +9,9 @@
 	flex-direction: column;
 	justify-content: space-between;
 	grid-row: span 2;
+	.pointer {
+		cursor: pointer;
+	}
 	a {
 		color: white;
 		display: flex;

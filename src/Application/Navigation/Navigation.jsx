@@ -16,11 +16,16 @@ import {
 } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../Account/store'
+import { useFindSettingsByAccountId } from '../../Tools/MagicBook/Settings/settings.hooks'
 
 const Navigation = () => {
 	const intl = useIntl()
 
-	const settings = useSelector(selectors.settings)
+	const { settings, loading } = useFindSettingsByAccountId(
+		useSelector(selectors.accountId),
+	)
+
+	if (loading) return <p>loading....</p>
 
 	return (
 		<div className="navigation">
@@ -32,47 +37,47 @@ const Navigation = () => {
 				</div>
 				<div className="main">
 					{settings.student && (
-						<Link to="/students">
+						<Link to="/students" className="pointer">
 							<UserOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
 						</Link>
 					)}
 					{settings.professor && (
-						<Link to="/professors">
+						<Link to="/professors" className="pointer">
 							<TeamOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
 						</Link>
 					)}
-					<Link to="/calendars">
+					<Link to="/calendars" className="pointer">
 						<CalendarOutlined />
 						<p>{intl.formatMessage({ id: 'navigation.calendars' })}</p>
 					</Link>
 					{settings.pathway && (
-						<Link to="/pathways">
+						<Link to="/pathways/" className="pointer">
 							<ExperimentOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
 						</Link>
 					)}
 					{settings.module && (
-						<Link to="/modules">
+						<Link to="/modules" className="pointer">
 							<TagsOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
 						</Link>
 					)}
 					{settings.lesson && (
-						<Link to="/lessons">
+						<Link to="/lessons" className="pointer">
 							<TagOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.lessons' })}</p>
 						</Link>
 					)}
 					{settings.room && (
-						<Link to="/rooms">
+						<Link to="/rooms" className="pointer">
 							<ShopOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
 						</Link>
 					)}
 					{settings.company && (
-						<Link to="/companies">
+						<Link to="/companies" className="pointer">
 							<WifiOutlined />
 							<p>{intl.formatMessage({ id: 'navigation.companies' })}</p>
 						</Link>
@@ -80,7 +85,7 @@ const Navigation = () => {
 				</div>
 			</div>
 			<div className="settings">
-				<Link to="/settings">
+				<Link to="/settings" className="pointer">
 					<SettingOutlined />
 					<p>{intl.formatMessage({ id: 'navigation.settings' })}</p>
 				</Link>

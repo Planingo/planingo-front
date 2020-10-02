@@ -1,25 +1,28 @@
 import React from 'react'
 import './professor.scss'
 import { Card } from 'antd'
+import { Link } from 'react-router-dom'
 
 const Professor = ({ data }) => {
 	const { Meta } = Card
 	return (
 		<div className="professor">
-			<Card
-				hoverable
-				cover={
-					<img
-						alt="example"
-						src={`https://source.unsplash.com/600x400/?personne&${data.firstName}${data.lastName}`}
+			<Link to={`/professors/${data.id}`}>
+				<Card
+					hoverable
+					cover={
+						<img
+							alt="example"
+							src={`https://api.adorable.io/avatars/285/${data.id}.png`}
+						/>
+					}
+				>
+					<Meta
+						title={`${data.firstName} ${data.lastName}`}
+						description={data.modules[0].module.name}
 					/>
-				}
-			>
-				<Meta
-					title={`${data.firstName} ${data.lastName}`}
-					description={data.modules[0].module.name}
-				/>
-			</Card>
+				</Card>
+			</Link>
 		</div>
 	)
 }
