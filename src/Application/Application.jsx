@@ -111,47 +111,40 @@ const Application = () => {
 						</Route>
 
 						{isGrid ? (
-							<>
-								<Route path="/students">
-									<Students
-										setIsGrid={setIsGrid}
-										isGrid={isGrid}
-										options={options}
-									/>
-								</Route>
-								<Route path="/professors">
-									<Professors />
-								</Route>
-								<Route path="/pathways">
-									<Pathways />
-								</Route>
-								<Route path="/modules">
-									<Modules />
-								</Route>
-								<Route path="/lessons">
-									<Lessons />
-								</Route>
-								<Route path="/rooms">
-									<Rooms />
-								</Route>
-								<Route path="/companies">
-									<Companies />
-								</Route>
-							</>
+							<Route path="/students">
+								<Students
+									setIsGrid={setIsGrid}
+									isGrid={isGrid}
+									options={options}
+								/>
+							</Route>
 						) : (
-							<>
-								<Route path="/students">
-									<StudentsList
-										setIsGrid={setIsGrid}
-										isGrid={isGrid}
-										options={options}
-									/>
-								</Route>
-								<Route path="/rooms">
-									<RoomsList />
-								</Route>
-							</>
+							<Route path="/students">
+								<StudentsList
+									setIsGrid={setIsGrid}
+									isGrid={isGrid}
+									options={options}
+								/>
+							</Route>
 						)}
+						<Route path="/professors">
+							<Professors />
+						</Route>
+						<Route path="/pathways">
+							<Pathways />
+						</Route>
+						<Route path="/modules">
+							<Modules />
+						</Route>
+						<Route path="/lessons">
+							<Lessons />
+						</Route>
+						<Route path="/rooms">
+							<Rooms />
+						</Route>
+						<Route path="/companies">
+							<Companies />
+						</Route>
 						<Route path="/calendars">
 							<Calendars />
 						</Route>
