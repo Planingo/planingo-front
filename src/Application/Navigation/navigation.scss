@@ -1,6 +1,8 @@
 .navigation {
-	height: 100%;
+	max-height: 100vh;
 	background-color: #ff5555;
+	position: sticky;
+	top: 0;
 	// background: transparent linear-gradient(180deg, #ff5555 0%, #ffce48 100%) 0%
 	// 	0% no-repeat padding-box;
 	color: white;
@@ -41,7 +43,7 @@
 
 		a {
 			svg {
-				width: 3em;
+				width: 5em;
 			}
 		}
 	}

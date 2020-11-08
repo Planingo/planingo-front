@@ -13,7 +13,7 @@ const Professor = ({ data }) => {
 					cover={
 						<img
 							alt="example"
-							src={`https://api.adorable.io/avatars/285/${data.id}.png`}
+							src={`https://avatars.bugsyaya.dev/285/${data.id}`}
 						/>
 					}
 				>

@@ -6,8 +6,7 @@ import { useGetAllStudents } from './students.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Radio, Spin } from 'antd'
-import AddItem from '../Layout/Add/AddItem'
+import { Spin } from 'antd'
 
 const Students = ({ setIsGrid, options, isGrid }) => {
 	const intl = useIntl()
@@ -31,19 +30,6 @@ const Students = ({ setIsGrid, options, isGrid }) => {
 		)
 	return (
 		<>
-			<div className="refinement">
-				<Radio.Group
-					options={options}
-					onChange={() => setIsGrid(!isGrid)}
-					value={isGrid ? 'Grille' : 'List'}
-					optionType="button"
-					buttonStyle="solid"
-				/>
-
-				<AddItem title={intl.formatMessage({ id: 'add.student' })}>
-					<AddStudent />
-				</AddItem>
-			</div>
 			<div className="students">
 				<Gallery
 					datas={data?.student}

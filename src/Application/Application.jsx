@@ -12,76 +12,41 @@ import Settings from './Settings/Settings'
 import Lessons from './Lessons/Lessons'
 import Rooms from './Rooms/Rooms'
 import Companies from './Companies/Companies'
-import { Breadcrumb, Dropdown, Avatar, Menu } from 'antd'
+import { Breadcrumb, Dropdown, Avatar, Menu, Radio } from 'antd'
 import {
 	HomeOutlined,
 	AppstoreOutlined,
 	UnorderedListOutlined,
+	UserOutlined,
+	CalendarOutlined,
 } from '@ant-design/icons'
 import { selectors } from '../Account/store'
 import { useSelector } from 'react-redux'
 import DetailPathway from './Pathways/Pathway/Detail/DetailPathway'
-import { Link } from 'react-router-dom'
 import DetailStudent from './Students/Student/Detail/DetailStudent'
 import DetailProfessor from './Professors/Professor/Detail/DetailProfessor'
 import DetailModule from './Modules/Module/Detail/DetailModule'
 import DetailLesson from './Lessons/Lesson/Detail/DetailLesson'
 import DetailRoom from './Rooms/Room/Detail/DetailRoom'
 import DetailCompany from './Companies/Company/Detail/DetailCompany'
-import RoomsList from './Rooms/RoomsList'
 import StudentsList from './Students/StudentsList'
+import Search from 'antd/lib/input/Search'
+import AddItem from './Layout/Add/AddItem'
+import AddStudent from './Students/Student/Add/AddStudent'
 
 const Application = () => {
-	const intl = useIntl()
-	const location = useLocation()
-
 	const options = [
 		{ label: <AppstoreOutlined />, value: 'Grille' },
 		{ label: <UnorderedListOutlined />, value: 'List' },
 	]
 
+	const intl = useIntl()
+
 	const [isGrid, setIsGrid] = useState(true)
-
-	const menu = (
-		<Menu>
-			<Menu.Item>
-				<a href="/auth/login">{intl.formatMessage({ id: 'logout' })}</a>
-			</Menu.Item>
-		</Menu>
-	)
-
-	const locations = location.pathname.split('/').slice(1)
 
 	return (
 		<div className="application">
 			<Navigation />
-			<div className="header">
-				<Breadcrumb>
-					<Breadcrumb.Item href="/">
-						<HomeOutlined />
-					</Breadcrumb.Item>
-					{locations.map((path, index) => {
-						const link = locations.slice(0, index + 1).join('/')
-						return (
-							<Breadcrumb.Item key={link}>
-								<Link to={`/${link}`} onClick={e => e.stopPropagation()}>
-									{intl.messages[`navigation.${path}`] ?? path}
-								</Link>
-							</Breadcrumb.Item>
-						)
-					})}
-				</Breadcrumb>
-
-				<Dropdown overlay={menu} placement="bottomRight">
-					<Avatar
-						size="large"
-						shape="square"
-						src={`https://api.adorable.io/avatars/285/${useSelector(
-							selectors.accountId,
-						)}.png`}
-					/>
-				</Dropdown>
-			</div>
 			<div className="body">
 				<div className="middle">
 					<Switch>
@@ -111,21 +76,95 @@ const Application = () => {
 						</Route>
 
 						{isGrid ? (
-							<Route path="/students">
-								<Students
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
-							</Route>
+							<>
+								<div className="search">
+									<Search placeholder="Rechercher un étudiant" />
+								</div>
+
+								<div className="refinement">
+									<Radio.Group
+										options={options}
+										onChange={() => setIsGrid(!isGrid)}
+										value={isGrid ? 'Grille' : 'List'}
+										optionType="button"
+										buttonStyle="solid"
+									/>
+									<div className="refinement-item">
+										<AddItem
+											title={
+												<div>
+													<UserOutlined />
+													<p>{intl.formatMessage({ id: 'add.student' })}</p>
+												</div>
+											}
+										>
+											<AddStudent />
+										</AddItem>
+										<AddItem
+											title={
+												<div>
+													<CalendarOutlined />
+													<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
+												</div>
+											}
+										>
+											<AddStudent />
+										</AddItem>
+									</div>
+								</div>
+								<Route path="/students">
+									<Students
+										setIsGrid={setIsGrid}
+										isGrid={isGrid}
+										options={options}
+									/>
+								</Route>
+							</>
 						) : (
-							<Route path="/students">
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
-							</Route>
+							<>
+								<div className="search">
+									<Search placeholder="Rechercher un étudiant" />
+								</div>
+
+								<div className="refinement">
+									<Radio.Group
+										options={options}
+										onChange={() => setIsGrid(!isGrid)}
+										value={isGrid ? 'Grille' : 'List'}
+										optionType="button"
+										buttonStyle="solid"
+									/>
+									<div className="refinement-item">
+										<AddItem
+											title={
+												<div>
+													<UserOutlined />
+													<p>{intl.formatMessage({ id: 'add.student' })}</p>
+												</div>
+											}
+										>
+											<AddStudent />
+										</AddItem>
+										<AddItem
+											title={
+												<div>
+													<CalendarOutlined />
+													<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
+												</div>
+											}
+										>
+											<AddStudent />
+										</AddItem>
+									</div>
+								</div>
+								<Route path="/students">
+									<StudentsList
+										setIsGrid={setIsGrid}
+										isGrid={isGrid}
+										options={options}
+									/>
+								</Route>
+							</>
 						)}
 						<Route path="/professors">
 							<Professors />
