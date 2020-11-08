@@ -1,5 +1,6 @@
 .application {
 	height: 100%;
+	overflow: auto;
 	display: grid;
 	grid-template-columns: min-content 1fr;
 	grid-template-rows: min-content 1fr;
@@ -19,7 +20,7 @@
 	.header {
 		padding: 0.5em;
 		background-color: #ffce48;
-		font-family: 'DK Lemon Yellow Sun';
+		font-family: 'Architects Daughter';
 		font-size: 1.5em;
 		display: flex;
 		justify-content: space-between;
@@ -31,11 +32,30 @@
 		font-size: 1em;
 	}
 
+	.search,
 	.refinement {
-		display: flex;
 		padding: 1em;
 		padding-top: 0;
+	}
+
+	.refinement {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.refinement-item {
+		display: flex;
 		align-items: center;
+
+		div {
+			display: flex;
+			align-items: center;
+
+			p {
+				margin: 0;
+				margin-left: 0.5em;
+			}
+		}
 	}
 
 	@media (max-width: 665px) {

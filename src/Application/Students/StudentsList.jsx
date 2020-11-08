@@ -4,9 +4,8 @@ import React from 'react'
 import './students.scss'
 import AddStudent from './Student/Add/AddStudent'
 import { useGetAllStudents } from './students.hooks'
-import { Table, Radio, Spin } from 'antd'
+import { Table, Spin } from 'antd'
 import { withSize } from 'react-sizeme'
-import AddItem from '../Layout/Add/AddItem'
 
 const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 	const intl = useIntl()
@@ -28,7 +27,7 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 					<img src={picture} alt={`${record.id} student image`} />
 				) : (
 					<img
-						src={`https://api.adorable.io/avatars/285/${record.id}_${record.pathway.id}.png`}
+						src={`https://avatars.bugsyaya.dev/285/${record.id}_${record.pathway.id}`}
 						alt="placeholder"
 					/>
 				),
@@ -68,22 +67,9 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 		)
 	return (
 		<>
-			<div className="refinement">
-				<Radio.Group
-					options={options}
-					onChange={() => setIsGrid(!isGrid)}
-					value={isGrid ? 'Grille' : 'List'}
-					optionType="button"
-					buttonStyle="solid"
-				/>
-				<AddItem title={intl.formatMessage({ id: 'add.student' })}>
-					<AddStudent />
-				</AddItem>
-			</div>
 			<div className="students">
 				<Table
 					tableLayout="fixed"
-					scroll={{ y: size.height - 110 }}
 					pagination={false}
 					rowKey={record => record.id}
 					columns={columns}
