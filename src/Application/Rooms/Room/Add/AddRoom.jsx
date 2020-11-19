@@ -83,7 +83,7 @@ const AddRoom = () => {
 						>
 							<DatePicker.RangePicker
 								style={{ width: '100%' }}
-								getPopupContainer={trigger => trigger.parentNode}
+								getPopupContainer={(trigger) => trigger.parentNode}
 							/>
 						</Form.Item>
 					</Col>

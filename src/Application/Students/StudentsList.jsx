@@ -14,9 +14,10 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 		console.log('params', pagination, filters, sorter, extra)
 	}
 
-	const uniqueP = new Set(data.student.map(s => s.pathway.name))
+	const uniqueP =
+		(data && new Set(data.student.map((s) => s.pathway.name))) || []
 
-	console.log(JSON.stringify([...uniqueP].map(s => ({ text: s, value: s }))))
+	console.log(JSON.stringify([...uniqueP].map((s) => ({ text: s, value: s }))))
 
 	const columns = [
 		{
@@ -43,8 +44,8 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 		{
 			title: 'Pathway',
 			dataIndex: 'pathway',
-			render: pathway => pathway.name,
-			filters: [...uniqueP].map(s => ({ text: s, value: s })),
+			render: (pathway) => pathway.name,
+			filters: [...uniqueP].map((s) => ({ text: s, value: s })),
 			onFilter: (value, record) => record.pathway.name === value,
 		},
 	]
@@ -71,7 +72,7 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 				<Table
 					tableLayout="fixed"
 					pagination={false}
-					rowKey={record => record.id}
+					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={data?.student}
 					onChange={onChange}
