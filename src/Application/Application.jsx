@@ -41,12 +41,15 @@ import AddModule from './Modules/Module/Add/AddModule'
 import AddRoom from './Rooms/Room/Add/AddRoom'
 import AddCour from './Lessons/Lesson/Add/AddLesson'
 import AddCompany from './Companies/Company/Add/AddCompany'
+import { useAddStudent } from './Students/students.hooks'
 
 const Application = () => {
 	const options = [
 		{ label: <AppstoreOutlined />, value: 'Grille' },
 		{ label: <UnorderedListOutlined />, value: 'List' },
 	]
+
+	const [addStudent, { loading: addingStudent }] = useAddStudent()
 
 	const intl = useIntl()
 
@@ -92,11 +95,12 @@ const Application = () => {
 									AddItem={AddItem}
 									FirstIcon={UserOutlined}
 									firstAddText={intl.formatMessage({ id: 'add.student' })}
-								>
-									<AddStudent />
-								</Refinement>
+									Form={AddStudent}
+									onAdd={addStudent}
+									adding={addingStudent}
+								/>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
@@ -124,7 +128,7 @@ const Application = () => {
 									<AddProfessor />
 								</Refinement>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
@@ -152,7 +156,7 @@ const Application = () => {
 									<AddPathway />
 								</Refinement>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
@@ -180,7 +184,7 @@ const Application = () => {
 									<AddModule />
 								</Refinement>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
@@ -208,7 +212,7 @@ const Application = () => {
 									<AddCour />
 								</Refinement>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
@@ -264,7 +268,7 @@ const Application = () => {
 									<AddCompany />
 								</Refinement>
 							</div>
-							{isGrid ? (
+							{!isGrid ? (
 								<StudentsList
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}

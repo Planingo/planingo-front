@@ -43,8 +43,6 @@ const AddCalendar = () => {
 			file.preview = await getBase64(file.originFileObj)
 		}
 
-		console.log(file)
-
 		setPreviewImage(file.url || file.preview)
 		setPreviewVisible(true)
 		setPreviewTitle(
@@ -81,7 +79,6 @@ const AddCalendar = () => {
 					<Upload
 						customRequest={async ({ file, onError, onSuccess }) => {
 							const coucou = await getBuffer(file)
-							console.log(coucou)
 							minioClient.putObject(
 								'test',
 								file.name,

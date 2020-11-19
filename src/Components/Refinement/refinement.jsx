@@ -11,7 +11,9 @@ const Refinement = ({
 	AddItem,
 	FirstIcon,
 	firstAddText,
-	children,
+	Form,
+	adding,
+	onAdd,
 }) => {
 	const intl = useIntl()
 
@@ -32,9 +34,10 @@ const Refinement = ({
 							<p>{firstAddText}</p>
 						</div>
 					}
-				>
-					{children}
-				</AddItem>
+					Form={Form}
+					adding={adding}
+					onAdd={onAdd}
+				/>
 
 				<AddItem
 					secondary
@@ -44,9 +47,8 @@ const Refinement = ({
 							<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
 						</div>
 					}
-				>
-					<AddCalendar />
-				</AddItem>
+					Form={AddCalendar}
+				/>
 			</div>
 		</div>
 	)

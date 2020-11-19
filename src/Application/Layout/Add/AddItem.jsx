@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import './addItem.scss'
 import { Drawer, Button } from 'antd'
 
-const AddItem = ({ children, title, cta, secondary }) => {
+const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
 	const [visible, setVisible] = useState(false)
+	const [item, setItem] = useState()
 	return (
 		<>
 			<div className="addItem">
@@ -34,13 +35,20 @@ const AddItem = ({ children, title, cta, secondary }) => {
 						>
 							Cancel
 						</Button>
-						<Button onClick={() => setVisible(false)} type="primary">
+						<Button
+							loading={adding}
+							onClick={async () => {
+								await onAdd(item)
+								setVisible(false)
+							}}
+							type="primary"
+						>
 							Submit
 						</Button>
 					</div>
 				}
 			>
-				{children}
+				<Form setItem={setItem} />
 			</Drawer>
 		</>
 	)
