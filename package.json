@@ -16,7 +16,7 @@
 		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-		"react-final-form": "^6.5.1",
+		"react-final-form": "^6.5.2",
 		"react-intl": "^5.8.0",
 		"react-redux": "^7.2.2",
 		"react-router": "^5.2.0",
