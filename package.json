@@ -14,7 +14,7 @@
 		"lodash": "^4.17.15",
 		"minio": "^7.0.16",
 		"node-sass": "^4.14.1",
-		"react": "^16.13.1",
+		"react": "^16.14.0",
 		"react-dom": "^16.13.1",
 		"react-final-form": "^6.5.1",
 		"react-intl": "^5.8.0",
