@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import './addItem.scss'
 import { Drawer, Button } from 'antd'
 
-const AddItem = ({ children, title, cta }) => {
+const AddItem = ({ children, title, cta, secondary }) => {
 	const [visible, setVisible] = useState(false)
 	return (
 		<>
 			<div className="addItem">
-				<Button label="add" type="primary" onClick={() => setVisible(true)}>
+				<Button
+					type="primary"
+					label="add"
+					ghost={secondary}
+					onClick={() => setVisible(true)}
+				>
 					{cta || title}
 				</Button>
 			</div>
