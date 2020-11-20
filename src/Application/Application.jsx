@@ -22,6 +22,7 @@ import {
 	TagOutlined,
 	ShopOutlined,
 	WifiOutlined,
+	EditOutlined,
 } from '@ant-design/icons'
 import DetailPathway from './Pathways/Pathway/Detail/DetailPathway'
 import DetailStudent from './Students/Student/Detail/DetailStudent'
@@ -62,27 +63,163 @@ const Application = () => {
 				<div className="middle">
 					<Switch>
 						<Route path="/students/:id">
+							<Refinement
+								backTo="students"
+								FirstActionItem={AddItem}
+								FirstActionIcon={UserOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.student' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailStudent />
 						</Route>
 						<Route path="/professors/:id">
+							<Refinement
+								backTo="professors"
+								FirstActionItem={AddItem}
+								FirstActionIcon={TeamOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.professor' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailProfessor />
 						</Route>
 						<Route path="/calendars/:id">
+							<Refinement
+								backTo="calendars"
+								FirstActionItem={AddItem}
+								FirstActionIcon={UserOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.calendar' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailPathway />
 						</Route>
 						<Route path="/pathways/:id">
+							<Refinement
+								backTo="pathways"
+								FirstActionItem={AddItem}
+								FirstActionIcon={ExperimentOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.pathway' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailPathway />
 						</Route>
 						<Route path="/modules/:id">
+							<Refinement
+								backTo="modules"
+								FirstActionItem={AddItem}
+								FirstActionIcon={TagsOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.module' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailModule />
 						</Route>
 						<Route path="/lessons/:id">
+							<Refinement
+								backTo="lessons"
+								FirstActionItem={AddItem}
+								FirstActionIcon={TagOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.lesson' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailLesson />
 						</Route>
 						<Route path="/rooms/:id">
+							<Refinement
+								backTo="rooms"
+								FirstActionItem={AddItem}
+								FirstActionIcon={ShopOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.room' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailRoom />
 						</Route>
 						<Route path="/companies/:id">
+							<Refinement
+								backTo="companies"
+								FirstActionItem={AddItem}
+								FirstActionIcon={WifiOutlined}
+								firstActionText={intl.formatMessage({ id: 'edit.company' })}
+								FirstForm={AddStudent}
+								onFirstAction={addStudent}
+								firstActioning={addingStudent}
+								SecondActionItem={AddItem}
+								SecondActionIcon={EditOutlined}
+								secondActionText={intl.formatMessage({
+									id: 'edit.constraints',
+								})}
+								SecondForm={AddStudent}
+								onSecondAction={addStudent}
+								secondActioning={addingStudent}
+							/>
 							<DetailCompany />
 						</Route>
 						<Route path="/students">
@@ -92,12 +229,12 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={UserOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.student' })}
-									Form={AddStudent}
-									onAdd={addStudent}
-									adding={addingStudent}
+									FirstActionItem={AddItem}
+									FirstActionIcon={UserOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.student' })}
+									FirstForm={AddStudent}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
 								/>
 							</div>
 							{!isGrid ? (
@@ -121,12 +258,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={TeamOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.professor' })}
-								>
-									<AddProfessor />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={TeamOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.professor' })}
+									FirstForm={AddProfessor}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{!isGrid ? (
 								<StudentsList
@@ -149,12 +287,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={ExperimentOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.pathway' })}
-								>
-									<AddPathway />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={ExperimentOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.pathway' })}
+									FirstForm={AddPathway}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{!isGrid ? (
 								<StudentsList
@@ -177,12 +316,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={TagsOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.module' })}
-								>
-									<AddModule />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={TagsOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.module' })}
+									FirstForm={AddModule}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{!isGrid ? (
 								<StudentsList
@@ -205,12 +345,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={TagOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.lesson' })}
-								>
-									<AddCour />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={TagOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.lesson' })}
+									FirstForm={AddCour}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{!isGrid ? (
 								<StudentsList
@@ -233,12 +374,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={ShopOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.room' })}
-								>
-									<AddRoom />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={ShopOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.room' })}
+									FirstForm={AddRoom}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{isGrid ? (
 								<StudentsList
@@ -261,12 +403,13 @@ const Application = () => {
 									options={options}
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
-									AddItem={AddItem}
-									FirstIcon={WifiOutlined}
-									firstAddText={intl.formatMessage({ id: 'add.company' })}
-								>
-									<AddCompany />
-								</Refinement>
+									FirstActionItem={AddItem}
+									FirstActionIcon={WifiOutlined}
+									firstActionText={intl.formatMessage({ id: 'add.company' })}
+									FirstForm={AddCompany}
+									onFirstAction={addStudent}
+									firstActioning={addingStudent}
+								/>
 							</div>
 							{!isGrid ? (
 								<StudentsList

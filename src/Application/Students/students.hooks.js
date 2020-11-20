@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost'
 
 const getStudentsQuerie = gql`
 	query getAllStudents {
-		student(order_by: { firstName: asc }) {
+		student(order_by: { lastName: asc }) {
 			firstName
 			lastName
 			id
