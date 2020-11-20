@@ -1,0 +1,30 @@
+img {
+    border-radius: 50%;
+    max-height: 10em;
+    margin-right: 1em;
+}
+
+.student-informations {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+}
+
+.student-name {
+    font-family: 'Architects Daughter';
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.align {
+    display: flex;
+    margin-bottom: 0.5em;
+
+    p {
+        margin: 0;
+    }
+
+    p:first-child {
+        margin-right: 0.2em;
+
+    }
+}
