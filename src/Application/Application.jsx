@@ -222,6 +222,11 @@ const Application = () => {
 							/>
 							<DetailCompany />
 						</Route>
+
+						<Route path="/calendars/:id">
+							<Refinement backTo="calendars" />
+							<Calendars />
+						</Route>
 						<Route path="/students">
 							<div className="header">
 								<Search placeholder="Rechercher un étudiant" />
@@ -426,7 +431,17 @@ const Application = () => {
 							)}
 						</Route>
 						<Route path="/calendars">
-							<Calendars />
+							<>
+								<div className="header">
+									<Search placeholder="Rechercher un calendrier" />
+									<Refinement
+										options={options}
+										setIsGrid={setIsGrid}
+										isGrid={isGrid}
+									/>
+								</div>
+								<Calendars />
+							</>
 						</Route>
 						<Route path="/settings">
 							<Settings />
