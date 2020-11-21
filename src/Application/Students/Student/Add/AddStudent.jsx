@@ -2,15 +2,23 @@ import React from 'react'
 import './addStudent.scss'
 import { Form, Input, Select } from 'antd'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
+import { useGetStudentById } from '../../students.hooks'
+import { useParams } from 'react-router'
 
 const AddStudent = ({ setItem }) => {
+	const { id } = useParams()
+
 	const { Option } = Select
 
+	const { loading: studentLoading, student } = useGetStudentById(id)
 	const { data, loading } = useGetAllPathways()
+
+	if (studentLoading) return null
 
 	return (
 		<div className="addStudent">
 			<Form
+				initialValues={student}
 				onValuesChange={(values) => {
 					console.log(values)
 					setItem((item) => ({ ...item, ...values }))

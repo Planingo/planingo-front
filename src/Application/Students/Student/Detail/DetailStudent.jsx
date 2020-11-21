@@ -1,21 +1,16 @@
 import { Tabs } from 'antd'
-import { last } from 'lodash'
 import React from 'react'
-import { useLocation } from 'react-router'
+import { useParams } from 'react-router'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
 import Informations from './Informations/informations'
 
 const DetailStudent = () => {
-	const location = useLocation()
+	const { id } = useParams()
 
 	const { TabPane } = Tabs
 
-	const studentId = last(
-		location.pathname.split('/').filter((path) => path !== ''),
-	)
-
-	const { loading, student } = useGetStudentById(studentId)
+	const { loading, student } = useGetStudentById(id)
 
 	if (loading) return null
 

@@ -2,8 +2,18 @@ import React, { useState } from 'react'
 import './addItem.scss'
 import { Drawer, Button } from 'antd'
 import { useIntl } from 'react-intl'
+import { useParams } from 'react-router'
 
-const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
+const AddItem = ({
+	Form,
+	title,
+	cta,
+	secondary,
+	onAdd,
+	adding,
+	mainActionButton,
+}) => {
+	const { id } = useParams()
 	const intl = useIntl()
 	const [visible, setVisible] = useState(false)
 	const [item, setItem] = useState()
@@ -38,14 +48,17 @@ const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
 							{intl.formatMessage({ id: 'cancel' })}
 						</Button>
 						<Button
+							disabled={!item}
 							loading={adding}
 							onClick={async () => {
-								await onAdd(item)
+								await onAdd(item, id)
 								setVisible(false)
 							}}
 							type="primary"
 						>
-							{intl.formatMessage({ id: 'add' })}
+							{mainActionButton
+								? mainActionButton
+								: intl.formatMessage({ id: 'add' })}
 						</Button>
 					</div>
 				}

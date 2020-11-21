@@ -71,3 +71,20 @@ export const useAddStudent = () => {
 
 	return [(student) => addStudent({ variables: { student } }), result]
 }
+
+export const useEditStudent = () => {
+	const [editStudent, result] = useMutation(
+		gql`
+			mutation editStudent($id: uuid!, $student: student_set_input) {
+				update_student_by_pk(pk_columns: { id: $id }, _set: $student) {
+					id
+					firstName
+					lastName
+					pathwayId
+				}
+			}
+		`,
+	)
+
+	return [(student, id) => editStudent({ variables: { id, student } }), result]
+}
