@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './addItem.scss'
 import { Drawer, Button } from 'antd'
+import { useIntl } from 'react-intl'
 
 const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
+	const intl = useIntl()
 	const [visible, setVisible] = useState(false)
 	const [item, setItem] = useState()
 	return (
@@ -33,7 +35,7 @@ const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
 							onClick={() => setVisible(false)}
 							style={{ marginRight: 8 }}
 						>
-							Cancel
+							{intl.formatMessage({ id: 'cancel' })}
 						</Button>
 						<Button
 							loading={adding}
@@ -43,7 +45,7 @@ const AddItem = ({ Form, title, cta, secondary, onAdd, adding }) => {
 							}}
 							type="primary"
 						>
-							Submit
+							{intl.formatMessage({ id: 'add' })}
 						</Button>
 					</div>
 				}

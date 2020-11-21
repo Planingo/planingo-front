@@ -42,17 +42,21 @@ const Refinement = ({
 				</Link>
 			)}
 			<div className="refinement-item">
-				<FirstActionItem
-					title={
-						<div>
-							<FirstActionIcon />
-							<p>{firstActionText}</p>
-						</div>
-					}
-					Form={FirstForm}
-					adding={firstActioning}
-					onAdd={onFirstAction}
-				/>
+				{firstActionText ? (
+					<FirstActionItem
+						title={
+							<div>
+								<FirstActionIcon />
+								<p>{firstActionText}</p>
+							</div>
+						}
+						Form={FirstForm}
+						adding={firstActioning}
+						onAdd={onFirstAction}
+					/>
+				) : (
+					<></>
+				)}
 
 				{secondActionText ? (
 					<SecondActionItem
@@ -70,16 +74,18 @@ const Refinement = ({
 					<></>
 				)}
 
-				<AddItem
-					secondary
-					title={
-						<div>
-							<CalendarOutlined />
-							<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
-						</div>
-					}
-					Form={AddCalendar}
-				/>
+				<Link to="/calendars">
+					<AddItem
+						secondary
+						title={
+							<div>
+								<CalendarOutlined />
+								<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
+							</div>
+						}
+						Form={AddCalendar}
+					/>
+				</Link>
 			</div>
 		</div>
 	)

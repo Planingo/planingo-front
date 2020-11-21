@@ -1,11 +1,15 @@
+import { Tabs } from 'antd'
 import { last } from 'lodash'
 import React from 'react'
 import { useLocation } from 'react-router'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
+import Informations from './Informations/informations'
 
 const DetailStudent = () => {
 	const location = useLocation()
+
+	const { TabPane } = Tabs
 
 	const studentId = last(
 		location.pathname.split('/').filter((path) => path !== ''),
@@ -17,33 +21,21 @@ const DetailStudent = () => {
 
 	return (
 		<div className="details">
-			<div className="student-informations">
-				<img
-					alt="example"
-					src={`https://avatars.bugsyaya.dev/285/${student.id}_${student.pathwayId}`}
-				/>
-				<div>
-					<p className="student-name">
-						{student.firstName} {student.lastName}
-					</p>
-					<div className="align">
-						<p>Formation :</p>
-						<p>{student.pathway.name}</p>
+			<Tabs defaultActiveKey="1">
+				<TabPane tab={`${student.firstName} ${student.lastName}`} key="1">
+					<Informations student={student} loading={loading} />
+				</TabPane>
+				<TabPane tab="Contraintes" key="2">
+					<div className="contraints-informations">
+						<p>Contraintes</p>
 					</div>
-
-					<div className="align">
-						<p>Apprentissage :</p>
-						<p>
-							{student.apprenticeships.lenght
-								? student.apprenticeships.map(
-										(apprenticeship) => apprenticeship.company.name,
-								  )
-								: '-'}
-						</p>
+				</TabPane>
+				<TabPane tab="Calendriers" key="3">
+					<div>
+						<p>Calendriers</p>
 					</div>
-				</div>
-			</div>
-			<div className="contraints-informations"></div>
+				</TabPane>
+			</Tabs>
 		</div>
 	)
 }
