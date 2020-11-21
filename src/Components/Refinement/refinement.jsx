@@ -23,6 +23,7 @@ const Refinement = ({
 	SecondForm,
 	secondActioning,
 	onSecondAction,
+	mainActionButton,
 }) => {
 	const intl = useIntl()
 
@@ -44,6 +45,7 @@ const Refinement = ({
 			<div className="refinement-item">
 				{firstActionText ? (
 					<FirstActionItem
+						mainActionButton={mainActionButton}
 						title={
 							<div>
 								<FirstActionIcon />
@@ -69,6 +71,7 @@ const Refinement = ({
 						Form={SecondForm}
 						adding={secondActioning}
 						onAdd={onSecondAction}
+						mainActionButton={mainActionButton}
 					/>
 				) : (
 					<></>
@@ -76,6 +79,7 @@ const Refinement = ({
 
 				<Link to="/calendars">
 					<AddItem
+						mainActionButton={mainActionButton}
 						secondary
 						title={
 							<div>

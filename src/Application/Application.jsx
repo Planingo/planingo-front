@@ -42,7 +42,7 @@ import AddModule from './Modules/Module/Add/AddModule'
 import AddRoom from './Rooms/Room/Add/AddRoom'
 import AddCour from './Lessons/Lesson/Add/AddLesson'
 import AddCompany from './Companies/Company/Add/AddCompany'
-import { useAddStudent } from './Students/students.hooks'
+import { useAddStudent, useEditStudent } from './Students/students.hooks'
 
 const Application = () => {
 	const options = [
@@ -51,6 +51,7 @@ const Application = () => {
 	]
 
 	const [addStudent, { loading: addingStudent }] = useAddStudent()
+	const [editStudent, { loading: editingStudent }] = useEditStudent()
 
 	const intl = useIntl()
 
@@ -69,8 +70,8 @@ const Application = () => {
 								FirstActionIcon={UserOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.student' })}
 								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								onFirstAction={editStudent}
+								firstActioning={editingStudent}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
@@ -79,6 +80,7 @@ const Application = () => {
 								SecondForm={AddStudent}
 								onSecondAction={addStudent}
 								secondActioning={addingStudent}
+								mainActionButton={intl.formatMessage({ id: 'edit' })}
 							/>
 							<DetailStudent />
 						</Route>
