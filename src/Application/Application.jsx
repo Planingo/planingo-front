@@ -47,6 +47,7 @@ import {
 	useEditProfessor,
 } from './Professors/professors.hooks'
 import AddProfessor from './Professors/Professor/Add/AddProfessor'
+import ProfessorsList from './Professors/ProfessorsList'
 
 const Application = () => {
 	const options = [
@@ -64,11 +65,16 @@ const Application = () => {
 
 	const [isGrid, setIsGrid] = useState(true)
 
-	const onSearch = (value) => {
+	const onStudentSearch = (value) => {
 		setStudentSearch(value)
 	}
 
+	const onProfessorSearch = (value) => {
+		setProfessorSearch(value)
+	}
+
 	const [studentSearch, setStudentSearch] = useState()
+	const [professorSearch, setProfessorSearch] = useState()
 
 	return (
 		<div className="application">
@@ -246,7 +252,7 @@ const Application = () => {
 							<div className="header">
 								<Search
 									placeholder="Rechercher un étudiant"
-									onSearch={onSearch}
+									onSearch={onStudentSearch}
 								/>
 								<Refinement
 									options={options}
@@ -261,19 +267,17 @@ const Application = () => {
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-									studentSearch={studentSearch}
-								/>
+								<StudentsList studentSearch={studentSearch} />
 							) : (
 								<Students studentSearch={studentSearch} />
 							)}
 						</Route>
 						<Route path="/professors">
 							<div className="header">
-								<Search placeholder="Rechercher un professeur" />
+								<Search
+									placeholder="Rechercher un professeur"
+									onSearch={onProfessorSearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -287,17 +291,9 @@ const Application = () => {
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<ProfessorsList professorSearch={professorSearch} />
 							) : (
-								<Professors
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Professors professorSearch={professorSearch} />
 							)}
 						</Route>
 						<Route path="/pathways">

@@ -14,8 +14,6 @@ const StudentsList = ({ studentSearch }) => {
 		console.log('params', pagination, filters, sorter, extra)
 	}
 
-	console.log(studentSearch)
-
 	const uniqueP =
 		(data && new Set(data.student.map((s) => s.pathway.name))) || []
 
