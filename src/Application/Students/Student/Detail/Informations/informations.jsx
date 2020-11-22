@@ -25,7 +25,7 @@ const Informations = ({ loading, student }) => {
 				<div className="align">
 					<p>Apprentissage :</p>
 					<p>
-						{student.apprenticeships.lenght
+						{student.apprenticeships.length
 							? student.apprenticeships.map(
 									(apprenticeship) => apprenticeship.company.name,
 							  )

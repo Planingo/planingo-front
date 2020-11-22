@@ -1,22 +1,91 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 
-export const useGetAllProfessors = () => {
-	const result = useQuery(gql`
-		query getAllProfessors {
-			professor(order_by: { firstName: asc }) {
-				firstName
+const getProfessorsQuerie = gql`
+	query getAllProfessors {
+		professor(order_by: { lastName: asc }) {
+			firstName
+			id
+			lastName
+			modules {
 				id
-				lastName
-				modules {
+				module {
 					id
-					module {
-						id
-						name
-					}
+					name
+					description
 				}
 			}
 		}
-	`)
+	}
+`
+
+export const useGetAllProfessors = () => {
+	const result = useQuery(getProfessorsQuerie)
 	return result
+}
+
+export const useGetProfessorById = (id) => {
+	const { loading, data } = useQuery(
+		gql`
+			query getProfessorsById($id: uuid!) {
+				professor_by_pk(id: $id) {
+					firstName
+					id
+					lastName
+					modules {
+						id
+						module {
+							description
+							id
+							name
+						}
+					}
+				}
+			}
+		`,
+		{ variables: { id: id } },
+	)
+	return { loading, professor: data?.professor_by_pk }
+}
+
+export const useAddProfessor = () => {
+	const [addProfessor, result] = useMutation(
+		gql`
+			mutation addProfessor($professor: professor_insert_input!) {
+				insert_professor_one(object: $professor) {
+					firstName
+					id
+					lastName
+				}
+			}
+		`,
+		{
+			refetchQueries: [
+				{
+					query: getProfessorsQuerie,
+				},
+			],
+		},
+	)
+
+	return [(professor) => addProfessor({ variables: { professor } }), result]
+}
+
+export const useEditProfessor = () => {
+	const [editProfessor, result] = useMutation(
+		gql`
+			mutation editProfessor($id: uuid!, $professor: professor_set_input) {
+				update_professor_by_pk(pk_columns: { id: $id }, _set: $professor) {
+					firstName
+					id
+					lastName
+				}
+			}
+		`,
+	)
+
+	return [
+		(professor, id) => editProfessor({ variables: { id, professor } }),
+		result,
+	]
 }

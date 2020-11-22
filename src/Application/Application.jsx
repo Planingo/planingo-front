@@ -36,13 +36,17 @@ import Search from '../Components/Search/search'
 import Refinement from '../Components/Refinement/refinement'
 import AddItem from './Layout/Add/AddItem'
 import AddStudent from './Students/Student/Add/AddStudent'
-import AddProfessor from './Professors/Professor/Add/AddProfessor'
 import AddPathway from './Pathways/Pathway/Add/AddPathway'
 import AddModule from './Modules/Module/Add/AddModule'
 import AddRoom from './Rooms/Room/Add/AddRoom'
 import AddCour from './Lessons/Lesson/Add/AddLesson'
 import AddCompany from './Companies/Company/Add/AddCompany'
 import { useAddStudent, useEditStudent } from './Students/students.hooks'
+import {
+	useAddProfessor,
+	useEditProfessor,
+} from './Professors/professors.hooks'
+import AddProfessor from './Professors/Professor/Add/AddProfessor'
 
 const Application = () => {
 	const options = [
@@ -53,12 +57,14 @@ const Application = () => {
 	const [addStudent, { loading: addingStudent }] = useAddStudent()
 	const [editStudent, { loading: editingStudent }] = useEditStudent()
 
+	const [addProfessor, { loading: addingProfessor }] = useAddProfessor()
+	const [editProfessor, { loading: editingProfessor }] = useEditProfessor()
+
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
 
 	const onSearch = (value) => {
-		console.log(value)
 		setStudentSearch(value)
 	}
 
@@ -97,9 +103,9 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={TeamOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.professor' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddProfessor}
+								onFirstAction={editProfessor}
+								firstActioning={editingProfessor}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
@@ -108,6 +114,7 @@ const Application = () => {
 								SecondForm={AddStudent}
 								onSecondAction={addStudent}
 								secondActioning={addingStudent}
+								mainActionButton={intl.formatMessage({ id: 'edit' })}
 							/>
 							<DetailProfessor />
 						</Route>
@@ -275,8 +282,8 @@ const Application = () => {
 									FirstActionIcon={TeamOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.professor' })}
 									FirstForm={AddProfessor}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addProfessor}
+									firstActioning={addingProfessor}
 								/>
 							</div>
 							{!isGrid ? (
