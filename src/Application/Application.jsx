@@ -57,6 +57,13 @@ const Application = () => {
 
 	const [isGrid, setIsGrid] = useState(true)
 
+	const onSearch = (value) => {
+		console.log(value)
+		setStudentSearch(value)
+	}
+
+	const [studentSearch, setStudentSearch] = useState()
+
 	return (
 		<div className="application">
 			<Navigation />
@@ -224,14 +231,16 @@ const Application = () => {
 							/>
 							<DetailCompany />
 						</Route>
-
 						<Route path="/calendars/:id">
 							<Refinement backTo="calendars" />
 							<Calendars />
 						</Route>
 						<Route path="/students">
 							<div className="header">
-								<Search placeholder="Rechercher un étudiant" />
+								<Search
+									placeholder="Rechercher un étudiant"
+									onSearch={onSearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -249,13 +258,10 @@ const Application = () => {
 									setIsGrid={setIsGrid}
 									isGrid={isGrid}
 									options={options}
+									studentSearch={studentSearch}
 								/>
 							) : (
-								<Students
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Students studentSearch={studentSearch} />
 							)}
 						</Route>
 						<Route path="/professors">
