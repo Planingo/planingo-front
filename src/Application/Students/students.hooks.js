@@ -4,12 +4,23 @@ import { gql } from 'apollo-boost'
 const getStudentsQuerie = gql`
 	query getAllStudents {
 		student(order_by: { lastName: asc }) {
-			firstName
-			lastName
-			id
-			pathway {
-				name
+			apprenticeships {
+				company {
+					id
+					name
+					description
+				}
+				companyId
 				id
+				studentId
+			}
+			firstName
+			id
+			lastName
+			pathway {
+				description
+				id
+				name
 			}
 		}
 	}
@@ -25,20 +36,23 @@ export const useGetStudentById = (id) => {
 		gql`
 			query getStudentById($id: uuid!) {
 				student_by_pk(id: $id) {
-					pathway {
-						name
+					apprenticeships {
+						company {
+							id
+							name
+							description
+						}
+						companyId
 						id
+						studentId
 					}
 					firstName
 					id
 					lastName
-					pathwayId
-					apprenticeships {
+					pathway {
+						description
 						id
-						company {
-							id
-							name
-						}
+						name
 					}
 				}
 			}
@@ -53,10 +67,24 @@ export const useAddStudent = () => {
 		gql`
 			mutation addStudent($student: student_insert_input!) {
 				insert_student_one(object: $student) {
-					id
+					apprenticeships {
+						company {
+							id
+							name
+							description
+						}
+						companyId
+						id
+						studentId
+					}
 					firstName
+					id
 					lastName
-					pathwayId
+					pathway {
+						description
+						id
+						name
+					}
 				}
 			}
 		`,
@@ -77,10 +105,24 @@ export const useEditStudent = () => {
 		gql`
 			mutation editStudent($id: uuid!, $student: student_set_input) {
 				update_student_by_pk(pk_columns: { id: $id }, _set: $student) {
-					id
+					apprenticeships {
+						company {
+							id
+							name
+							description
+						}
+						companyId
+						id
+						studentId
+					}
 					firstName
+					id
 					lastName
-					pathwayId
+					pathway {
+						description
+						id
+						name
+					}
 				}
 			}
 		`,

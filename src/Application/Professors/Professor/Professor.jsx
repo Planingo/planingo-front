@@ -19,7 +19,7 @@ const Professor = ({ data }) => {
 				>
 					<Meta
 						title={`${data.firstName} ${data.lastName}`}
-						description={data.modules[0].module.name}
+						description={data?.modules[0]?.module?.name}
 					/>
 				</Card>
 			</Link>

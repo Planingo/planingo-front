@@ -20,7 +20,6 @@ const AddStudent = ({ setItem }) => {
 			<Form
 				initialValues={student}
 				onValuesChange={(values) => {
-					console.log(values)
 					setItem((item) => ({ ...item, ...values }))
 				}}
 				layout="vertical"
