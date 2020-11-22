@@ -8,7 +8,7 @@ import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from 'antd'
 
-const Professors = () => {
+const Professors = ({ professorSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllProfessors()
 
@@ -28,10 +28,19 @@ const Professors = () => {
 				title={intl.formatMessage({ id: 'add.professor' })}
 			/>
 		)
+
+	const professors = professorSearch
+		? data.professor.filter(
+				(p) =>
+					p.lastName.toLowerCase().includes(professorSearch.toLowerCase()) ||
+					p.firstName.toLowerCase().includes(professorSearch.toLowerCase()),
+		  )
+		: data.professor
+
 	return (
 		<div className="professors">
 			<Gallery
-				datas={data?.professor}
+				datas={professors}
 				loading={loading}
 				Item={Professor}
 				Add={AddProfessor}
