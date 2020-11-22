@@ -7,12 +7,14 @@ import { useGetAllStudents } from './students.hooks'
 import { Table, Spin } from 'antd'
 import { withSize } from 'react-sizeme'
 
-const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
+const StudentsList = ({ studentSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllStudents()
 	function onChange(pagination, filters, sorter, extra) {
 		console.log('params', pagination, filters, sorter, extra)
 	}
+
+	console.log(studentSearch)
 
 	const uniqueP =
 		(data && new Set(data.student.map((s) => s.pathway.name))) || []
@@ -66,6 +68,14 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 				title={intl.formatMessage({ id: 'add.student' })}
 			/>
 		)
+
+	const students = studentSearch
+		? data.student.filter(
+				(s) =>
+					s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
+					s.firstName.toLowerCase().includes(studentSearch.toLowerCase()),
+		  )
+		: data.student
 	return (
 		<>
 			<div className="students">
@@ -74,7 +84,7 @@ const StudentsList = ({ size, setIsGrid, options, isGrid }) => {
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
-					dataSource={data?.student}
+					dataSource={students}
 					onChange={onChange}
 				/>
 			</div>

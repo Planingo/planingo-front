@@ -8,8 +8,9 @@ import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from 'antd'
 
-const Students = ({ setIsGrid, options, isGrid }) => {
+const Students = ({ studentSearch }) => {
 	const intl = useIntl()
+
 	const { data, loading } = useGetAllStudents()
 
 	if (loading)
@@ -28,11 +29,20 @@ const Students = ({ setIsGrid, options, isGrid }) => {
 				title={intl.formatMessage({ id: 'add.student' })}
 			/>
 		)
+
+	const students = studentSearch
+		? data.student.filter(
+				(s) =>
+					s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
+					s.firstName.toLowerCase().includes(studentSearch.toLowerCase()),
+		  )
+		: data.student
+
 	return (
 		<>
 			<div className="students">
 				<Gallery
-					datas={data?.student}
+					datas={students}
 					loading={loading}
 					Item={Student}
 					Add={AddStudent}

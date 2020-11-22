@@ -1,6 +1,7 @@
 import { Tabs } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
+import Calendars from '../../../Calendars/Calendars'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
 import Informations from './Informations/informations'
@@ -27,7 +28,7 @@ const DetailStudent = () => {
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">
 					<div>
-						<p>Calendriers</p>
+						<Calendars />
 					</div>
 				</TabPane>
 			</Tabs>
