@@ -2,15 +2,15 @@ import React from 'react'
 import './lessons.scss'
 import Lesson from './Lesson/Lesson'
 import AddLesson from './Lesson/Add/AddLesson'
-import { useGetAllStudents } from './lessons.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from 'antd'
+import { useGetAllLessons } from './lessons.hooks'
 
-const Lessons = () => {
+const Lessons = ({ lessonSearch }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllStudents()
+	const { data, loading } = useGetAllLessons()
 
 	if (loading)
 		return (
@@ -28,10 +28,17 @@ const Lessons = () => {
 				title={intl.formatMessage({ id: 'add.lesson' })}
 			/>
 		)
+
+	const lessons = lessonSearch
+		? data.lesson.filter((c) =>
+				c.name.toLowerCase().includes(lessonSearch.toLowerCase()),
+		  )
+		: data.lesson
+
 	return (
 		<div className="lessons">
 			<Gallery
-				datas={data?.lesson}
+				datas={lessons}
 				loading={loading}
 				Item={Lesson}
 				Add={AddLesson}

@@ -52,6 +52,10 @@ import { useAddCompany, useEditCompany } from './Companies/companies.hooks'
 import CompaniesList from './Companies/CompaniesList'
 import { useAddPathway, useEditPathway } from './Pathways/pathways.hooks'
 import PathwaysList from './Pathways/PathwaysList'
+import { useAddLesson, useEditLesson } from './Lessons/lessons.hooks'
+import LessonsList from './Lessons/LessonsList'
+import ModulesList from './Modules/ModulesList'
+import { useAddModule, useEditModule } from './Modules/modules.hooks'
 
 const Application = () => {
 	const options = [
@@ -71,6 +75,12 @@ const Application = () => {
 	const [addPathway, { loading: addingPathway }] = useAddPathway()
 	const [editPathway, { loading: editingPathway }] = useEditPathway()
 
+	const [addLesson, { loading: addingLesson }] = useAddLesson()
+	const [editLesson, { loading: editingLesson }] = useEditLesson()
+
+	const [addModule, { loading: addingModule }] = useAddModule()
+	const [editModule, { loading: editingModule }] = useEditModule()
+
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
@@ -86,14 +96,25 @@ const Application = () => {
 	const onCompanySearch = (value) => {
 		setCompanySearch(value)
 	}
+
 	const onPathwaySearch = (value) => {
 		setPathwaySearch(value)
+	}
+
+	const onLessonSearch = (value) => {
+		setLessonSearch(value)
+	}
+
+	const onModuleSearch = (value) => {
+		setModuleSearch(value)
 	}
 
 	const [studentSearch, setStudentSearch] = useState()
 	const [professorSearch, setProfessorSearch] = useState()
 	const [companySearch, setCompanySearch] = useState()
 	const [pathwaySearch, setPathwaySearch] = useState()
+	const [lessonSearch, setLessonSearch] = useState()
+	const [moduleSearch, setModuleSearch] = useState()
 
 	return (
 		<div className="application">
@@ -341,7 +362,10 @@ const Application = () => {
 						</Route>
 						<Route path="/modules">
 							<div className="header">
-								<Search placeholder="Rechercher un module" />
+								<Search
+									placeholder="Rechercher un module"
+									onSearch={onModuleSearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -350,27 +374,22 @@ const Application = () => {
 									FirstActionIcon={TagsOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.module' })}
 									FirstForm={AddModule}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addModule}
+									firstActioning={addingModule}
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<ModulesList moduleSearch={moduleSearch} />
 							) : (
-								<Modules
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Modules moduleSearch={moduleSearch} />
 							)}
 						</Route>
 						<Route path="/lessons">
 							<div className="header">
-								<Search placeholder="Rechercher un cours" />
+								<Search
+									placeholder="Rechercher un cours"
+									onSearch={onLessonSearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -379,22 +398,14 @@ const Application = () => {
 									FirstActionIcon={TagOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.lesson' })}
 									FirstForm={AddCour}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addLesson}
+									firstActioning={addingLesson}
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<LessonsList lessonSearch={lessonSearch} />
 							) : (
-								<Lessons
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Lessons lessonSearch={lessonSearch} />
 							)}
 						</Route>
 						<Route path="/rooms">
