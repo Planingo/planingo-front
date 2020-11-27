@@ -8,7 +8,7 @@ import { useIntl } from 'react-intl'
 import AddModule from './Module/Add/AddModule'
 import { Spin } from 'antd'
 
-const Modules = () => {
+const Modules = ({ moduleSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllModules()
 
@@ -29,10 +29,16 @@ const Modules = () => {
 			/>
 		)
 
+	const modules = moduleSearch
+		? data.module.filter((c) =>
+				c.name.toLowerCase().includes(moduleSearch.toLowerCase()),
+		  )
+		: data.module
+
 	return (
 		<div className="modules">
 			<Gallery
-				datas={data?.module}
+				datas={modules}
 				loading={loading}
 				Item={Module}
 				Add={AddModule}
