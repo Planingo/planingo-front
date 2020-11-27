@@ -8,7 +8,7 @@ import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from 'antd'
 
-const Pathways = () => {
+const Pathways = ({ pathwaySearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllPathways()
 
@@ -28,10 +28,17 @@ const Pathways = () => {
 				title={intl.formatMessage({ id: 'add.pathway' })}
 			/>
 		)
+
+	const pathways = pathwaySearch
+		? data.pathway.filter((c) =>
+				c.name.toLowerCase().includes(pathwaySearch.toLowerCase()),
+		  )
+		: data.pathway
+
 	return (
 		<div className="pathways">
 			<Gallery
-				datas={data?.pathway}
+				datas={pathways}
 				loading={loading}
 				Item={Pathway}
 				Add={AddPathway}

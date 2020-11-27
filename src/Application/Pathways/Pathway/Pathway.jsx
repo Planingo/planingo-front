@@ -13,7 +13,7 @@ const Pathway = ({ data }) => {
 					cover={
 						<img
 							alt="example"
-							src={`https://source.unsplash.com/600x400/?personne&${data.name}${data.description}`}
+							src={`https://avatars.bugsyaya.dev/285/${data.id}`}
 						/>
 					}
 				>

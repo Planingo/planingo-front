@@ -50,6 +50,8 @@ import AddProfessor from './Professors/Professor/Add/AddProfessor'
 import ProfessorsList from './Professors/ProfessorsList'
 import { useAddCompany, useEditCompany } from './Companies/companies.hooks'
 import CompaniesList from './Companies/CompaniesList'
+import { useAddPathway, useEditPathway } from './Pathways/pathways.hooks'
+import PathwaysList from './Pathways/PathwaysList'
 
 const Application = () => {
 	const options = [
@@ -66,6 +68,9 @@ const Application = () => {
 	const [addCompany, { loading: addingCompany }] = useAddCompany()
 	const [editCompany, { loading: editingCompany }] = useEditCompany()
 
+	const [addPathway, { loading: addingPathway }] = useAddPathway()
+	const [editPathway, { loading: editingPathway }] = useEditPathway()
+
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
@@ -81,10 +86,14 @@ const Application = () => {
 	const onCompanySearch = (value) => {
 		setCompanySearch(value)
 	}
+	const onPathwaySearch = (value) => {
+		setPathwaySearch(value)
+	}
 
 	const [studentSearch, setStudentSearch] = useState()
 	const [professorSearch, setProfessorSearch] = useState()
 	const [companySearch, setCompanySearch] = useState()
+	const [pathwaySearch, setPathwaySearch] = useState()
 
 	return (
 		<div className="application">
@@ -308,7 +317,10 @@ const Application = () => {
 						</Route>
 						<Route path="/pathways">
 							<div className="header">
-								<Search placeholder="Rechercher une formation" />
+								<Search
+									placeholder="Rechercher une formation"
+									onSearch={onPathwaySearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -317,22 +329,14 @@ const Application = () => {
 									FirstActionIcon={ExperimentOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.pathway' })}
 									FirstForm={AddPathway}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addPathway}
+									firstActioning={addingPathway}
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<PathwaysList pathwaySearch={pathwaySearch} />
 							) : (
-								<Pathways
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Pathways pathwaySearch={pathwaySearch} />
 							)}
 						</Route>
 						<Route path="/modules">
