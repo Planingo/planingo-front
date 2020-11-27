@@ -13,14 +13,11 @@ const Room = ({ data }) => {
 					cover={
 						<img
 							alt="example"
-							src={`https://source.unsplash.com/600x400/?personne&${data.firstName}${data.lastName}`}
+							src={`https://avatars.bugsyaya.dev/285/${data.id}`}
 						/>
 					}
 				>
-					<Meta
-						title={`${data.firstName} ${data.lastName}`}
-						description={data.pathway.name}
-					/>
+					<Meta title={`${data.name}`} />
 				</Card>
 			</Link>
 		</div>

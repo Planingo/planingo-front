@@ -8,7 +8,7 @@ import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from 'antd'
 
-const Rooms = () => {
+const Rooms = ({ roomSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllRooms()
 
@@ -28,10 +28,17 @@ const Rooms = () => {
 				title={intl.formatMessage({ id: 'add.room' })}
 			/>
 		)
+
+	const rooms = roomSearch
+		? data.room.filter((c) =>
+				c.name.toLowerCase().includes(roomSearch.toLowerCase()),
+		  )
+		: data.room
+
 	return (
 		<div className="rooms">
 			<Gallery
-				datas={data?.room}
+				datas={rooms}
 				loading={loading}
 				Item={Room}
 				Add={AddRoom}
