@@ -1,16 +1,16 @@
 import React from 'react'
 import './companies.scss'
 import Company from './Company/Company'
-import { useGetAllCompagnies } from './companies.hooks'
+import { useGetAllCompanies } from './companies.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddCompany from './Company/Add/AddCompany'
 import { Spin } from 'antd'
 
-const Compagnies = () => {
+const Companies = ({ companySearch }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllCompagnies()
+	const { data, loading } = useGetAllCompanies()
 
 	if (loading)
 		return (
@@ -28,10 +28,17 @@ const Compagnies = () => {
 				title={intl.formatMessage({ id: 'add.company' })}
 			/>
 		)
+
+	const companies = companySearch
+		? data.company.filter((c) =>
+				c.name.toLowerCase().includes(companySearch.toLowerCase()),
+		  )
+		: data.company
+
 	return (
-		<div className="compagnies">
+		<div className="companies">
 			<Gallery
-				datas={data?.company}
+				datas={companies}
 				loading={loading}
 				Item={Company}
 				Add={AddCompany}
@@ -41,4 +48,4 @@ const Compagnies = () => {
 	)
 }
 
-export default Compagnies
+export default Companies

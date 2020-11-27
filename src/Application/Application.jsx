@@ -48,6 +48,8 @@ import {
 } from './Professors/professors.hooks'
 import AddProfessor from './Professors/Professor/Add/AddProfessor'
 import ProfessorsList from './Professors/ProfessorsList'
+import { useAddCompany, useEditCompany } from './Companies/companies.hooks'
+import CompaniesList from './Companies/CompaniesList'
 
 const Application = () => {
 	const options = [
@@ -61,6 +63,9 @@ const Application = () => {
 	const [addProfessor, { loading: addingProfessor }] = useAddProfessor()
 	const [editProfessor, { loading: editingProfessor }] = useEditProfessor()
 
+	const [addCompany, { loading: addingCompany }] = useAddCompany()
+	const [editCompany, { loading: editingCompany }] = useEditCompany()
+
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
@@ -73,8 +78,13 @@ const Application = () => {
 		setProfessorSearch(value)
 	}
 
+	const onCompanySearch = (value) => {
+		setCompanySearch(value)
+	}
+
 	const [studentSearch, setStudentSearch] = useState()
 	const [professorSearch, setProfessorSearch] = useState()
+	const [companySearch, setCompanySearch] = useState()
 
 	return (
 		<div className="application">
@@ -414,7 +424,10 @@ const Application = () => {
 						</Route>
 						<Route path="/companies">
 							<div className="header">
-								<Search placeholder="Rechercher une entreprise" />
+								<Search
+									placeholder="Rechercher une entreprise"
+									onSearch={onCompanySearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -423,22 +436,14 @@ const Application = () => {
 									FirstActionIcon={WifiOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.company' })}
 									FirstForm={AddCompany}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addCompany}
+									firstActioning={addingCompany}
 								/>
 							</div>
 							{!isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<CompaniesList companySearch={companySearch} />
 							) : (
-								<Companies
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Companies companySearch={companySearch} />
 							)}
 						</Route>
 						<Route path="/calendars">

@@ -1,19 +1,92 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 
-export const useGetAllCompagnies = () => {
-	useQuery(gql`
-		query getAllCompagnies {
-			student(order_by: { firstName: asc }) {
-				firstName
-				lastName
+const getCompaniesQuerie = gql`
+	query getAllCompanies {
+		company(order_by: { name: asc }) {
+			apprenticeships {
 				id
-				pathway {
-					name
+			}
+			created_at
+			description
+			id
+			name
+			updated_at
+		}
+	}
+`
+
+export const useGetAllCompanies = () => {
+	const result = useQuery(getCompaniesQuerie)
+	return result
+}
+
+export const useGetCompanyById = (id) => {
+	const { loading, data } = useQuery(
+		gql`
+			query getCompaniesById($id: uuid!) {
+				company_by_pk(id: $id) {
+					apprenticeships {
+						id
+					}
+					created_at
+					description
 					id
+					name
+					updated_at
 				}
 			}
-		}
-	`)
-	return []
+		`,
+		{ variables: { id: id } },
+	)
+	return { loading, company: data?.company_by_pk }
+}
+
+export const useAddCompany = () => {
+	const [addCompany, result] = useMutation(
+		gql`
+			mutation addCompany($company: company_insert_input!) {
+				insert_company_one(object: $company) {
+					apprenticeships {
+						id
+					}
+					created_at
+					description
+					id
+					name
+					updated_at
+				}
+			}
+		`,
+		{
+			refetchQueries: [
+				{
+					query: getCompaniesQuerie,
+				},
+			],
+		},
+	)
+
+	return [(company) => addCompany({ variables: { company } }), result]
+}
+
+export const useEditCompany = () => {
+	const [editCompany, result] = useMutation(
+		gql`
+			mutation editCompany($id: uuid!, $company: company_set_input) {
+				update_company_by_pk(pk_columns: { id: $id }, _set: $company) {
+					apprenticeships {
+						id
+					}
+					created_at
+					description
+					id
+					name
+					updated_at
+				}
+			}
+		`,
+	)
+
+	return [(company, id) => editCompany({ variables: { id, company } }), result]
 }

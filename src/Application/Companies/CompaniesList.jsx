@@ -1,15 +1,15 @@
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import React from 'react'
-import './professors.scss'
-import AddProfessor from './Professor/Add/AddProfessor'
-import { useGetAllProfessors } from './professors.hooks'
+import './companies.scss'
+import AddCompany from './Company/Add/AddCompany'
+import { useGetAllCompanies } from './companies.hooks'
 import { Table, Spin } from 'antd'
 import { withSize } from 'react-sizeme'
 
-const ProfessorsList = ({ professorSearch }) => {
+const CompaniesList = ({ companySearch }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllProfessors()
+	const { data, loading } = useGetAllCompanies()
 	function onChange(pagination, filters, sorter, extra) {
 		console.log('params', pagination, filters, sorter, extra)
 	}
@@ -29,12 +29,8 @@ const ProfessorsList = ({ professorSearch }) => {
 				),
 		},
 		{
-			title: 'First name',
-			dataIndex: 'firstName',
-		},
-		{
-			title: 'Last name',
-			dataIndex: 'lastName',
+			title: 'Name',
+			dataIndex: 'name',
 		},
 	]
 
@@ -48,20 +44,19 @@ const ProfessorsList = ({ professorSearch }) => {
 	if (!data)
 		return (
 			<NoData
-				Add={AddProfessor}
-				cta={intl.formatMessage({ id: 'add.professor' })}
-				description={intl.formatMessage({ id: 'no.data.professor' })}
-				title={intl.formatMessage({ id: 'add.professor' })}
+				Add={AddCompany}
+				cta={intl.formatMessage({ id: 'add.company' })}
+				description={intl.formatMessage({ id: 'no.data.company' })}
+				title={intl.formatMessage({ id: 'add.company' })}
 			/>
 		)
 
-	const professors = professorSearch
-		? data.professor.filter(
-				(s) =>
-					s.lastName.toLowerCase().includes(professorSearch.toLowerCase()) ||
-					s.firstName.toLowerCase().includes(professorSearch.toLowerCase()),
+	const companies = companySearch
+		? data.company.filter((c) =>
+				c.name.toLowerCase().includes(companySearch.toLowerCase()),
 		  )
-		: data.professor
+		: data.company
+
 	return (
 		<>
 			<div className="professors">
@@ -70,7 +65,7 @@ const ProfessorsList = ({ professorSearch }) => {
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
-					dataSource={professors}
+					dataSource={companies}
 					onChange={onChange}
 				/>
 			</div>
@@ -79,5 +74,5 @@ const ProfessorsList = ({ professorSearch }) => {
 }
 
 export default withSize({ monitorHeight: true, monitorWidth: false })(
-	ProfessorsList,
+	CompaniesList,
 )

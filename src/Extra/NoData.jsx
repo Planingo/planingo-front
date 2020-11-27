@@ -8,11 +8,7 @@ const NoData = ({ description, cta, Add, title }) => {
 	const intl = useIntl()
 	return (
 		<div className="noData">
-			<Empty
-				description={
-					<p>{description || intl.formatMessage({ id: 'no.data' })}</p>
-				}
-			>
+			<Empty description={description || intl.formatMessage({ id: 'no.data' })}>
 				<AddFirstItem title={title} cta={cta}>
 					<Add />
 				</AddFirstItem>
