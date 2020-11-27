@@ -16,8 +16,6 @@ const Scopes = () => {
 		useSelector(selectors.accountId),
 	)
 
-	console.log(settings)
-
 	const [updateSettingsById, result] = useUpdateSettingsById()
 
 	if (loading)
@@ -29,7 +27,7 @@ const Scopes = () => {
 	return (
 		<Form
 			initialValues={settings}
-			onSubmit={values => updateSettingsById({ variables: values })}
+			onSubmit={(values) => updateSettingsById({ variables: values })}
 			render={({ handleSubmit }) => (
 				<form onSubmit={handleSubmit} className="scopes">
 					<Button htmlType="submit">Saved</Button>
