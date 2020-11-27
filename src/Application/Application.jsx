@@ -56,6 +56,8 @@ import { useAddLesson, useEditLesson } from './Lessons/lessons.hooks'
 import LessonsList from './Lessons/LessonsList'
 import ModulesList from './Modules/ModulesList'
 import { useAddModule, useEditModule } from './Modules/modules.hooks'
+import { useAddRoom, useEditRoom } from './Rooms/rooms.hooks'
+import RoomsList from './Rooms/RoomsList'
 
 const Application = () => {
 	const options = [
@@ -80,6 +82,9 @@ const Application = () => {
 
 	const [addModule, { loading: addingModule }] = useAddModule()
 	const [editModule, { loading: editingModule }] = useEditModule()
+
+	const [addRoom, { loading: addingRoom }] = useAddRoom()
+	const [editRoom, { loading: editingRoom }] = useEditRoom()
 
 	const intl = useIntl()
 
@@ -109,12 +114,17 @@ const Application = () => {
 		setModuleSearch(value)
 	}
 
+	const onRoomSearch = (value) => {
+		setRoomSearch(value)
+	}
+
 	const [studentSearch, setStudentSearch] = useState()
 	const [professorSearch, setProfessorSearch] = useState()
 	const [companySearch, setCompanySearch] = useState()
 	const [pathwaySearch, setPathwaySearch] = useState()
 	const [lessonSearch, setLessonSearch] = useState()
 	const [moduleSearch, setModuleSearch] = useState()
+	const [roomSearch, setRoomSearch] = useState()
 
 	return (
 		<div className="application">
@@ -410,7 +420,10 @@ const Application = () => {
 						</Route>
 						<Route path="/rooms">
 							<div className="header">
-								<Search placeholder="Rechercher une salle" />
+								<Search
+									placeholder="Rechercher une salle"
+									onSearch={onRoomSearch}
+								/>
 								<Refinement
 									options={options}
 									setIsGrid={setIsGrid}
@@ -419,22 +432,14 @@ const Application = () => {
 									FirstActionIcon={ShopOutlined}
 									firstActionText={intl.formatMessage({ id: 'add.room' })}
 									FirstForm={AddRoom}
-									onFirstAction={addStudent}
-									firstActioning={addingStudent}
+									onFirstAction={addRoom}
+									firstActioning={addingRoom}
 								/>
 							</div>
-							{isGrid ? (
-								<StudentsList
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+							{!isGrid ? (
+								<RoomsList roomSearch={roomSearch} />
 							) : (
-								<Rooms
-									setIsGrid={setIsGrid}
-									isGrid={isGrid}
-									options={options}
-								/>
+								<Rooms roomSearch={roomSearch} />
 							)}
 						</Route>
 						<Route path="/companies">
