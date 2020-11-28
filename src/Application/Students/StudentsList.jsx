@@ -25,7 +25,7 @@ const StudentsList = ({ studentSearch }) => {
 			dataIndex: 'image',
 			render: (picture, record) =>
 				picture ? (
-					<img src={picture} alt={`${record.id} student image`} />
+					<img src={picture} alt={`${record.id} student`} />
 				) : (
 					<img
 						src={`https://avatars.bugsyaya.dev/285/${record.id}_${record.pathway.id}`}

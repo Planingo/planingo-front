@@ -90,3 +90,25 @@ export const useEditCompany = () => {
 
 	return [(company, id) => editCompany({ variables: { id, company } }), result]
 }
+
+export const useDeleteCompanyById = (id) => {
+	const [deleteCompanyById, { loading, data }] = useMutation(
+		gql`
+			mutation deleteCompanyById($id: uuid!) {
+				delete_company_by_pk(id: $id) {
+					id
+				}
+			}
+		`,
+		{
+			variables: { id: id },
+			refetchQueries: [
+				{
+					query: getCompaniesQuerie,
+				},
+			],
+		},
+	)
+
+	return [deleteCompanyById, { loading, company: data?.delete_company_by_pk }]
+}

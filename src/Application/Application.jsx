@@ -48,7 +48,11 @@ import {
 } from './Professors/professors.hooks'
 import AddProfessor from './Professors/Professor/Add/AddProfessor'
 import ProfessorsList from './Professors/ProfessorsList'
-import { useAddCompany, useEditCompany } from './Companies/companies.hooks'
+import {
+	useAddCompany,
+	useDeleteCompanyById,
+	useEditCompany,
+} from './Companies/companies.hooks'
 import CompaniesList from './Companies/CompaniesList'
 import { useAddPathway, useEditPathway } from './Pathways/pathways.hooks'
 import PathwaysList from './Pathways/PathwaysList'
@@ -58,6 +62,7 @@ import ModulesList from './Modules/ModulesList'
 import { useAddModule, useEditModule } from './Modules/modules.hooks'
 import { useAddRoom, useEditRoom } from './Rooms/rooms.hooks'
 import RoomsList from './Rooms/RoomsList'
+import AddLesson from './Lessons/Lesson/Add/AddLesson'
 
 const Application = () => {
 	const options = [
@@ -167,9 +172,9 @@ const Application = () => {
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddProfessor}
+								onSecondAction={addProfessor}
+								secondActioning={addingProfessor}
 								mainActionButton={intl.formatMessage({ id: 'edit' })}
 							/>
 							<DetailProfessor />
@@ -200,17 +205,17 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={ExperimentOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.pathway' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddPathway}
+								onFirstAction={editPathway}
+								firstActioning={editingPathway}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddPathway}
+								onSecondAction={addPathway}
+								secondActioning={addingPathway}
 							/>
 							<DetailPathway />
 						</Route>
@@ -220,17 +225,17 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={TagsOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.module' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddModule}
+								onFirstAction={editModule}
+								firstActioning={editingModule}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddModule}
+								onSecondAction={addModule}
+								secondActioning={addingModule}
 							/>
 							<DetailModule />
 						</Route>
@@ -240,17 +245,17 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={TagOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.lesson' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddLesson}
+								onFirstAction={editLesson}
+								firstActioning={editingLesson}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddLesson}
+								onSecondAction={addLesson}
+								secondActioning={addingLesson}
 							/>
 							<DetailLesson />
 						</Route>
@@ -260,17 +265,17 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={ShopOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.room' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddRoom}
+								onFirstAction={editRoom}
+								firstActioning={editingRoom}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddRoom}
+								onSecondAction={addRoom}
+								secondActioning={addingRoom}
 							/>
 							<DetailRoom />
 						</Route>
@@ -280,17 +285,17 @@ const Application = () => {
 								FirstActionItem={AddItem}
 								FirstActionIcon={WifiOutlined}
 								firstActionText={intl.formatMessage({ id: 'edit.company' })}
-								FirstForm={AddStudent}
-								onFirstAction={addStudent}
-								firstActioning={addingStudent}
+								FirstForm={AddCompany}
+								onFirstAction={addCompany}
+								firstActioning={addingCompany}
 								SecondActionItem={AddItem}
 								SecondActionIcon={EditOutlined}
 								secondActionText={intl.formatMessage({
 									id: 'edit.constraints',
 								})}
-								SecondForm={AddStudent}
-								onSecondAction={addStudent}
-								secondActioning={addingStudent}
+								SecondForm={AddCompany}
+								onSecondAction={editCompany}
+								secondActioning={editingCompany}
 							/>
 							<DetailCompany />
 						</Route>

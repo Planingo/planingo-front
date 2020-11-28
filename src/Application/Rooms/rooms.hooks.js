@@ -74,3 +74,25 @@ export const useEditRoom = () => {
 
 	return [(room, id) => editRoom({ variables: { id, room } }), result]
 }
+
+export const useDeleteRoomById = (id) => {
+	const [deleteRoomById, { loading, data }] = useMutation(
+		gql`
+			mutation deleteRoomById($id: uuid!) {
+				delete_room_by_pk(id: $id) {
+					id
+				}
+			}
+		`,
+		{
+			variables: { id: id },
+			refetchQueries: [
+				{
+					query: getRoomsQuerie,
+				},
+			],
+		},
+	)
+
+	return [deleteRoomById, { loading, company: data?.delete_room_by_pk }]
+}

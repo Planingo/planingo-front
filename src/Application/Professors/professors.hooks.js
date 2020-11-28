@@ -89,3 +89,28 @@ export const useEditProfessor = () => {
 		result,
 	]
 }
+
+export const useDeleteProfessorById = (id) => {
+	const [deleteProfessorById, { loading, data }] = useMutation(
+		gql`
+			mutation deleteProfessorById($id: uuid!) {
+				delete_professor_by_pk(id: $id) {
+					id
+				}
+			}
+		`,
+		{
+			variables: { id: id },
+			refetchQueries: [
+				{
+					query: getProfessorsQuerie,
+				},
+			],
+		},
+	)
+
+	return [
+		deleteProfessorById,
+		{ loading, company: data?.delete_professor_by_pk },
+	]
+}
