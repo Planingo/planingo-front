@@ -1,10 +1,15 @@
-import { ArrowLeftOutlined, CalendarOutlined } from '@ant-design/icons'
-import { Radio } from 'antd'
+import {
+	ArrowLeftOutlined,
+	CalendarOutlined,
+	DeleteOutlined,
+} from '@ant-design/icons'
+import { Button, Radio } from 'antd'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import AddCalendar from '../../Application/Calendars/Calendar/Add/AddCalendar'
 import AddItem from '../../Application/Layout/Add/AddItem'
+import './refinement.scss'
 
 const Refinement = ({
 	options,
@@ -24,8 +29,11 @@ const Refinement = ({
 	secondActioning,
 	onSecondAction,
 	mainActionButton,
+	onDelete,
+	onDeleteText,
 }) => {
 	const intl = useIntl()
+	const { id } = useParams()
 
 	return (
 		<div className="refinement">
@@ -42,6 +50,7 @@ const Refinement = ({
 					<ArrowLeftOutlined />
 				</Link>
 			)}
+
 			<div className="refinement-item">
 				{firstActionText ? (
 					<FirstActionItem

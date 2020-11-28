@@ -70,3 +70,25 @@ export const useEditPathway = () => {
 
 	return [(pathway, id) => editPathway({ variables: { id, pathway } }), result]
 }
+
+export const useDeletePathwayById = (id) => {
+	const [deletePathwayById, { loading, data }] = useMutation(
+		gql`
+			mutation deletePathwayById($id: uuid!) {
+				delete_pathway_by_pk(id: $id) {
+					id
+				}
+			}
+		`,
+		{
+			variables: { id: id },
+			refetchQueries: [
+				{
+					query: getPathwaysQuerie,
+				},
+			],
+		},
+	)
+
+	return [deletePathwayById, { loading, company: data?.delete_pathway_by_pk }]
+}

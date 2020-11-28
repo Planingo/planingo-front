@@ -10,7 +10,7 @@ const Schools = () => {
 		const { Option } = Select
 
 		const onClickLine = () => {
-			setLines([...lines.filter(line => lines[index] !== line)])
+			setLines([...lines.filter((line) => lines[index] !== line)])
 		}
 
 		return (
@@ -21,7 +21,7 @@ const Schools = () => {
 					optionLabelProp="label"
 					onChange={setJoursChecked}
 				>
-					{jourDeLaSemaine.map(jour => (
+					{jourDeLaSemaine.map((jour) => (
 						<Option key={jour} label={jour}>
 							{jour}
 						</Option>
@@ -61,7 +61,7 @@ const Schools = () => {
 	const [studentChecked, setStudentChecked] = useState(
 		intl.formatMessage({ id: 'settings.school.hour' }),
 	)
-	const [joursChecked, setJoursChecked] = useState([])
+	const [, setJoursChecked] = useState([])
 	return (
 		<div className="schools">
 			<Button onClick={() => console.log}>Saved</Button>

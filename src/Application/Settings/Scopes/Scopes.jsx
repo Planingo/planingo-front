@@ -16,7 +16,7 @@ const Scopes = () => {
 		useSelector(selectors.accountId),
 	)
 
-	const [updateSettingsById, result] = useUpdateSettingsById()
+	const [updateSettingsById] = useUpdateSettingsById()
 
 	if (loading)
 		return (
