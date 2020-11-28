@@ -100,6 +100,20 @@ export const useAddStudent = () => {
 	return [(student) => addStudent({ variables: { student } }), result]
 }
 
+export const useAddStudents = () => {
+	const [addStudents, result] = useMutation(
+		gql`
+			mutation addStudents($students: [student_insert_input!]!) {
+				insert_student(objects: $students) {
+					affected_rows
+				}
+			}
+		`,
+	)
+
+	return [(students) => addStudents({ variables: { students } }), result]
+}
+
 export const useEditStudent = () => {
 	const [editStudent, result] = useMutation(
 		gql`
@@ -129,4 +143,28 @@ export const useEditStudent = () => {
 	)
 
 	return [(student, id) => editStudent({ variables: { id, student } }), result]
+}
+
+export const useDeleteStudentById = () => {
+	const [deleteStudentById, { loading, data }] = useMutation(
+		gql`
+			mutation deleteStudentById($id: uuid!) {
+				delete_student_by_pk(id: $id) {
+					id
+				}
+			}
+		`,
+		{
+			refetchQueries: [
+				{
+					query: getStudentsQuerie,
+				},
+			],
+		},
+	)
+
+	return [
+		(id) => deleteStudentById({ variables: { id } }),
+		{ loading, student: data?.delete_student_by_pk },
+	]
 }
