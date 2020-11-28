@@ -71,7 +71,7 @@ export const useEditLesson = () => {
 	return [(lesson, id) => editLesson({ variables: { id, lesson } }), result]
 }
 
-export const useDeleteLessonById = (id) => {
+export const useDeleteLessonById = () => {
 	const [deleteLessonById, { loading, data }] = useMutation(
 		gql`
 			mutation deleteLessonById($id: uuid!) {
@@ -81,7 +81,6 @@ export const useDeleteLessonById = (id) => {
 			}
 		`,
 		{
-			variables: { id: id },
 			refetchQueries: [
 				{
 					query: getLessonsQuerie,
@@ -90,5 +89,8 @@ export const useDeleteLessonById = (id) => {
 		},
 	)
 
-	return [deleteLessonById, { loading, company: data?.delete_lesson_by_pk }]
+	return [
+		(id) => deleteLessonById({ variables: { id } }),
+		{ loading, company: data?.delete_lesson_by_pk },
+	]
 }

@@ -17,8 +17,6 @@ const Informations = ({ loading, company }) => {
 	if (loading) return null
 	if (deletedLoading) return null
 
-	console.log(deletedCompany)
-
 	if (deletedCompany) return <Redirect to="/companies" />
 
 	return (

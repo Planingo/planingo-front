@@ -71,7 +71,7 @@ export const useEditModule = () => {
 	return [(module, id) => editModule({ variables: { id, module } }), result]
 }
 
-export const useDeleteModuleById = (id) => {
+export const useDeleteModuleById = () => {
 	const [deleteModuleById, { loading, data }] = useMutation(
 		gql`
 			mutation deleteModuleById($id: uuid!) {
@@ -81,7 +81,6 @@ export const useDeleteModuleById = (id) => {
 			}
 		`,
 		{
-			variables: { id: id },
 			refetchQueries: [
 				{
 					query: getModulesQuerie,
@@ -90,5 +89,22 @@ export const useDeleteModuleById = (id) => {
 		},
 	)
 
-	return [deleteModuleById, { loading, company: data?.delete_module_by_pk }]
+	return [
+		(id) => deleteModuleById({ variables: { id } }),
+		{ loading, module: data?.delete_module_by_pk },
+	]
+}
+
+export const useDeleteModules = () => {
+	const [deleteModules, { loading, data }] = useMutation(
+		gql`
+			mutation deleteModules {
+				delete_module(where: {}) {
+					affected_rows
+				}
+			}
+		`,
+	)
+
+	return [deleteModules, { loading, module: data?.delete_module }]
 }

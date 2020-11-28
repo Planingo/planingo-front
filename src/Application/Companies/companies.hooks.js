@@ -91,7 +91,7 @@ export const useEditCompany = () => {
 	return [(company, id) => editCompany({ variables: { id, company } }), result]
 }
 
-export const useDeleteCompanyById = (id) => {
+export const useDeleteCompanyById = () => {
 	const [deleteCompanyById, { loading, data }] = useMutation(
 		gql`
 			mutation deleteCompanyById($id: uuid!) {
@@ -101,7 +101,6 @@ export const useDeleteCompanyById = (id) => {
 			}
 		`,
 		{
-			variables: { id: id },
 			refetchQueries: [
 				{
 					query: getCompaniesQuerie,
@@ -110,5 +109,8 @@ export const useDeleteCompanyById = (id) => {
 		},
 	)
 
-	return [deleteCompanyById, { loading, company: data?.delete_company_by_pk }]
+	return [
+		(id) => deleteCompanyById({ variables: { id } }),
+		{ loading, company: data?.delete_company_by_pk },
+	]
 }
