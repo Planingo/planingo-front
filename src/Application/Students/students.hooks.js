@@ -8,17 +8,14 @@ const getStudentsQuerie = gql`
 				company {
 					id
 					name
-					description
 				}
-				companyId
 				id
-				studentId
 			}
+			created_at
 			firstName
 			id
 			lastName
 			pathway {
-				description
 				id
 				name
 			}
@@ -71,17 +68,14 @@ export const useAddStudent = () => {
 						company {
 							id
 							name
-							description
 						}
-						companyId
 						id
-						studentId
 					}
+					created_at
 					firstName
 					id
 					lastName
 					pathway {
-						description
 						id
 						name
 					}
