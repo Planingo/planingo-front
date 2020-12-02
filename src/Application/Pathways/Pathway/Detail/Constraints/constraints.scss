@@ -1,0 +1,17 @@
+.line {
+    display: flex;
+    align-items: center;
+
+    p {
+        margin: 0;
+        margin-left: 0.5em;
+    }
+
+    [role="img"] {
+        cursor: grab;
+    }
+
+    [role="img"]:active {
+        cursor: grabbing;
+    }
+}
