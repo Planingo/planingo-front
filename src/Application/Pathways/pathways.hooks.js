@@ -21,9 +21,21 @@ export const useGetPathwayById = (id) => {
 		gql`
 			query getPathwaysById($id: uuid!) {
 				pathway_by_pk(id: $id) {
+					created_at
 					description
 					id
 					name
+					updated_at
+					modules {
+						module {
+							created_at
+							description
+							id
+							name
+							updated_at
+						}
+						id
+					}
 				}
 			}
 		`,

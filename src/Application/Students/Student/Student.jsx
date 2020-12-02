@@ -2,6 +2,7 @@ import React from 'react'
 import './student.scss'
 import { Card } from 'antd'
 import { Link } from 'react-router-dom'
+import { head } from 'lodash'
 
 const Student = ({ data }) => {
 	const { Meta } = Card
@@ -19,7 +20,11 @@ const Student = ({ data }) => {
 				>
 					<Meta
 						title={`${data.firstName} ${data.lastName}`}
-						description={data.pathway.name}
+						description={`${data.pathway.name}${
+							data.apprenticeships.length
+								? ' - ' + head(data.apprenticeships).company.name
+								: ''
+						}`}
 					/>
 				</Card>
 			</Link>
