@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './addCalendar.scss'
-import { Form, Radio, Input, Select, DatePicker, Upload, Modal } from 'antd'
+import { Form, Input, Select, DatePicker, Upload, Modal } from 'antd'
+import { Radio } from '@planingo/ditto'
 
 import { PlusOutlined } from '@ant-design/icons'
 import * as Minio from 'minio'

@@ -1,6 +1,6 @@
 import React from 'react'
 import './global.scss'
-import { Button, Switch } from 'antd'
+import { Button, Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 import { useReset } from '../../../Generate/reset.hooks'

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Input, Form, Button } from 'antd'
+import { Input, Form } from 'antd'
+import { Button } from '@planingo/ditto'
 import './signup.scss'
 // import { useDispatch } from 'react-redux'
 import { Form as FinalForm, Field } from 'react-final-form'

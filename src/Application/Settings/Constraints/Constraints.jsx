@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './constraints.scss'
-import { Switch, Button, Card } from 'antd'
+import { Card } from 'antd'
+import { Button, Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 

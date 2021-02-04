@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './addItem.scss'
-import { Drawer, Button } from 'antd'
+import { Drawer } from 'antd'
+import { Button } from '@planingo/ditto'
 
 const AddFirstItem = ({ children, title, cta }) => {
 	const [visible, setVisible] = useState(false)
