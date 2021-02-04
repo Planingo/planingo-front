@@ -1,6 +1,7 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Input, Form, Button } from 'antd'
+import { Input, Form } from 'antd'
+import { Button } from '@planingo/ditto'
 import './login.scss'
 import { Form as FinalForm, Field } from 'react-final-form'
 import { useLogin } from './login.hooks'

@@ -1,9 +1,8 @@
 import {
 	ArrowLeftOutlined,
 	CalendarOutlined,
-	DeleteOutlined,
 } from '@ant-design/icons'
-import { Button, Radio } from 'antd'
+import { Radio } from 'antd'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useParams } from 'react-router-dom'

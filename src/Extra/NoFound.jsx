@@ -1,6 +1,7 @@
 import React from 'react'
 import './noData.scss'
-import { Result, Button } from 'antd'
+import { Result } from 'antd'
+import { Button } from '@planingo/ditto'
 
 const NoFound = () => {
 	return (

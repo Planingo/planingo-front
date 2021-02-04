@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { Button } from '@planingo/ditto'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Redirect } from 'react-router'
