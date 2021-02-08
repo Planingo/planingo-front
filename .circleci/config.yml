@@ -1,0 +1,54 @@
+version: 2.1
+orbs:
+  discord: antonioned/discord@0.1.0
+
+jobs:
+  unit-test:
+    docker:
+      - image: circleci/node:15
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          key: dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
+            - ~/.config
+            - ./node_modules
+      - run: yarn test
+
+  deploy:
+    docker:
+      - image: circleci/node:15
+    steps:
+      - checkout
+      - run: yarn global add caprover
+      - run: yarn deploy
+      - discord/status:
+          success_only: true
+          success_message: ":partying_face: Branch and Brush s'est déployé sans encombre ! :partying_face:"
+          webhook: "${DISCORD_STATUS_WEBHOOK}"
+
+filters-tag: &filters-tag
+  branches:
+    ignore: /.*/
+  tags:
+    only: /.*/
+
+filters-all: &filters-all
+  tags:
+    only: /.*/
+
+workflows:
+  version: 2
+  common:
+    jobs:
+      - unit-test :
+          filters: *filters-all
+      - deploy:
+          requires:
+            - unit-test
+          filters: *filters-tag
