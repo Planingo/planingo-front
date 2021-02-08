@@ -12,7 +12,7 @@
 		"craco-babel-loader": "^0.1.4",
 		"craco-less": "^1.17.0",
 		"final-form": "^4.20.0",
-		"graphql": "^15.3.0",
+		"graphql": "^15.5.0",
 		"lodash": "^4.17.15",
 		"minio": "^7.0.16",
 		"node-sass": "^5.0.0",
