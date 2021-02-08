@@ -27,7 +27,7 @@ jobs:
             - ~/.cache
             - ~/.config
             - ./node_modules
-      - run: yarn test
+      - run: yarn test --passWithNoTests
 
   e2e-test:
     executor: cypress
