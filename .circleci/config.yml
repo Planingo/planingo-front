@@ -20,6 +20,43 @@ jobs:
             - ./node_modules
       - run: yarn test
 
+  e2e-test:
+    executor: cypress
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - restore_cache:
+          keys:
+            - e2e-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn ci:install
+      - save_cache:
+          key: e2e-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
+            - ~/.config
+            - ./node_modules
+
+      - run:
+          command: yarn e2e:ci
+          environment:
+            MOCHA_FILE: /root/project/reports/test-results-[hash].xml
+
+      - store_test_results:
+          path: /root/project/reports/
+      - store_artifacts:
+          path: /root/project/reports/
+
+      # Conserve les screenshots et la vidéo en cas d'erreur pour faciliter le debug
+      - store_artifacts:
+          path: cypress/videos
+          when: on_fail
+      - store_artifacts:
+          path: cypress/screenshots
+          when: on_fail
+
   deploy:
     docker:
       - image: circleci/node:15
@@ -48,7 +85,10 @@ workflows:
     jobs:
       - unit-test :
           filters: *filters-all
+      - e2e-test :
+          filters: *filters-all
       - deploy:
           requires:
             - unit-test
+            - e2e-test
           filters: *filters-tag

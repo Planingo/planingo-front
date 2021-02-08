@@ -23,6 +23,8 @@
 		"build": "craco build",
 		"test": "craco test",
 		"eject": "craco eject",
+		"e2e": "cypress open",
+		"e2e:ci": "cypress run",
 		"deploy": "caprover deploy -h https://captain.caprover.cocaud.dev/ -p ${CAPROVER_PASSWORD} -b master -a planingo"
 	},
 	"eslintConfig": {
