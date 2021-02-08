@@ -10,6 +10,7 @@
 		"apollo-boost": "^0.4.9",
 		"craco-babel-loader": "^0.1.4",
 		"craco-less": "^1.17.0",
+		"cypress": "^6.4.0",
 		"final-form": "^4.20.0",
 		"graphql": "^15.5.0",
 		"minio": "^7.0.16",
@@ -21,7 +22,8 @@
 		"start": "craco start",
 		"build": "craco build",
 		"test": "craco test",
-		"eject": "craco eject"
+		"eject": "craco eject",
+		"deploy": "caprover deploy -h https://captain.caprover.cocaud.dev/ -p ${CAPROVER_PASSWORD} -b master -a planingo"
 	},
 	"eslintConfig": {
 		"parser": "babel-eslint",
@@ -43,8 +45,11 @@
 		]
 	},
 	"devDependencies": {
-		"lodash": "^4.17.15",
 		"antd": "^4.12.1",
+		"babel-eslint": "^10.1.0",
+		"eslint-config-airbnb": "^18.2.0",
+		"lodash": "^4.17.15",
+		"node-sass": "^4.0.0",
 		"react": "^17.0.1",
 		"react-dnd": "^11.1.3",
 		"react-dnd-html5-backend": "^11.1.3",
@@ -55,9 +60,6 @@
 		"react-router": "^5.2.0",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "3.4.3",
-		"react-sizeme": "^2.6.12",
-		"node-sass": "^4.0.0",
-		"babel-eslint": "^10.1.0",
-		"eslint-config-airbnb": "^18.2.0"
+		"react-sizeme": "^2.6.12"
 	}
 }
