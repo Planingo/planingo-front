@@ -1464,10 +1464,12 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@planingo/ditto@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@planingo/ditto/-/ditto-0.1.3.tgz#72b9289b83e3cc31c69ff6957080e867b88fbada"
-  integrity sha512-gYoXHttq/IQlRahnwkYjqJPyN5DxHWlJPCNbCsB+62XDPoKt3zKqcWRLFonVirpe1YIWs10OhDOWVGOq/MJjVw==
+"@planingo/ditto@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@planingo/ditto/-/ditto-0.1.7.tgz#ad451e2f0de52185bab8bda96e697a779bec4ed3"
+  integrity sha512-EMG+FVfBteHrzmFJLK+T+w1VdGsqk7aOFKJoXvg3AvpW7XxzfyzNAO9K5aTup/Iynh3eF390AWtahhh5vDIEiw==
+  dependencies:
+    "@ant-design/icons" "^4.4.0"
 
 "@react-dnd/asap@^4.0.0":
   version "4.0.0"
