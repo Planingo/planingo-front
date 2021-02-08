@@ -19,6 +19,14 @@ jobs:
             - ~/.config
             - ./node_modules
       - run: yarn test
+  
+  cypress:
+    docker:
+      # Image primaire utilisée pour lancer les tests
+      - image: cypress/browsers:node14.7.0-chrome84
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
 
   e2e-test:
     executor: cypress
