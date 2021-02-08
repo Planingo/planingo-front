@@ -25,6 +25,7 @@
 		"eject": "craco eject",
 		"e2e": "cypress open",
 		"e2e:ci": "cypress run",
+		"ci:install": "yarn install --frozen-lockfile --cache-folder ~/.cache/yarn",
 		"deploy": "caprover deploy -h https://captain.caprover.cocaud.dev/ -p ${CAPROVER_PASSWORD} -b master -a planingo"
 	},
 	"eslintConfig": {
