@@ -3,6 +3,7 @@ import './schools.scss'
 import { Radio, Button, Card, Select, TimePicker, Tooltip } from 'antd'
 import { useIntl } from 'react-intl'
 import { DeleteOutlined } from '@ant-design/icons'
+import { RadioGroup } from '@planingo/ditto'
 
 const Schools = () => {
 	const Line = ({ setJoursChecked, jourDeLaSemaine, index }) => {
@@ -71,7 +72,7 @@ const Schools = () => {
 				})}
 			>
 				<div className="school">
-					<Radio.Group
+					<RadioGroup
 						onChange={setStudentChecked}
 						defaultValue={studentChecked}
 						buttonStyle="solid"
@@ -91,7 +92,7 @@ const Schools = () => {
 						>
 							{intl.formatMessage({ id: 'settings.school.week' })}
 						</Radio.Button>
-					</Radio.Group>
+					</RadioGroup>
 
 					<div className="select">
 						{lines.map((line, index) => {

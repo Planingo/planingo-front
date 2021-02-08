@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './addCalendar.scss'
 import { Form, Input, Select, DatePicker, Upload, Modal } from 'antd'
-import { Radio } from '@planingo/ditto'
+import { Radio, RadioGroup } from '@planingo/ditto'
 
 import { PlusOutlined } from '@ant-design/icons'
 import * as Minio from 'minio'
@@ -133,7 +133,7 @@ const AddCalendar = () => {
 					label="Genre"
 					rules={[{ required: true, message: 'Please enter user name' }]}
 				>
-					<Radio.Group
+					<RadioGroup
 						onChange={setGenderChecked}
 						defaultValue={genderChecked}
 						buttonStyle="solid"
@@ -141,7 +141,7 @@ const AddCalendar = () => {
 						<Radio.Button value="woman">Femme</Radio.Button>
 						<Radio.Button value="man">Homme</Radio.Button>
 						<Radio.Button value="autre">autre</Radio.Button>
-					</Radio.Group>
+					</RadioGroup>
 				</Form.Item>
 				<Form.Item
 					name="pathway"

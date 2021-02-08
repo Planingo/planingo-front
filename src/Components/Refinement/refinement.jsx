@@ -2,7 +2,7 @@ import {
 	ArrowLeftOutlined,
 	CalendarOutlined,
 } from '@ant-design/icons'
-import { Radio } from 'antd'
+import { RadioGroup } from '@planingo/ditto'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useParams } from 'react-router-dom'
@@ -37,7 +37,7 @@ const Refinement = ({
 	return (
 		<div className="refinement">
 			{options ? (
-				<Radio.Group
+				<RadioGroup
 					options={options}
 					onChange={() => setIsGrid(!isGrid)}
 					value={isGrid ? 'Grille' : 'List'}
