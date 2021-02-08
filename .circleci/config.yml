@@ -2,6 +2,15 @@ version: 2.1
 orbs:
   discord: antonioned/discord@0.1.0
 
+executors:
+  cypress:
+    docker:
+      # Image primaire utilisée pour lancer les tests
+      - image: cypress/browsers:node14.7.0-chrome84
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+
 jobs:
   unit-test:
     docker:
@@ -18,7 +27,44 @@ jobs:
             - ~/.cache
             - ~/.config
             - ./node_modules
-      - run: yarn test
+      - run: yarn test --passWithNoTests
+
+  e2e-test:
+    executor: cypress
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - restore_cache:
+          keys:
+            - e2e-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn ci:install
+      - save_cache:
+          key: e2e-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
+            - ~/.config
+            - ./node_modules
+
+      - run:
+          command: yarn e2e:ci
+          environment:
+            MOCHA_FILE: /root/project/reports/test-results-[hash].xml
+
+      - store_test_results:
+          path: /root/project/reports/
+      - store_artifacts:
+          path: /root/project/reports/
+
+      # Conserve les screenshots et la vidéo en cas d'erreur pour faciliter le debug
+      - store_artifacts:
+          path: cypress/videos
+          when: on_fail
+      - store_artifacts:
+          path: cypress/screenshots
+          when: on_fail
 
   deploy:
     docker:
@@ -48,7 +94,10 @@ workflows:
     jobs:
       - unit-test :
           filters: *filters-all
+      - e2e-test :
+          filters: *filters-all
       - deploy:
           requires:
             - unit-test
+            - e2e-test
           filters: *filters-tag
