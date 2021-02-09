@@ -1,17 +1,19 @@
-import { useSignup, useAccountIdByEmail, useCreateSettings } from './account'
+import { useSignup, useCreateSettings } from './account'
+import * as actions from '../../../Account/store/actions'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 
 export const useCreateAccount = () => {
-	const [createAccount] = useSignup()
-
+	const dispatch = useDispatch()
+	const history = useHistory()
+	const createAccount = useSignup()
 	const createSettings = useCreateSetting()
 
 	return async values => {
-		const { data } = await createAccount({
-			variables: { email: values.email, password: values.password },
-		})
-		await createSettings(data.insert_account_one.id)
-
-		return data.insert_account_one.id
+		const account = await createAccount(values)
+		dispatch(actions.accountCreated(account))
+		await createSettings(account.id)
+		history.push('/')
 	}
 }
 
@@ -30,15 +32,4 @@ export const useCreateSetting = () => {
 				student: true,
 			},
 		})
-}
-
-export const useFindAccountByEmail = () => {
-	const [findAccountIdByEmail, result] = useAccountIdByEmail()
-	return [
-		values =>
-			findAccountIdByEmail({
-				variables: { email: values.email, password: values.password },
-			}),
-		result,
-	]
 }
