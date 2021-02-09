@@ -1,5 +1,5 @@
-import { useApolloClient } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useApolloClient } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const useReset = () => {
 	const client = useApolloClient()

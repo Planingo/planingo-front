@@ -1,14 +1,19 @@
-import { useMutation, useLazyQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const useSignup = () => {
-	return useMutation(gql`
+	const [doCreate] = useMutation(gql`
 		mutation createAccount($email: String!, $password: String!) {
-			insert_account_one(object: { email: $email, password: $password }) {
-				id
+			account: createAccount(email: $email, password: $password) {
+				id: accountId
+				token
 			}
 		}
 	`)
+	return async ({ email, password }) => {
+		const { data } = await doCreate({ variables: { email, password } })
+		if (data?.account) return data.account
+	}
 }
 
 export const useCreateSettings = () => {
@@ -35,16 +40,6 @@ export const useCreateSettings = () => {
 					student: $student
 				}
 			) {
-				id
-			}
-		}
-	`)
-}
-
-export const useAccountIdByEmail = () => {
-	return useLazyQuery(gql`
-		query findAccountIdByEmail($email: String!, $password: String!) {
-			account(where: { email: { _eq: $email }, password: { _eq: $password } }) {
 				id
 			}
 		}

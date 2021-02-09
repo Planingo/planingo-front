@@ -50,7 +50,6 @@ import AddProfessor from './Professors/Professor/Add/AddProfessor'
 import ProfessorsList from './Professors/ProfessorsList'
 import {
 	useAddCompany,
-	useDeleteCompanyById,
 	useEditCompany,
 } from './Companies/companies.hooks'
 import CompaniesList from './Companies/CompaniesList'

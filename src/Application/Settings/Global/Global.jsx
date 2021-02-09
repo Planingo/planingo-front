@@ -4,7 +4,7 @@ import { Button, Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useIntl } from 'react-intl'
 import { useReset } from '../../../Generate/reset.hooks'
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 
 const Global = () => {
 	const intl = useIntl()

@@ -5,13 +5,12 @@ import { Button } from '@planingo/ditto'
 import './signup.scss'
 // import { useDispatch } from 'react-redux'
 import { Form as FinalForm, Field } from 'react-final-form'
-import { useHistory, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useCreateAccount } from '../../Tools/MagicBook/Account/account.hooks'
 // import { actions } from '../store'
 
 const Signup = () => {
 	const intl = useIntl()
-	const history = useHistory()
 	// const dispatch = useDispatch()
 	const requiredEmail = value =>
 		value ? undefined : intl.formatMessage({ id: 'error.required' })
@@ -36,9 +35,7 @@ const Signup = () => {
 	const createAccount = useCreateAccount()
 
 	const onSubmit = async values => {
-		const id = await createAccount(values)
-		// await dispatch(actions.createAnAccount({ values.email, id }))
-		history.push(`/auth/login/${id}`)
+		await createAccount(values)
 	}
 
 	return (

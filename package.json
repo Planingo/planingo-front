@@ -5,10 +5,9 @@
 	"private": true,
 	"dependencies": {
 		"@ant-design/icons": "^4.2.2",
-		"@apollo/react-hooks": "^4.0.0",
+		"@apollo/client": "^3.3.8",
 		"@craco/craco": "^5.9.0",
 		"@planingo/ditto": "^0.1.7",
-		"apollo-boost": "^0.4.9",
 		"craco-babel-loader": "^0.1.4",
 		"craco-less": "^1.17.0",
 		"cypress": "^6.4.0",

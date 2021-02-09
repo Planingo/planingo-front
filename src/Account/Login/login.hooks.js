@@ -1,31 +1,23 @@
-import { useEffect } from 'react'
-import { useFindAccountByEmail } from '../../Tools/MagicBook/Account/account.hooks'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { actions } from '../store'
 import { useDispatch } from 'react-redux'
-import { gql } from 'apollo-boost'
-import { useMutation } from '@apollo/react-hooks'
+import { gql } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 
 export const useLogin = () => {
 	const history = useHistory()
 	const dispatch = useDispatch()
-	const [findAccountByEmail, { data, loading }] = useFindAccountByEmail()
-
-	useEffect(() => {
-		const p = async accountId => {
-			dispatch(actions.login(accountId))
-			history.push(`/`)
-		}
-		if (data && data.account[0] && data.account[0].id) {
-			p(data.account[0].id)
-		}
-	}, [data, history, dispatch])
+	const [loading, setLoading] = useState(false)
 
 	return [
-		async values => {
-			await findAccountByEmail(values)
+		async (values) => {
+			setLoading(true)
+			const id = await dispatch(actions.login(values))
+			if (id) history.push('/')
+			setLoading(false)
 		},
-		loading,
+		loading
 	]
 }
 

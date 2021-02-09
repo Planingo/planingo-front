@@ -5,6 +5,7 @@ import { Button } from '@planingo/ditto'
 import './login.scss'
 import { Form as FinalForm, Field } from 'react-final-form'
 import { useLogin } from './login.hooks'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 	const intl = useIntl()
@@ -68,16 +69,16 @@ const Login = () => {
 							)}
 						</Field>
 						<div className="links">
-							<a className="el-link el-link--primary" href="../reset">
+							<Link className="el-link el-link--primary" to="reset">
 								{intl.formatMessage({
 									id: 'form.login.forget',
 								})}
-							</a>
-							<a className="el-link el-link--primary" href="../signup">
+							</Link>
+							<Link className="el-link el-link--primary" to="signup">
 								{intl.formatMessage({
 									id: 'form.login.signup',
 								})}
-							</a>
+							</Link>
 						</div>
 						<Button
 							loading={loading}

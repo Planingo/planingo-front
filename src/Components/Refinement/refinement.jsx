@@ -5,7 +5,7 @@ import {
 import { RadioGroup } from '@planingo/ditto'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AddCalendar from '../../Application/Calendars/Calendar/Add/AddCalendar'
 import AddItem from '../../Application/Layout/Add/AddItem'
 import './refinement.scss'
@@ -32,7 +32,6 @@ const Refinement = ({
 	onDeleteText,
 }) => {
 	const intl = useIntl()
-	const { id } = useParams()
 
 	return (
 		<div className="refinement">
