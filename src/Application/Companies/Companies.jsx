@@ -6,7 +6,7 @@ import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddCompany from './Company/Add/AddCompany'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const Companies = ({ companySearch }) => {
 	const intl = useIntl()

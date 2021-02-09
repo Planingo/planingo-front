@@ -6,7 +6,7 @@ import { useGetAllPathways } from './pathways.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const Pathways = ({ pathwaySearch }) => {
 	const intl = useIntl()

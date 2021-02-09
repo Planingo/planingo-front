@@ -6,7 +6,7 @@ import { useGetAllProfessors } from './professors.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const Professors = ({ professorSearch }) => {
 	const intl = useIntl()

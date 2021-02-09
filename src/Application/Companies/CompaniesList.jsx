@@ -4,8 +4,9 @@ import React from 'react'
 import './companies.scss'
 import AddCompany from './Company/Add/AddCompany'
 import { useGetAllCompanies } from './companies.hooks'
-import { Table, Spin } from 'antd'
+import { Table } from 'antd'
 import { withSize } from 'react-sizeme'
+import { Spin } from '@planingo/ditto'
 
 const CompaniesList = ({ companySearch }) => {
 	const intl = useIntl()

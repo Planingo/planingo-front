@@ -5,7 +5,7 @@ import AddLesson from './Lesson/Add/AddLesson'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 import { useGetAllLessons } from './lessons.hooks'
 
 const Lessons = ({ lessonSearch }) => {
