@@ -4,7 +4,8 @@ import React from 'react'
 import './students.scss'
 import AddStudent from './Student/Add/AddStudent'
 import { useGetAllStudents } from './students.hooks'
-import { Table, Spin } from 'antd'
+import { Table } from 'antd'
+import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 
 const StudentsList = ({ studentSearch }) => {
@@ -68,11 +69,9 @@ const StudentsList = ({ studentSearch }) => {
 		)
 
 	const students = studentSearch
-		? data.student.filter(
-				(s) =>
-					s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
-					s.firstName.toLowerCase().includes(studentSearch.toLowerCase()),
-		  )
+		? data.student.filter((s) =>
+			s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
+			s.firstName.toLowerCase().includes(studentSearch.toLowerCase()))
 		: data.student
 	return (
 		<>

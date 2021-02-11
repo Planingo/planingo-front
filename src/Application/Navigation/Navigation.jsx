@@ -17,7 +17,7 @@ import {
 import { useSelector } from 'react-redux'
 import { selectors } from '../../Account/store'
 import { useFindSettingsByAccountId } from '../../Tools/MagicBook/Settings/settings.hooks'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const Navigation = () => {
 	const intl = useIntl()

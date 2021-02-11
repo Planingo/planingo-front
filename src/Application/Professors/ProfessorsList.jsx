@@ -4,7 +4,8 @@ import React from 'react'
 import './professors.scss'
 import AddProfessor from './Professor/Add/AddProfessor'
 import { useGetAllProfessors } from './professors.hooks'
-import { Table, Spin } from 'antd'
+import { Table } from 'antd'
+import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 
 const ProfessorsList = ({ professorSearch }) => {

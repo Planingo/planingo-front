@@ -6,7 +6,7 @@ import { useGetAllRooms } from './rooms.hooks'
 import List from '../Layout/List'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const RoomsList = ({ roomSearch }) => {
 	const intl = useIntl()

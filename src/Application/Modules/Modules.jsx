@@ -6,7 +6,7 @@ import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddModule from './Module/Add/AddModule'
-import { Spin } from 'antd'
+import { Spin } from '@planingo/ditto'
 
 const Modules = ({ moduleSearch }) => {
 	const intl = useIntl()
