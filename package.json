@@ -5,7 +5,7 @@
 	"private": true,
 	"dependencies": {
 		"@ant-design/icons": "^4.2.2",
-		"@apollo/client": "^3.3.8",
+		"@apollo/client": "^3.3.11",
 		"@craco/craco": "^5.9.0",
 		"@planingo/ditto": "^0.1.7",
 		"craco-babel-loader": "^0.1.4",
