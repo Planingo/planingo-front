@@ -83,7 +83,6 @@ const Login = () => {
 						<Button
 							loading={loading}
 							htmlType="submit"
-							disabled={!valid}
 							type="primary"
 							shape="round"
 							size="large"

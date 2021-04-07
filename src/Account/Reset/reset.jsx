@@ -85,7 +85,6 @@ const Reset = () => {
 							</a>
 						</div>
 						<Button
-							disabled={!valid}
 							type="primary"
 							shape="round"
 							onClick={onSubmit}
