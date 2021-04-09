@@ -113,7 +113,6 @@ const Signup = () => {
 
 						<Button
 							htmlType="submit"
-							disabled={!valid}
 							type="primary"
 							shape="round"
 							size="large"

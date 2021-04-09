@@ -11,11 +11,14 @@ import configureStore from './Tools/store/store'
 import { ApolloProvider } from '@apollo/client'
 import { hogwarts } from './Tools/Clients/graphql'
 import * as selectors from './Account/store/selectors'
+import { ConfigProvider } from 'antd'
+import frFR from 'antd/lib/locale/fr_FR'
 
 const { store, persistor } = configureStore()
 
 const App = () => {
 	return (
+		<ConfigProvider locale={frFR}>
 		<ReduxProvider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
 				<IntlProvider>
@@ -25,6 +28,7 @@ const App = () => {
 				</IntlProvider>
 			</PersistGate>
 		</ReduxProvider>
+		</ConfigProvider>
 	)
 }
 

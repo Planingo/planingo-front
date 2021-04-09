@@ -1,6 +1,6 @@
 import React from 'react'
 import './navigation.scss'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { ReactComponent as Logo } from './media/sogme-blanc.svg'
 import {
@@ -33,6 +33,81 @@ const Navigation = () => {
 			</div>
 		)
 
+	const pathways = [
+		{
+			key: 'student',
+			to: '/students',
+			message: <>
+				<UserOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
+			</>
+		},
+		{
+			key: 'professor',
+			to: '/professors',
+			message: <>
+				<TeamOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
+			</>
+		},
+		{
+			key: 'calendar',
+			to: '/calendars',
+			message: <>
+				<CalendarOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.calendars' })}</p>
+			</>
+		},
+		{
+			key: 'pathway',
+			to: '/pathways',
+			message: <>
+				<ExperimentOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
+			</>
+		},
+		{
+			key: 'module',
+			to: '/modules',
+			message: <>
+				<TagsOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
+			</>
+		},
+		{
+			key: 'lesson',
+			to: '/lessons',
+			message: <>
+				<TagOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.lessons' })}</p>
+			</>
+		},
+		{
+			key: 'room',
+			to: '/rooms',
+			message: <>
+				<ShopOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
+			</>
+		},
+		{
+			key: 'company',
+			to: '/companies',
+			message: <>
+				<WifiOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.companies' })}</p>
+			</>
+		},
+		{
+			key: 'setting',
+			to: '/settings',
+			message: <>
+				<SettingOutlined />
+				<p>{intl.formatMessage({ id: 'navigation.settings' })}</p>
+			</>
+		}
+	]
+
 	return (
 		<div className="navigation">
 			<div className="top">
@@ -42,59 +117,23 @@ const Navigation = () => {
 					</Link>
 				</div>
 				<div className="main">
-					{settings.student && (
-						<Link to="/students" className="pointer">
-							<UserOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
-						</Link>
-					)}
-					{settings.professor && (
-						<Link to="/professors" className="pointer">
-							<TeamOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
-						</Link>
-					)}
-					<Link to="/calendars" className="pointer">
-						<CalendarOutlined />
-						<p>{intl.formatMessage({ id: 'navigation.calendars' })}</p>
-					</Link>
-					{settings.pathway && (
-						<Link to="/pathways/" className="pointer">
-							<ExperimentOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
-						</Link>
-					)}
-					{settings.module && (
-						<Link to="/modules" className="pointer">
-							<TagsOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
-						</Link>
-					)}
-					{settings.lesson && (
-						<Link to="/lessons" className="pointer">
-							<TagOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.lessons' })}</p>
-						</Link>
-					)}
-					{settings.room && (
-						<Link to="/rooms" className="pointer">
-							<ShopOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
-						</Link>
-					)}
-					{settings.company && (
-						<Link to="/companies" className="pointer">
-							<WifiOutlined />
-							<p>{intl.formatMessage({ id: 'navigation.companies' })}</p>
-						</Link>
-					)}
+					{
+						pathways.filter(({key}) => settings[key] || key === 'calendar').map(({key, to, message}) => (
+							<NavLink key={key} activeClassName='active' to={to} className="pointer">
+								{message}
+							</NavLink>
+						))
+					}
 				</div>
 			</div>
 			<div className="settings">
-				<Link to="/settings" className="pointer">
-					<SettingOutlined />
-					<p>{intl.formatMessage({ id: 'navigation.settings' })}</p>
-				</Link>
+			{
+				pathways.filter(({key}) => key === 'setting').map(({key, to, message}) => (
+					<NavLink key={key} to={to} className="pointer">
+						{message}
+					</NavLink>
+				))
+			}
 			</div>
 		</div>
 	)
