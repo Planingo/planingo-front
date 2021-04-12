@@ -1,147 +1,76 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './constraints.scss'
-import { Card } from 'antd'
-import { Button, Switch } from '@planingo/ditto'
-import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { Collapse } from 'antd'
+import { Spin } from '@planingo/ditto'
 import { useIntl } from 'react-intl'
+import { 
+	StudentConstraints, 
+	ProfessorContraints, 
+	LessonContraints, 
+	ModuleContraints, 
+	PathwayContraints, 
+	RoomConstraints,
+	CompanyContraints,
+} from './Componants'
+import { useSelector } from 'react-redux'
+import { useFindSettingsByAccountId } from '../../../Tools/MagicBook/Settings/settings.hooks'
+import { selectors } from '../../../Account/store'
 
 const Constraints = () => {
+	const { Panel } = Collapse;
 	const intl = useIntl()
 
-	const [studentChecked, setStudentChecked] = useState(true)
+	const { settings, loading } = useFindSettingsByAccountId(
+		useSelector(selectors.accountId),
+	)
+	function callback(key) {
+		console.log(key);
+	}	  
+
+	if(loading) return <Spin/>
+
 	return (
 		<div className="constraints">
-			<Button onClick={() => console.log}>Saved</Button>
-			<Card
-				title={intl.formatMessage({
-					id: 'settings.constraints.modules',
-				})}
-			>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Module requis obligatoirement
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Module requis optionnellement
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Module sécable
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-			</Card>
-			<Card
-				title={intl.formatMessage({
-					id: 'settings.constraints.professor',
-				})}
-			>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Souhait d'intervention
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-			</Card>
-			<Card
-				title={intl.formatMessage({
-					id: 'settings.constraints.companies',
-				})}
-			>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Durée des sessions maximum en formation
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Durée des sessions minimum en formation
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Durée des sessions maximum en entreprise
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-				<div className="constraint">
-					<Switch
-						checkedChildren={<CheckOutlined />}
-						unCheckedChildren={<CloseOutlined />}
-						checked={studentChecked}
-						onChange={setStudentChecked}
-					/>
-					<p>
-						Durée des sessions minimum en entreprise
-						{/* {intl.formatMessage({
-							id: `navigation.students`,
-						})} */}
-					</p>
-				</div>
-			</Card>
+			<Collapse defaultActiveKey={['1']} onChange={callback}>
+				{settings.student && 
+					<Panel header={intl.formatMessage({
+							id: 'settings.constraints.student',
+						})} key="1">
+						<StudentConstraints />
+					</Panel>
+				}
+				{settings.professor && 
+					<Panel header={intl.formatMessage({
+						id: 'settings.constraints.professor',
+					})} key="2"><ProfessorContraints/></Panel>
+				}
+			{settings.lesson && 
+				<Panel header={intl.formatMessage({
+						id: 'settings.constraints.lesson',
+					})} key="3"><LessonContraints /></Panel>
+			}
+			{settings.module && 
+				<Panel header={intl.formatMessage({
+						id: 'settings.constraints.modules',
+					})} key="4"><ModuleContraints /></Panel>
+			}
+			{settings.pathway && 
+				<Panel header={intl.formatMessage({
+						id: 'settings.constraints.pathway',
+					})} key="5"><PathwayContraints /></Panel>
+			}
+			{settings.room && 
+				<Panel header={intl.formatMessage({
+						id: 'settings.constraints.room',
+					})} key="6"><RoomConstraints /></Panel>
+	
+			}
+			{settings.company && 
+				<Panel header={intl.formatMessage({
+						id: 'settings.constraints.companies',
+					})} key="7"><CompanyContraints /></Panel>
+			}
+			</Collapse>
 		</div>
 	)
 }

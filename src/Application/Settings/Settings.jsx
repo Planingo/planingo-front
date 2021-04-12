@@ -15,18 +15,18 @@ const Settings = () => {
 			<div className="card-container">
 				<Tabs type="card" animated>
 					<TabPane
-						className="settings-constraints"
-						tab={intl.formatMessage({ id: 'settings.constraints' })}
-						key="1"
-					>
-						<Constraints />
-					</TabPane>
-					<TabPane
 						className="settings-scope"
 						tab={intl.formatMessage({ id: 'settings.scope' })}
-						key="2"
+						key="1"
 					>
 						<Scopes />
+					</TabPane>
+					<TabPane
+						className="settings-constraints"
+						tab={intl.formatMessage({ id: 'settings.constraints' })}
+						key="2"
+					>
+						<Constraints />
 					</TabPane>
 					<TabPane
 						className="settings-school"

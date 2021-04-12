@@ -5,6 +5,7 @@ import Calendars from '../../../Calendars/Calendars'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
 import Informations from './Informations/informations'
+import Constraints from './Constraints/Constraints'
 
 const DetailStudent = () => {
 	const { id } = useParams()
@@ -23,7 +24,7 @@ const DetailStudent = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-						<p>Contraintes</p>
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">
