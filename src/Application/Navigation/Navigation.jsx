@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './navigation.scss'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { ReactComponent as Logo } from './media/sogme-blanc.svg'
+import { Menu, Modal } from 'antd'
 import {
 	CalendarOutlined,
 	ExperimentOutlined,
@@ -14,19 +14,25 @@ import {
 	TagOutlined,
 	ShopOutlined,
 } from '@ant-design/icons'
+import {Tooltip} from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../Account/store'
 import { useFindSettingsByAccountId } from '../../Tools/MagicBook/Settings/settings.hooks'
 import { Spin } from '@planingo/ditto'
+import { useAccountById } from '../../Tools/MagicBook/Account/account.hooks'
+
+const { SubMenu } = Menu;
 
 const Navigation = () => {
 	const intl = useIntl()
+	const [isModalVisible, setIsModalVisible] = useState(false);
 
-	const { settings, loading } = useFindSettingsByAccountId(
-		useSelector(selectors.accountId),
-	)
+	const userId = useSelector(selectors.accountId)
+	const {email, loadingAccount} = useAccountById(userId)
 
-	if (loading)
+	const { settings, loading } = useFindSettingsByAccountId(userId)
+
+	if (loading || loadingAccount)
 		return (
 			<div>
 				<Spin size="large" />
@@ -37,84 +43,103 @@ const Navigation = () => {
 		{
 			key: 'student',
 			to: '/students',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.students' })}>
 				<UserOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.students' })}</p>
-			</>
+			</Tooltip>
 		},
 		{
 			key: 'professor',
 			to: '/professors',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.professors' })}>
 				<TeamOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.professors' })}</p>
-			</>
+			</Tooltip>
 		},
 		{
 			key: 'calendar',
 			to: '/calendars',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.calendars' })}>
 				<CalendarOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.calendars' })}</p>
-			</>
-		},
-		{
-			key: 'pathway',
-			to: '/pathways',
-			message: <>
-				<ExperimentOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.pathways' })}</p>
-			</>
-		},
-		{
-			key: 'module',
-			to: '/modules',
-			message: <>
-				<TagsOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.modules' })}</p>
-			</>
+			</Tooltip>
 		},
 		{
 			key: 'lesson',
 			to: '/lessons',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.lessons' })}>
 				<TagOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.lessons' })}</p>
-			</>
+			</Tooltip>
+		},
+		{
+			key: 'module',
+			to: '/modules',
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.modules' })}>
+				<TagsOutlined />
+			</Tooltip>
+		},
+		{
+			key: 'pathway',
+			to: '/pathways',
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.pathways' })}>
+				<ExperimentOutlined />
+			</Tooltip>
 		},
 		{
 			key: 'room',
 			to: '/rooms',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.rooms' })}>
 				<ShopOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.rooms' })}</p>
-			</>
+			</Tooltip>
 		},
 		{
 			key: 'company',
 			to: '/companies',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.companies' })}>
 				<WifiOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.companies' })}</p>
-			</>
+			</Tooltip>
 		},
 		{
 			key: 'setting',
 			to: '/settings',
-			message: <>
+			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.settings' })}>
 				<SettingOutlined />
-				<p>{intl.formatMessage({ id: 'navigation.settings' })}</p>
-			</>
+			</Tooltip>
 		}
 	]
 
+	function handleClick(e) {
+		console.log('click', e);
+	}
+
+
+	const showModal = () => {
+		setIsModalVisible(true);
+	};
+
+	const handleOk = () => {
+		setIsModalVisible(false);
+	};
+
+	const handleCancel = () => {
+		setIsModalVisible(false);
+	};
+	
 	return (
 		<div className="navigation">
 			<div className="top">
 				<div className="logo">
-					<Link to="/">
-						<Logo />
-					</Link>
+				<Menu onClick={handleClick} mode="vertical" triggerSubMenuAction="click">
+					<SubMenu key="sub1" title={<img
+							alt="profil"
+							src={`https://avatars.bugsyaya.dev/50/${userId}`}
+						/>}>
+						<Menu.Item key="1">{email}</Menu.Item>
+						<Menu.Item key="2">
+							<p onClick={showModal}>
+								Mon compte
+							</p>
+						</Menu.Item>
+						<Menu.Item key="3">Déconnexion</Menu.Item>
+					</SubMenu>		
+				</Menu>
 				</div>
 				<div className="main">
 					{
@@ -135,6 +160,9 @@ const Navigation = () => {
 				))
 			}
 			</div>
+			<Modal title="Mon compte" visible={isModalVisible} okText="Enregistrer" onOk={handleOk} onCancel={handleCancel}>
+				<p>{email}</p>
+			</Modal>
 		</div>
 	)
 }

@@ -11,7 +11,7 @@ const Calendar = () => {
 	return (
 		<div className="calendar">
 			<FullCalendar
-			height='85vh'
+				height='85vh'
 				plugins={[ dayGridPlugin, listPlugin, timeGridPlugin, interactionPlugin ]}
 				initialView="dayGridMonth"
 				locale={frLocale}
@@ -22,6 +22,22 @@ const Calendar = () => {
 					center: "title",
 					right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
 				}}
+				events={[
+					{ 
+						title: 'event 1', 
+						start: '2021-04-05',
+						end: '2021-04-10',
+						allDay: true
+					},
+					{ 
+						title: 'event 2', 
+						start: '2021-04-12',
+						end: '2021-04-21',
+						allDay: true,
+						backgroundColor: 'orange',
+						borderColor: 'orange'
+					}
+				]}
 			/>
 		</div>
 	)

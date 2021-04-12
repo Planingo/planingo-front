@@ -1,3 +1,16 @@
 .calendar {
 	padding: 1em;
+
+	button {
+		background-color: #1890ff !important;
+		border-color: #1890ff !important;
+		&:focus {
+			box-shadow: none !important;
+		}
+	}
+
+	.fc-button-active {
+		background-color: white !important;
+		color: #1890ff !important;
+	}
 }

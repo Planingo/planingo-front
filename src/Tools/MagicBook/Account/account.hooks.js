@@ -2,6 +2,7 @@ import { useSignup, useCreateSettings } from './account'
 import * as actions from '../../../Account/store/actions'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import { gql, useQuery } from '@apollo/client'
 
 export const useCreateAccount = () => {
 	const dispatch = useDispatch()
@@ -32,4 +33,19 @@ export const useCreateSetting = () => {
 				student: true,
 			},
 		})
+}
+
+export const useAccountById = (id) => {
+	const { loading, data } = useQuery(
+		gql`
+			query getUserById($id: uuid!) {
+				account_by_pk(id: $id) {
+					email
+					id
+				}
+			}
+		`,
+		{ variables: { id: id } },
+	)
+	return { loadingAccount: loading, email: data?.account_by_pk.email }
 }

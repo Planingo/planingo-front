@@ -1,0 +1,197 @@
+import { useMutation, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+
+export const studentConstraintsFragment = gql`
+    fragment studentConstraintsFragment on setting_constraints_student {
+        id,
+        schoolPlace,
+        maxSchool,
+        minSchool,
+        maxPathway,
+        minPathway,
+        maxSchoolSession,
+        minSchoolSession,
+        maxCompanySession,
+        minCompanySession,
+        schoolMandatory,
+        companyMandatory,
+        accountId,
+    }
+`
+
+export function useStudentConstraints(accountId) {
+    const {data, loading} = useQuery(
+        STUDENT_CONSTRAINTS,
+      {
+        variables: { accountId: accountId },
+      },
+    )
+    return {data: data?.setting_constraints_student[0], loading}
+}
+  
+const STUDENT_CONSTRAINTS = gql`
+    query studentConstraints($accountId: uuid!) {
+        setting_constraints_student(where: {accountId: {_eq: $accountId}}) {
+            id
+            ...studentConstraintsFragment
+        }
+    }
+    ${studentConstraintsFragment}
+`
+
+export function useUpdateStudentConstraints(accountId, input) {
+    const [updateStudentConstraints, result] = useMutation(
+            STUDENT_CONTRAINTS_UPDATE_MUTATION,
+        )
+    return [(accountId, input) => updateStudentConstraints({ variables: { accountId, input } }), result]
+}
+
+const STUDENT_CONTRAINTS_UPDATE_MUTATION = gql`
+    mutation updateStudentConstraints($accountId: uuid!, $input: setting_constraints_student_set_input) {
+        update_setting_constraints_student(where: {accountId: {_eq: $accountId}}, _set: $input) {
+            affected_rows
+            returning {
+                ...studentConstraintsFragment
+            }
+        }
+    }
+    ${studentConstraintsFragment}
+`
+
+const getStudentsQuerie = gql`
+	query getAllStudents {
+		student(order_by: { lastName: asc }) {
+			apprenticeships {
+				company {
+					id
+					name
+				}
+				id
+			}
+			created_at
+			firstName
+			id
+			lastName
+			pathway {
+				id
+				name
+			}
+		}
+	}
+`
+
+export const useGetAllStudents = () => {
+	const result = useQuery(getStudentsQuerie)
+	return result
+}
+
+export const useGetStudentById = (id) => {
+	const { loading, data } = useQuery(
+		gql`
+			query getStudentById($id: uuid!) {
+				student_by_pk(id: $id) {
+					apprenticeships {
+						company {
+							id
+							name
+							description
+						}
+						companyId
+						id
+						studentId
+					}
+					firstName
+					id
+					lastName
+					pathway {
+						description
+						id
+						name
+					}
+				}
+			}
+		`,
+		{ variables: { id: id } },
+	)
+	return { loading, student: data?.student_by_pk }
+}
+
+export const useAddStudent = () => {
+	const [addStudent, result] = useMutation(
+		gql`
+			mutation addStudent($student: student_insert_input!) {
+				insert_student_one(object: $student) {
+					apprenticeships {
+						company {
+							id
+							name
+						}
+						id
+					}
+					created_at
+					firstName
+					id
+					lastName
+					pathway {
+						id
+						name
+					}
+				}
+			}
+		`,
+		{
+			refetchQueries: [
+				{
+					query: getStudentsQuerie,
+				},
+			],
+		},
+	)
+
+	return [(student) => addStudent({ variables: { student } }), result]
+}
+
+export const useAddStudents = () => {
+	const [addStudents, result] = useMutation(
+		gql`
+			mutation addStudents($students: [student_insert_input!]!) {
+				insert_student(objects: $students) {
+					affected_rows
+				}
+			}
+		`,
+	)
+
+	return [(students) => addStudents({ variables: { students } }), result]
+}
+
+export const useEditStudent = () => {
+	const [editStudent, result] = useMutation(
+		gql`
+			mutation editStudent($id: uuid!, $student: student_set_input) {
+				update_student_by_pk(pk_columns: { id: $id }, _set: $student) {
+					apprenticeships {
+						company {
+							id
+							name
+							description
+						}
+						companyId
+						id
+						studentId
+					}
+					firstName
+					id
+					lastName
+					pathway {
+						description
+						id
+						name
+					}
+				}
+			}
+		`,
+	)
+
+	return [(student, id) => editStudent({ variables: { id, student } }), result]
+}
