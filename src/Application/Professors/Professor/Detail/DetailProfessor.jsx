@@ -4,6 +4,7 @@ import { useParams } from 'react-router'
 import Calendars from '../../../Calendars/Calendars'
 import { useGetProfessorById } from '../../professors.hooks'
 import Informations from './Informations/informations'
+import {Constraints} from './Constraints/Constraints'
 
 const DetailProfessor = () => {
 	const { id } = useParams()
@@ -22,7 +23,7 @@ const DetailProfessor = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-						<p>Contraintes</p>
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">

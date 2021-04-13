@@ -1,0 +1,1 @@
+export { ProfessorConstraints } from './ProfessorConstraints'

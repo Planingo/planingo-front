@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { selectors } from '../../../../Account/store'
+import { useCompanyConstraints, useUpdateCompanyConstraints } from '../Hook/companyConstraints.hook'
 
 export const CompanyContraints = () => {
-	const [maxSchoolConstraint, setMaxSchoolConstraint] = useState(true)
-	const [minSchoolConstraint, setMinSchoolConstraint] = useState(true)
-	const [maxCompanyConstraint, setMaxCompanyConstraint] = useState(true)
-	const [minCompanyConstraint, setMinCompanyConstraint] = useState(true)
+    const accountId = useSelector(selectors.accountId)
+    
+    const {data, loading} = useCompanyConstraints(accountId)
+    
+    const [updateCompanyConstraints] = useUpdateCompanyConstraints()
+
+    const onUpdate = (input) => updateCompanyConstraints(accountId, input)
+
+    if(loading) return null
 
 	return (
 		<>
@@ -15,8 +23,8 @@ export const CompanyContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxSchoolConstraint}
-                    onChange={setMaxSchoolConstraint}
+                    checked={data?.maxSchoolSession}
+                    onChange={() => onUpdate({maxSchoolSession: !data?.maxSchoolSession})}
                 />
                 <p>Durée des sessions maximum en formation</p>
             </div>
@@ -24,8 +32,8 @@ export const CompanyContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minSchoolConstraint}
-                    onChange={setMinSchoolConstraint}
+                    checked={data?.minSchoolSession}
+                    onChange={() => onUpdate({minSchoolSession: !data?.minSchoolSession})}
                 />
                 <p>Durée des sessions minimum en formation</p>
             </div>
@@ -33,8 +41,8 @@ export const CompanyContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxCompanyConstraint}
-                    onChange={setMaxCompanyConstraint}
+                    checked={data?.maxCompanySession}
+                    onChange={() => onUpdate({maxCompanySession: !data?.maxCompanySession})}
                 />
                 <p>Durée des sessions maximum en entreprise</p>
             </div>
@@ -42,8 +50,8 @@ export const CompanyContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minCompanyConstraint}
-                    onChange={setMinCompanyConstraint}
+                    checked={data?.minCompanySession}
+                    onChange={() => onUpdate({minCompanySession: !data?.minCompanySession})}
                 />
                 <p>Durée des sessions minimum en entreprise</p>
             </div>
