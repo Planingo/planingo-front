@@ -19,6 +19,29 @@ export const studentConstraintsFragment = gql`
     }
 `
 
+export const studentFragment = gql`
+    fragment studentFragment on student {
+        apprenticeships {
+			company {
+				id
+				name
+				description
+			}
+			companyId
+			id
+			studentId
+		}
+		firstName
+		id
+		lastName
+		pathway {
+			description
+			id
+			name
+		}
+    }
+`
+
 export function useStudentConstraints(accountId) {
     const {data, loading} = useQuery(
         STUDENT_CONSTRAINTS,
@@ -61,23 +84,11 @@ const STUDENT_CONTRAINTS_UPDATE_MUTATION = gql`
 const getStudentsQuerie = gql`
 	query getAllStudents {
 		student(order_by: { lastName: asc }) {
-			apprenticeships {
-				company {
-					id
-					name
-				}
-				id
-			}
-			created_at
-			firstName
 			id
-			lastName
-			pathway {
-				id
-				name
-			}
+			...studentFragment
 		}
 	}
+	${studentFragment}
 `
 
 export const useGetAllStudents = () => {
@@ -89,27 +100,11 @@ export const useGetStudentById = (id) => {
 	const { loading, data } = useQuery(
 		gql`
 			query getStudentById($id: uuid!) {
-				student_by_pk(id: $id) {
-					apprenticeships {
-						company {
-							id
-							name
-							description
-						}
-						companyId
-						id
-						studentId
-					}
-					firstName
-					id
-					lastName
-					pathway {
-						description
-						id
-						name
-					}
-				}
+				id
+				...studentFragment
 			}
+		}
+		${studentFragment}
 		`,
 		{ variables: { id: id } },
 	)
@@ -195,3 +190,62 @@ export const useEditStudent = () => {
 
 	return [(student, id) => editStudent({ variables: { id, student } }), result]
 }
+
+export const useCreateStudentConstraintsSetting = () => {
+	const [createStudentConstraintsSettings] = useMutation(
+        STUDENT_CONSTRAINTS_CREATE_MUTATION
+    )
+	return accountId =>
+    createStudentConstraintsSettings({
+        variables: {
+            schoolPlace: true,
+            accountId: accountId,
+            maxSchool: true,
+            minSchool: true,
+            maxPathway: true,
+            minPathway: true,
+            maxSchoolSession: true,
+            minSchoolSession: true,
+            maxCompanySession: true,
+            minCompanySession: true,
+            schoolMandatory: true,
+            companyMandatory: true,
+        },
+    })
+}
+
+const STUDENT_CONSTRAINTS_CREATE_MUTATION = gql`
+    mutation createStudentConstraintsSettings(
+		$schoolPlace: Boolean!, 
+		$accountId: uuid!, 
+		$maxSchool: Boolean!,
+		$minSchool: Boolean!, 
+		$maxPathway: Boolean!,
+		$minPathway: Boolean!, 
+		$maxSchoolSession: Boolean!,
+		$minSchoolSession: Boolean!, 
+		$maxCompanySession: Boolean!,
+		$minCompanySession: Boolean!, 
+		$schoolMandatory: Boolean!,
+		$companyMandatory: Boolean!,
+	) {
+        insert_setting_constraints_student_one(
+            object: {
+                schoolPlace: $schoolPlace
+                accountId: $accountId
+                maxSchool: $maxSchool
+                minSchool: $minSchool
+                maxPathway: $maxSchool
+                minPathway: $minPathway
+                maxSchoolSession: $maxSchoolSession
+                minSchoolSession: $minSchoolSession
+                maxCompanySession: $maxCompanySession
+                minCompanySession: $minCompanySession
+                schoolMandatory: $schoolMandatory
+                companyMandatory: $companyMandatory
+            }
+        ) {
+            id
+        }
+    }
+`

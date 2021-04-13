@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { selectors } from '../../../../Account/store'
+import { useModuleConstraints, useUpdateModuleConstraints } from '../Hook/moduleConstraints.hook'
 
 export const ModuleContraints = () => {
-	const [moduleConstraint, setModuleConstraint] = useState(true)
-	const [moduleConstraintOptionnal, setModuleConstraintOptionnal] = useState(true)
-	const [moduleConstraintSecable, setModuleConstraintSecable] = useState(true)
+    const accountId = useSelector(selectors.accountId)
+    
+    const {data, loading} = useModuleConstraints(accountId)
+    
+    const [updateModuleConstraints] = useUpdateModuleConstraints()
+
+    const onUpdate = (input) => updateModuleConstraints(accountId, input)
 
 	return (
 		<>
@@ -14,8 +21,8 @@ export const ModuleContraints = () => {
 						<Switch
 							checkedChildren={<CheckOutlined />}
 							unCheckedChildren={<CloseOutlined />}
-							checked={moduleConstraint}
-							onChange={setModuleConstraint}
+							checked={data?.breakable}
+							onChange={() => onUpdate({breakable: !data?.breakable})}
 						/>
 						<p>
 							Module requis obligatoirement
@@ -25,8 +32,8 @@ export const ModuleContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={moduleConstraintOptionnal}
-                    onChange={setModuleConstraintOptionnal}
+                    checked={data?.moduleOptionnal}
+                    onChange={() => onUpdate({moduleOptionnal: !data?.moduleOptionnal})}
                 />
                 <p>
                     Module requis optionnellement
@@ -36,8 +43,8 @@ export const ModuleContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={moduleConstraintSecable}
-                    onChange={setModuleConstraintSecable}
+                    checked={data?.moduleMandatory}
+                    onChange={() => onUpdate({moduleMandatory: !data?.moduleMandatory})}
                 />
                 <p>
                     Module sécable

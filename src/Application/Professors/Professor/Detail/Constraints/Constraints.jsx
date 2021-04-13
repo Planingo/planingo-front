@@ -1,9 +1,9 @@
 import React from 'react'
 import './constraints.scss'
 import { Collapse } from 'antd'
-import { StudentConstraints } from './Componants'
+import { ProfessorConstraints } from './Componants'
 
-const Constraints = () => {
+export const Constraints = () => {
 	const { Panel } = Collapse;
 
 	function callback(key) {
@@ -12,11 +12,10 @@ const Constraints = () => {
 
 	return (
 		<Collapse defaultActiveKey={['1']} onChange={callback}>
-			<Panel header="Contraintes de l'étudiant" key="1">
-				<StudentConstraints />
+			<Panel header="Contraintes de l'intervenant" key="1">
+				<ProfessorConstraints />
 			</Panel>
 		</Collapse>
 	)
 }
 
-export default Constraints

@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { selectors } from '../../../../Account/store'
+import { usePathwayConstraints, useUpdatePathwayConstraints } from '../Hook/pathwayConstraints.hook'
 
-export const PathwayContraints = () => {
-	const [schoolPlace, setSchoolPlace] = useState(true)
-	const [maxSchool, setMaxSchool] = useState(true)
-	const [minSchool, setMinSchool] = useState(true)
-	const [maxPathway, setMaxPathway] = useState(true)
-	const [minPathway, setMinPathway] = useState(true)
-	const [maxSchoolSession, setMaxSchoolSession] = useState(true)
-	const [minSchoolSession, setMinSchoolSession] = useState(true)
-	const [maxCompanySession, setMaxCompanySession] = useState(true)
-	const [minCompanySession, setMinCompanySession] = useState(true)
-	const [schoolMandatory, setSchoolMandatory] = useState(true)
-	const [companyMandatory, setCompanyMandatory] = useState(true)
+export const PathwayConstraints = () => {
+    const accountId = useSelector(selectors.accountId)
+    
+    const {data, loading} = usePathwayConstraints(accountId)
+    
+    const [updatePathwayConstraints] = useUpdatePathwayConstraints()
+
+    const onUpdate = (input) => updatePathwayConstraints(accountId, input)
+
+    if (loading) return null
 
 	return (
 		<>
@@ -22,8 +23,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={schoolPlace}
-                    onChange={setSchoolPlace}
+                    checked={data?.schoolPlace}
+                    onChange={() => onUpdate({schoolPlace: !data?.schoolPlace})}
                 />
                 <p>Lieu de formation</p>
             </div>
@@ -31,8 +32,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxSchool}
-                    onChange={setMaxSchool}
+                    checked={data?.maxSchool}
+                    onChange={() => onUpdate({maxSchool: !data?.maxSchool})}
                 />
                 <p>Volume d'heure maximum de la formation</p>
             </div>
@@ -40,8 +41,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minSchool}
-                    onChange={setMinSchool}
+                    checked={data?.minSchool}
+                    onChange={() => onUpdate({minSchool: !data?.minSchool})}
                 />
                 <p>Volume d'heure minimum de la formation</p>
             </div>
@@ -49,8 +50,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxPathway}
-                    onChange={setMaxPathway}
+                    checked={data?.maxPathway}
+                    onChange={() => onUpdate({maxPathway: !data?.maxPathway})}
                 />
                 <p>Durée maximum de la formation</p>
             </div>
@@ -58,8 +59,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minPathway}
-                    onChange={setMinPathway}
+                    checked={data?.minPathway}
+                    onChange={() => onUpdate({minPathway: !data?.minPathway})}
                 />
                 <p>Durée minimum de la formation</p>
             </div>
@@ -67,8 +68,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxSchoolSession}
-                    onChange={setMaxSchoolSession}
+                    checked={data?.maxSchoolSession}
+                    onChange={() => onUpdate({maxSchoolSession: !data?.maxSchoolSession})}
                 />
                 <p>Durée maximum des sessions de formation</p>
             </div>
@@ -76,8 +77,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minSchoolSession}
-                    onChange={setMinSchoolSession}
+                    checked={data?.minSchoolSession}
+                    onChange={() => onUpdate({minSchoolSession: !data?.minSchoolSession})}
                 />
                 <p>Durée minimum des sessions de formation</p>
             </div>
@@ -85,8 +86,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={maxCompanySession}
-                    onChange={setMaxCompanySession}
+                    checked={data?.maxCompanySession}
+                    onChange={() => onUpdate({maxCompanySession: !data?.maxCompanySession})}
                 />
                 <p>Durée maximum des sessions d'entreprise</p>
             </div>
@@ -94,8 +95,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={minCompanySession}
-                    onChange={setMinCompanySession}
+                    checked={data?.minCompanySession}
+                    onChange={() => onUpdate({minCompanySession: !data?.minCompanySession})}
                 />
                 <p>Durée minimum des sessions d'entreprise</p>
             </div>
@@ -103,8 +104,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={schoolMandatory}
-                    onChange={setSchoolMandatory}
+                    checked={data?.schoolMandatory}
+                    onChange={() => onUpdate({schoolMandatory: !data?.schoolMandatory})}
                 />
                 <p>Période en cours obligatoire</p>
             </div>
@@ -112,8 +113,8 @@ export const PathwayContraints = () => {
                 <Switch
                     checkedChildren={<CheckOutlined />}
                     unCheckedChildren={<CloseOutlined />}
-                    checked={companyMandatory}
-                    onChange={setCompanyMandatory}
+                    checked={data?.companyMandatory}
+                    onChange={() => onUpdate({companyMandatory: !data?.companyMandatory})}
                 />
                 <p>Période en entreprise obligatoire</p>
             </div>
