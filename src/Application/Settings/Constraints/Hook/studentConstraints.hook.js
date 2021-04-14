@@ -235,7 +235,7 @@ const STUDENT_CONSTRAINTS_CREATE_MUTATION = gql`
                 accountId: $accountId
                 maxSchool: $maxSchool
                 minSchool: $minSchool
-                maxPathway: $maxSchool
+                maxPathway: $maxPathway
                 minPathway: $minPathway
                 maxSchoolSession: $maxSchoolSession
                 minSchoolSession: $minSchoolSession

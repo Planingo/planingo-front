@@ -73,8 +73,8 @@ const COMPANY_CONSTRAINTS_CREATE_MUTATION = gql`
             object: {
                 maxSchoolSession: $maxSchoolSession
                 accountId: $accountId
-                minSchoolSession: $maxSchoolSession
-                maxCompanySession: $maxSchoolSession
+                minSchoolSession: $minSchoolSession
+                maxCompanySession: $maxCompanySession
                 minCompanySession: $minCompanySession
             }
         ) {
