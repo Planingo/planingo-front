@@ -11,18 +11,17 @@ export const ProfessorConstraints = () => {
     const accountId = useSelector(selectors.accountId)
     const {data, loading} = useProfessorConstraints(accountId)
 
-	const { cities } = useCity()
+	const { data: cities, loading: citiesLoading } = useCity()
 
 	const { Option } = Select
 
-	if (loading) return null
+	if (loading || citiesLoading) return null
 
 	function onChange(checkedValues) {
 		console.log('checked = ', checkedValues);
 	}
 	
 	const plainOptions = ['Matin', 'Après-midi'];
-
 
 	return (
 		<div>

@@ -15,13 +15,11 @@ const Refinement = ({
 	setIsGrid,
 	isGrid,
 	backTo,
-	FirstActionItem,
 	FirstActionIcon,
 	firstActionText,
 	FirstForm,
 	firstActioning,
 	onFirstAction,
-	SecondActionItem,
 	SecondActionIcon,
 	secondActionText,
 	SecondForm,
@@ -51,7 +49,7 @@ const Refinement = ({
 
 			<div className="refinement-item">
 				{firstActionText ? (
-					<FirstActionItem
+					<AddItem
 						mainActionButton={mainActionButton}
 						title={
 							<div>
@@ -68,7 +66,7 @@ const Refinement = ({
 				)}
 
 				{secondActionText ? (
-					<SecondActionItem
+					<AddItem
 						title={
 							<div>
 								<SecondActionIcon />

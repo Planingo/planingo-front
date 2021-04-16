@@ -1,20 +1,20 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Select, DatePicker } from 'antd'
-import { selectors } from '../../../../../../Account/store'
-import { useStudentConstraints } from '../../../../../Settings/Constraints/Hook/studentConstraints.hook'
-import { useCity } from '../city.hook'
-import '../constraints.scss'
+import { selectors } from '../../../../../Account/store'
+import { useCity } from './city.hook'
+import './constraints.scss'
+import { useStudentConstraints } from '../../../../Settings/Constraints/Hook/studentConstraints.hook'
 
-export const StudentConstraints = () => {
+export const StudentConstraintsRead = () => {
     const accountId = useSelector(selectors.accountId)
     const {data, loading} = useStudentConstraints(accountId)
 
-	const { cities } = useCity()
+	const { data: cities, loading: citiesLoading } = useCity()
 
 	const { Option } = Select
 
-	if (loading) return null
+	if (loading || citiesLoading) return null
 
 	const { RangePicker } = DatePicker;
 
