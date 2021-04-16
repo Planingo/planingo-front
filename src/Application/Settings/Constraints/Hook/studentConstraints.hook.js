@@ -191,6 +191,36 @@ export const useEditStudent = () => {
 	return [(student, id) => editStudent({ variables: { id, student } }), result]
 }
 
+export const useEditStudentConstraints = () => {
+	const [editStudentConstraints] = useMutation(
+        STUDENT_CONSTRAINTS_EDIT_MUTATION
+    )
+	return (studentId, constraints) =>
+    editStudentConstraints({
+        variables: {
+            studentId: studentId,
+			constraints: constraints,
+        },
+    })
+}
+
+
+const STUDENT_CONSTRAINTS_EDIT_MUTATION = gql`
+    mutation editStudentConstraints(
+		$studentId: uuid!, 
+		$constraints: jsonb!,
+	) {
+        insert_student_constraints_one(
+            object: {
+                studentId: $studentId
+                constraints: $constraints
+            }
+        ) {
+            id
+        }
+    }
+`
+
 export const useCreateStudentConstraintsSetting = () => {
 	const [createStudentConstraintsSettings] = useMutation(
         STUDENT_CONSTRAINTS_CREATE_MUTATION

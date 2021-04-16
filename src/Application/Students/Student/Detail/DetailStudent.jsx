@@ -5,10 +5,10 @@ import Calendars from '../../../Calendars/Calendars'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
 import Informations from './Informations/informations'
-import Constraints from './Constraints/Constraints'
 import { useStudentConstraints } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
+import { StudentConstraintsRead } from './Constraints'
 
 const DetailStudent = () => {
 	const { id } = useParams()
@@ -36,7 +36,7 @@ const DetailStudent = () => {
 				{haveConstraint &&
 					<TabPane tab="Contraintes" key="2">
 						<div className="contraints-informations">
-							<Constraints />
+							<StudentConstraintsRead />
 						</div>
 					</TabPane>
 				}
