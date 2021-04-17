@@ -15,6 +15,8 @@ import { useAddLesson, useEditLesson } from '../Lessons/lessons.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddLesson from '../Lessons/Lesson/Add/AddLesson'
+import { useEditLessonConstraints } from '../Settings/Constraints/Hook/lessonConstraints.hook'
+import EditConstraintLesson from '../Lessons/Lesson/Edit/EditConstraintLesson'
 
 export const Lesson = () => {
 	const options = [
@@ -24,6 +26,7 @@ export const Lesson = () => {
 
 	const [addLesson, { loading: addingLesson }] = useAddLesson()
 	const [editLesson, { loading: editingLesson }] = useEditLesson()
+    const [editLessonConstraints, {loading: editingLessonConstraints}] = useEditLessonConstraints()
 
 	const intl = useIntl()
 
@@ -50,9 +53,9 @@ export const Lesson = () => {
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={AddLesson}
-                        onSecondAction={addLesson}
-                        secondActioning={addingLesson}
+                        SecondForm={EditConstraintLesson}
+                        onSecondAction={editLessonConstraints}
+                        secondActioning={editingLessonConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailLesson />
