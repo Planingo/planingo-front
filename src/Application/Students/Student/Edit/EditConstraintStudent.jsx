@@ -3,9 +3,9 @@ import './editConstraintStudent.scss'
 import { Form, Select, DatePicker, InputNumber } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { useCity } from '../Detail/Constraints/city.hook'
 import { useGetStudentConstraints, useStudentConstraintsSetting } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
 import { useParams } from 'react-router'
+import { useCity } from '../../../Cities/city.hook'
 
 const EditConstraintStudent = ({ setItem }) => {
 	const { RangePicker } = DatePicker;

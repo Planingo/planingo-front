@@ -15,6 +15,8 @@ import { useAddProfessor, useEditProfessor } from '../Professors/professors.hook
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddProfessor from '../Professors/Professor/Add/AddProfessor'
+import { useEditProfessorConstraints } from '../Settings/Constraints/Hook/professorConstraints.hook'
+import EditConstraintProfessor from '../Professors/Professor/Edit/EditConstraintProfessor'
 
 export const Professor = () => {
 	const options = [
@@ -24,6 +26,7 @@ export const Professor = () => {
 
 	const [addProfessor, { loading: addingProfessor }] = useAddProfessor()
 	const [editProfessor, { loading: editingProfessor }] = useEditProfessor()
+    const [editProfessorConstraints, {loading: editingProfessorConstraints}] = useEditProfessorConstraints()
 
 	const intl = useIntl()
 
@@ -50,9 +53,9 @@ export const Professor = () => {
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={AddProfessor}
-                        onSecondAction={addProfessor}
-                        secondActioning={addingProfessor}
+                        SecondForm={EditConstraintProfessor}
+                        onSecondAction={editProfessorConstraints}
+                        secondActioning={editingProfessorConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailProfessor />
