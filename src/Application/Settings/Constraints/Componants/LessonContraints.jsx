@@ -4,12 +4,12 @@ import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { useLessonConstraints, useUpdateLessonConstraints } from '../Hook/lessonConstraints.hook'
+import { useLessonConstraintsSetting, useUpdateLessonConstraints } from '../Hook/lessonConstraints.hook'
 
 export const LessonContraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = useLessonConstraints(accountId)
+    const {data, loading} = useLessonConstraintsSetting(accountId)
     
     const [updateLessonConstraints] = useUpdateLessonConstraints()
 

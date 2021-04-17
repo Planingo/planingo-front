@@ -20,7 +20,7 @@ import { useCompanyConstraints, useUpdateCompanyConstraints } from './Hook/compa
 import { useStudentConstraintsSetting, useUpdateStudentConstraints } from './Hook/studentConstraints.hook'
 import { useProfessorConstraintsSetting, useUpdateProfessorConstraints } from './Hook/professorConstraints.hook'
 import { useRoomConstraints, useUpdateRoomConstraints } from './Hook/roomConstraints.hook'
-import { useLessonConstraints, useUpdateLessonConstraints } from './Hook/lessonConstraints.hook'
+import { useLessonConstraintsSetting, useUpdateLessonConstraints } from './Hook/lessonConstraints.hook'
 import { useModuleConstraints, useUpdateModuleConstraints } from './Hook/moduleConstraints.hook'
 import { usePathwayConstraints, useUpdatePathwayConstraints } from './Hook/pathwayConstraints.hook'
 
@@ -40,7 +40,7 @@ const Constraints = () => {
     const { data: professorData, loading: professorLoading } = useProfessorConstraintsSetting(accountId)
     const { data: roomData, loading: roomLoading } = useRoomConstraints(accountId)
     const { data: companyData, loading: companyLoading } = useCompanyConstraints(accountId)
-    const { data: lessonData, loading: lessonLoading } = useLessonConstraints(accountId)
+    const { data: lessonData, loading: lessonLoading } = useLessonConstraintsSetting(accountId)
     const { data: moduleData, loading: moduleLoading } = useModuleConstraints(accountId)
     const { data: pathwayData, loading: pathwayLoading } = usePathwayConstraints(accountId)
 	
