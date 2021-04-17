@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-export const studentConstraintsFragment = gql`
-    fragment studentConstraintsFragment on setting_constraints_student {
+export const studentConstraintsSettingFragment = gql`
+    fragment studentConstraintsSettingFragment on setting_constraints_student {
         id,
         schoolPlace,
         maxSchool,
@@ -42,9 +42,16 @@ export const studentFragment = gql`
     }
 `
 
-export function useStudentConstraints(accountId) {
+export const studentConstraintsFragment = gql`
+    fragment studentConstraintsFragment on student_constraints {
+		studentId
+		constraints
+    }
+`
+
+export function useStudentConstraintsSetting(accountId) {
     const {data, loading} = useQuery(
-        STUDENT_CONSTRAINTS,
+        STUDENT_CONSTRAINTS_SETTING,
       {
         variables: { accountId: accountId },
       },
@@ -52,9 +59,30 @@ export function useStudentConstraints(accountId) {
     return {data: data?.setting_constraints_student[0], loading}
 }
   
-const STUDENT_CONSTRAINTS = gql`
+const STUDENT_CONSTRAINTS_SETTING = gql`
     query studentConstraints($accountId: uuid!) {
         setting_constraints_student(where: {accountId: {_eq: $accountId}}) {
+            id
+            ...studentConstraintsSettingFragment
+        }
+    }
+    ${studentConstraintsSettingFragment}
+`
+
+export function useGetStudentConstraints(studentId) {
+    const {data, loading} = useQuery(
+        STUDENT_CONSTRAINTS,
+      {
+        variables: { studentId: studentId },
+      },
+    )
+
+    return {data: data?.student_constraints[0], loading}
+}
+  
+const STUDENT_CONSTRAINTS = gql`
+    query getStudentConstraints($studentId: uuid!) {
+        student_constraints(where: {studentId: {_eq: $studentId}}) {
             id
             ...studentConstraintsFragment
         }
@@ -74,11 +102,11 @@ const STUDENT_CONTRAINTS_UPDATE_MUTATION = gql`
         update_setting_constraints_student(where: {accountId: {_eq: $accountId}}, _set: $input) {
             affected_rows
             returning {
-                ...studentConstraintsFragment
+                ...studentConstraintsSettingFragment
             }
         }
     }
-    ${studentConstraintsFragment}
+    ${studentConstraintsSettingFragment}
 `
 
 const getStudentsQuerie = gql`
@@ -192,18 +220,18 @@ export const useEditStudent = () => {
 }
 
 export const useEditStudentConstraints = () => {
-	const [editStudentConstraints] = useMutation(
+	const [editStudentConstraints, result] = useMutation(
         STUDENT_CONSTRAINTS_EDIT_MUTATION
     )
-	return (studentId, constraints) =>
-    editStudentConstraints({
-        variables: {
-            studentId: studentId,
-			constraints: constraints,
-        },
-    })
-}
 
+	return [(constraints, studentId) =>
+		editStudentConstraints({
+			variables: {
+				studentId: studentId,
+				constraints: constraints,
+			}
+    }), result]
+}
 
 const STUDENT_CONSTRAINTS_EDIT_MUTATION = gql`
     mutation editStudentConstraints(
@@ -212,11 +240,21 @@ const STUDENT_CONSTRAINTS_EDIT_MUTATION = gql`
 	) {
         insert_student_constraints_one(
             object: {
-                studentId: $studentId
+                studentId: $studentId,
                 constraints: $constraints
-            }
+            },
+			on_conflict: {
+				where: {
+					studentId: {
+						_eq: $studentId
+					}
+				}, 
+				update_columns: constraints, 
+				constraint: student_constraints_studentId_key
+			}
         ) {
-            id
+            id,
+			constraints
         }
     }
 `

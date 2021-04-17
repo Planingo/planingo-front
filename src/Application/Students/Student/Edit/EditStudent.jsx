@@ -17,10 +17,6 @@ const EditStudent = ({ setItem }) => {
 	const { data, loading } = useGetAllPathways()
 	const companies = useGetAllCompanies()
 	
-	function onChange(e) {
-		console.log(`checked = ${e.target.checked}`);
-	}
-
 	if (studentLoading || companies.loading) return null
 
 	return (

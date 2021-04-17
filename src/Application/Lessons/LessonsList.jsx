@@ -12,7 +12,6 @@ const LessonsList = ({ lessonSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllLessons()
 	function onChange(pagination, filters, sorter, extra) {
-		console.log('params', pagination, filters, sorter, extra)
 	}
 
 	const columns = [

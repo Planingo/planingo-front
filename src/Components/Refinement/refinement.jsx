@@ -52,7 +52,7 @@ const Refinement = ({
 					<AddItem
 						mainActionButton={mainActionButton}
 						title={
-							<div>
+							<div className="title">
 								<FirstActionIcon />
 								<p>{firstActionText}</p>
 							</div>
@@ -60,6 +60,8 @@ const Refinement = ({
 						Form={FirstForm}
 						adding={firstActioning}
 						onAdd={onFirstAction}
+						editing={secondActioning}
+						onEdit={onSecondAction}
 					/>
 				) : (
 					<></>
@@ -68,7 +70,7 @@ const Refinement = ({
 				{secondActionText ? (
 					<AddItem
 						title={
-							<div>
+							<div className="title">
 								<SecondActionIcon />
 								<p>{secondActionText}</p>
 							</div>
@@ -76,6 +78,8 @@ const Refinement = ({
 						Form={SecondForm}
 						adding={secondActioning}
 						onAdd={onSecondAction}
+						editing={secondActioning}
+						onEdit={onSecondAction}
 						mainActionButton={mainActionButton}
 					/>
 				) : (

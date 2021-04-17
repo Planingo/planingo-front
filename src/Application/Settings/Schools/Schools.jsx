@@ -65,7 +65,7 @@ const Schools = () => {
 	const [, setJoursChecked] = useState([])
 	return (
 		<div className="schools">
-			<Button onClick={() => console.log}>Saved</Button>
+			<Button>Saved</Button>
 			<Card
 				title={intl.formatMessage({
 					id: 'settings.school.constraints.modules',

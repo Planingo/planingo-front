@@ -7,7 +7,6 @@ export const Constraints = () => {
 	const { Panel } = Collapse;
 
 	function callback(key) {
-		console.log(key);
 	}
 
 	return (

@@ -106,7 +106,6 @@ const Navigation = () => {
 	]
 
 	function handleClick(e) {
-		console.log('click', e);
 	}
 
 
