@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Select, DatePicker } from 'antd'
+import { Select } from 'antd'
 import { selectors } from '../../../../../../Account/store'
 import { useProfessorConstraints } from '../../../../../Settings/Constraints/Hook/professorConstraints.hook'
 import { useCity } from '../city.hook'
@@ -18,7 +18,6 @@ export const ProfessorConstraints = () => {
 	if (loading || citiesLoading) return null
 
 	function onChange(checkedValues) {
-		console.log('checked = ', checkedValues);
 	}
 	
 	const plainOptions = ['Matin', 'Après-midi'];

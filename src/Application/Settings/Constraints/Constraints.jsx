@@ -17,7 +17,7 @@ import { useFindSettingsByAccountId } from '../../../Tools/MagicBook/Settings/se
 import { selectors } from '../../../Account/store'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useCompanyConstraints, useUpdateCompanyConstraints } from './Hook/companyConstraints.hook'
-import { useStudentConstraints, useUpdateStudentConstraints } from './Hook/studentConstraints.hook'
+import { useStudentConstraintsSetting, useUpdateStudentConstraints } from './Hook/studentConstraints.hook'
 import { useProfessorConstraints, useUpdateProfessorConstraints } from './Hook/professorConstraints.hook'
 import { useRoomConstraints, useUpdateRoomConstraints } from './Hook/roomConstraints.hook'
 import { useLessonConstraints, useUpdateLessonConstraints } from './Hook/lessonConstraints.hook'
@@ -32,12 +32,11 @@ const Constraints = () => {
 		useSelector(selectors.accountId),
 	)
 	function callback(key) {
-		console.log(key);
 	}	  
 
     const accountId = useSelector(selectors.accountId)
     
-    const { data: studentData, loading: studentLoading } = useStudentConstraints(accountId)
+    const { data: studentData, loading: studentLoading } = useStudentConstraintsSetting(accountId)
     const { data: professorData, loading: professorLoading } = useProfessorConstraints(accountId)
     const { data: roomData, loading: roomLoading } = useRoomConstraints(accountId)
     const { data: companyData, loading: companyLoading } = useCompanyConstraints(accountId)

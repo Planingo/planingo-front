@@ -12,7 +12,6 @@ const ProfessorsList = ({ professorSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllProfessors()
 	function onChange(pagination, filters, sorter, extra) {
-		console.log('params', pagination, filters, sorter, extra)
 	}
 
 	const columns = [

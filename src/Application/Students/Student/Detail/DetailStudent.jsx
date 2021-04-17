@@ -5,7 +5,7 @@ import Calendars from '../../../Calendars/Calendars'
 import { useGetStudentById } from '../../students.hooks'
 import './detailStudent.scss'
 import Informations from './Informations/informations'
-import { useStudentConstraints } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
+import { useStudentConstraintsSetting } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
 import { StudentConstraintsRead } from './Constraints'
@@ -18,15 +18,12 @@ const DetailStudent = () => {
 	const { loading, student } = useGetStudentById(id)
 
     const accountId = useSelector(selectors.accountId)
-    const { data: studentData, loading: studentLoading } = useStudentConstraints(accountId)
+    const { data: studentData, loading: studentLoading } = useStudentConstraintsSetting(accountId)
 
 	if (loading || studentLoading) return null
 
-	console.log(studentData)
-
 	const haveConstraint = Object.values(studentData).includes(true)
-	console.log(haveConstraint)
-
+	
 	return (
 		<div className="details">
 			<Tabs defaultActiveKey="1">

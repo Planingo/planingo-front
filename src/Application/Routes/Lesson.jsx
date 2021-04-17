@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl'
 import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
-	UserOutlined,
 	EditOutlined,
     TagsOutlined
 } from '@ant-design/icons'

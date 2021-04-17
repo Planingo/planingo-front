@@ -2,14 +2,14 @@ import React from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
-import { useStudentConstraints, useUpdateStudentConstraints } from '../Hook/studentConstraints.hook'
+import { useStudentConstraintsSetting, useUpdateStudentConstraints } from '../Hook/studentConstraints.hook'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
 
 export const StudentConstraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = useStudentConstraints(accountId)
+    const {data, loading} = useStudentConstraintsSetting(accountId)
     
     const [updateStudentConstraints] = useUpdateStudentConstraints()
 

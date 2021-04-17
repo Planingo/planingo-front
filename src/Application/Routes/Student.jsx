@@ -17,6 +17,7 @@ import { useAddStudent, useEditStudent } from '../Students/students.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddStudent from '../Students/Student/Add/AddStudent'
+import { useEditStudentConstraints } from '../Settings/Constraints/Hook/studentConstraints.hook'
 
 export const Student = () => {
 	const options = [
@@ -26,6 +27,8 @@ export const Student = () => {
 
 	const [addStudent, { loading: addingStudent }] = useAddStudent()
 	const [editStudent, { loading: editingStudent }] = useEditStudent()
+    const [editStudentConstraints, {loading: editingStudentConstraints}] = useEditStudentConstraints()
+
 
 	const intl = useIntl()
 
@@ -48,13 +51,15 @@ export const Student = () => {
                         FirstForm={EditStudent}
                         onFirstAction={editStudent}
                         firstActioning={editingStudent}
+                        
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
                         SecondForm={EditConstraintStudent}
-                        onSecondAction={editStudent}
-                        secondActioning={addingStudent}
+                        onSecondAction={editStudentConstraints}
+                        secondActioning={editingStudentConstraints}
+
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailStudent />
@@ -69,6 +74,7 @@ export const Student = () => {
                             options={options}
                             setIsGrid={setIsGrid}
                             isGrid={isGrid}
+                            
                             FirstActionIcon={UserOutlined}
                             firstActionText={intl.formatMessage({ id: 'add.student' })}
                             FirstForm={AddStudent}

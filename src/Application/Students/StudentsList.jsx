@@ -12,13 +12,11 @@ const StudentsList = ({ studentSearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllStudents()
 	function onChange(pagination, filters, sorter, extra) {
-		console.log('params', pagination, filters, sorter, extra)
 	}
 
 	const uniqueP =
 		(data && new Set(data.student.map((s) => s.pathway.name))) || []
 
-	console.log(JSON.stringify([...uniqueP].map((s) => ({ text: s, value: s }))))
 
 	const columns = [
 		{

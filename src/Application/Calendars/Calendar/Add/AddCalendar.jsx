@@ -126,7 +126,7 @@ const AddCalendar = () => {
 					label="Date de naissance"
 					rules={[{ required: true, message: 'Please enter user name' }]}
 				>
-					<DatePicker onChange={console.log} />
+					<DatePicker />
 				</Form.Item>
 				<Form.Item
 					name="gender"

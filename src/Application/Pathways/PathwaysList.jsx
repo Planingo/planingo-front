@@ -12,7 +12,6 @@ const PathwaysList = ({ pathwaySearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllPathways()
 	function onChange(pagination, filters, sorter, extra) {
-		console.log('params', pagination, filters, sorter, extra)
 	}
 
 	const columns = [

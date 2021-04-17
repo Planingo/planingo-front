@@ -1,99 +1,52 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Select, DatePicker } from 'antd'
-import { selectors } from '../../../../../Account/store'
-import { useCity } from './city.hook'
 import './constraints.scss'
-import { useStudentConstraints } from '../../../../Settings/Constraints/Hook/studentConstraints.hook'
+import { useGetStudentConstraints, useStudentConstraintsSetting } from '../../../../Settings/Constraints/Hook/studentConstraints.hook'
+import { useParams } from 'react-router'
+import { useSelector } from 'react-redux'
+import { selectors } from '../../../../../Account/store'
 
 export const StudentConstraintsRead = () => {
+	const { id } = useParams()
     const accountId = useSelector(selectors.accountId)
-    const {data, loading} = useStudentConstraints(accountId)
+    const {data: studentConstraintsSetting, loading: loadingStudentConstraintsSetting} = useStudentConstraintsSetting(accountId)
+	const { data: studentConstraints, loading: loadingStudentConstraints } = useGetStudentConstraints(id)
 
-	const { data: cities, loading: citiesLoading } = useCity()
-
-	const { Option } = Select
-
-	if (loading || citiesLoading) return null
-
-	const { RangePicker } = DatePicker;
-
-	const dateFormat = 'DD/MM/YYYY';
+	if (loadingStudentConstraintsSetting || loadingStudentConstraints) return null
 
 	return (
 		<div>
-			{data?.schoolPlace && 
-				<div className='constraints'>
-					<p>Lieu de la formation</p>
-					<Select>
-						{!loading &&
-							cities.map(city => (
-								<Option 
-									placeholder="Selectionnez une ville" 
-									key={city}
-								>
-										{city}
-								</Option>
-							))
-						}
-					</Select>
-				</div>
+			{studentConstraintsSetting?.schoolPlace && 
+				<p className='constraints'>{`Lieu de la formation : ${studentConstraints?.constraints.schoolPlace || '-'}`}</p>
 			}
-			{data?.maxSchool && 
-				<div className='constraints'>
-					<p>Volume d'heure maximum de la formation</p>
-				</div>
+			{studentConstraintsSetting?.maxSchool && 
+				<p className='constraints'>{`Volume d'heure maximum de la formation : ${studentConstraints?.constraints.maxSchool || '-'}`}</p>
 			}
-			{data?.minSchool && 
-				<div className='constraints'>
-					<p>Volume d'heure minimum de la formation</p>
-				</div>
+			{studentConstraintsSetting?.minSchool && 
+				<p className='constraints'>{`Volume d'heure minimum de la formation : ${studentConstraints?.constraints.minSchool || '-'}`}</p>
 			}
-			{data?.maxPathway && 
-				<div className='constraints'>
-					<p>Durée maximum de la formation</p>
-				</div>
+			{studentConstraintsSetting?.maxPathway && 
+				<p className='constraints'>{`Durée maximum de la formation : ${studentConstraints?.constraints.maxPathway || '-'}`}</p>
 			}
-			{data?.minPathway && 
-				<div className='constraints'>
-					<p>Durée minimum de la formation</p>
-				</div>
+			{studentConstraintsSetting?.minPathway && 
+				<p className='constraints'>{`Durée minimum de la formation : ${studentConstraints?.constraints.minPathway || '-'}`}</p>
 			}
-			{data?.maxSchoolSession && 
-				<div className='constraints'>
-					<p>Durée maximum des sessions de formation</p>
-				</div>
+			{studentConstraintsSetting?.maxSchoolSession && 
+				<p className='constraints'>{`Durée maximum des sessions de formation : ${studentConstraints?.constraints.maxSchoolSession || '-'}`}</p>
 			}
-			{data?.minSchoolSession && 
-				<div className='constraints'>
-					<p>Durée minimum des sessions de formation</p>
-				</div>
+			{studentConstraintsSetting?.minSchoolSession && 
+				<p className='constraints'>{`Durée minimum des sessions de formation : ${studentConstraints?.constraints.minSchoolSession || '-'}`}</p>
 			}
-			{data?.maxCompanySession && 
-				<div className='constraints'>
-					<p>Durée maximum des sessions d'entreprise</p>
-				</div>
+			{studentConstraintsSetting?.maxCompanySession && 
+				<p className='constraints'>{`Durée maximum des sessions d'entreprise : ${studentConstraints?.constraints.maxCompanySession || '-'}`}</p>
 			}
-			{data?.minCompanySession && 
-				<div className='constraints'>
-					<p>Durée minimum des sessions d'entreprise</p>
-				</div>
+			{studentConstraintsSetting?.minCompanySession && 
+				<p className='constraints'>{`Durée minimum des sessions d'entreprise : ${studentConstraints?.constraints.minCompanySession || '-'}`}</p>
 			}
-			{data?.schoolMandatory && 
-				<div className='constraints'>
-					<p>Période en cours obligatoire</p>
-					<RangePicker
-						format={dateFormat}
-					/>
-				</div>
+			{studentConstraintsSetting?.schoolMandatory && 
+				<p className='constraints'>{`Période en cours obligatoire : ${studentConstraints?.constraints.schoolMandatory || '-'}`}</p>
 			}
-			{data?.companyMandatory && 
-				<div className='constraints'>
-					<p>Période en entreprise obligatoire</p>
-					<RangePicker
-						format={dateFormat}
-					/>
-				</div>
+			{studentConstraintsSetting?.companyMandatory && 
+				<p className='constraints'>{`Période en entreprise obligatoire : ${studentConstraints?.constraints.companyMandatory || '-'}`}</p>
 			}
 		</div>
 	)

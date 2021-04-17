@@ -18,7 +18,6 @@ const Scopes = () => {
 	const onUpdateSetting = (input) => updateSetting(accountId, input)
 
 	function callback(key) {
-		console.log(key);
 	}	  
 
 	if (loading)

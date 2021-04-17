@@ -12,6 +12,8 @@ const AddItem = ({
 	secondary,
 	onAdd,
 	adding,
+	onEdit,
+	editing,
 	mainActionButton,
 }) => {
 	const { id } = useParams()
@@ -50,10 +52,15 @@ const AddItem = ({
 						</Button>
 						<Button
 							disabled={!item}
-							loading={adding}
+							loading={adding || editing}
 							onClick={async () => {
-								await onAdd(item, id)
-								setVisible(false)
+								if(onAdd){
+									await onAdd(item, id)
+									setVisible(false)
+								} else if(onEdit){
+									await onEdit(item, id)
+									setVisible(false)
+								}
 							}}
 							type="primary"
 						>

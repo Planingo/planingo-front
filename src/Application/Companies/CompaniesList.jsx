@@ -12,7 +12,6 @@ const CompaniesList = ({ companySearch }) => {
 	const intl = useIntl()
 	const { data, loading } = useGetAllCompanies()
 	function onChange(pagination, filters, sorter, extra) {
-		console.log('params', pagination, filters, sorter, extra)
 	}
 
 	const columns = [
