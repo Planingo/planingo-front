@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-export const professorConstraintsFragment = gql`
-    fragment professorConstraintsFragment on setting_constraints_professor {
+export const professorConstraintsSettingFragment = gql`
+    fragment professorConstraintsSettingFragment on setting_constraints_professor {
         id,
         accountId,
         intervention,
@@ -10,9 +10,16 @@ export const professorConstraintsFragment = gql`
     }
 `
 
-export function useProfessorConstraints(accountId) {
+export const professorConstraintsFragment = gql`
+    fragment professorConstraintsFragment on professor_constraints {
+		professorId
+		constraints
+    }
+`
+
+export function useProfessorConstraintsSetting(accountId) {
     const {data, loading} = useQuery(
-        PROFESSOR_CONSTRAINTS,
+        PROFESSOR_CONSTRAINTS_SETTING,
       {
         variables: { accountId: accountId },
       },
@@ -20,14 +27,14 @@ export function useProfessorConstraints(accountId) {
     return {data: data?.setting_constraints_professor[0], loading}
 }
   
-const PROFESSOR_CONSTRAINTS = gql`
+const PROFESSOR_CONSTRAINTS_SETTING = gql`
     query professorConstraints($accountId: uuid!) {
         setting_constraints_professor(where: {accountId: {_eq: $accountId}}) {
             id
-            ...professorConstraintsFragment
+            ...professorConstraintsSettingFragment
         }
     }
-    ${professorConstraintsFragment}
+    ${professorConstraintsSettingFragment}
 `
 
 export function useUpdateProfessorConstraints(accountId, input) {
@@ -42,11 +49,11 @@ const PROFESSOR_CONTRAINTS_UPDATE_MUTATION = gql`
         update_setting_constraints_professor(where: {accountId: {_eq: $accountId}}, _set: $input) {
             affected_rows
             returning {
-                ...professorConstraintsFragment
+                ...professorConstraintsSettingFragment
             }
         }
     }
-    ${professorConstraintsFragment}
+    ${professorConstraintsSettingFragment}
 `
 
 export const useCreateProfessorConstraintsSetting = () => {
@@ -75,4 +82,65 @@ const PROFESSOR_CONSTRAINTS_CREATE_MUTATION = gql`
             id
         }
     }
+`
+export const useEditProfessorConstraints = () => {
+	const [editProfessorConstraints, result] = useMutation(
+        PROFESSOR_CONSTRAINTS_EDIT_MUTATION
+    )
+
+	return [(constraints, professorId) =>
+		editProfessorConstraints({
+			variables: {
+				professorId: professorId,
+				constraints: constraints,
+			}
+    }), result]
+}
+
+const PROFESSOR_CONSTRAINTS_EDIT_MUTATION = gql`
+    mutation editProfessorConstraints(
+		$professorId: uuid!, 
+		$constraints: jsonb!,
+	) {
+        insert_professor_constraints_one(
+            object: {
+                professorId: $professorId,
+                constraints: $constraints
+            },
+			on_conflict: {
+				where: {
+					professorId: {
+						_eq: $professorId
+					}
+				}, 
+				update_columns: constraints, 
+				constraint: professor_constraints_professorId_key
+			}
+        ) {
+            id,
+			constraints
+        }
+    }
+`
+
+
+export function useGetProfessorConstraints(professorId) {
+    const {data, loading} = useQuery(
+        PROFESSOR_CONSTRAINTS,
+      {
+        variables: { professorId: professorId },
+      },
+    )
+
+    return {data: data?.professor_constraints[0], loading}
+}
+  
+const PROFESSOR_CONSTRAINTS = gql`
+    query getProfessorConstraints($professorId: uuid!) {
+        professor_constraints(where: {professorId: {_eq: $professorId}}) {
+            id
+            ...professorConstraintsFragment
+        }
+    }
+    ${professorConstraintsFragment}
 `

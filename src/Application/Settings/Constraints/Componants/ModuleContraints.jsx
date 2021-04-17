@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
@@ -14,6 +14,8 @@ export const ModuleContraints = () => {
     const [updateModuleConstraints] = useUpdateModuleConstraints()
 
     const onUpdate = (input) => updateModuleConstraints(accountId, input)
+
+    if (loading) return null
 
 	return (
 		<>
