@@ -15,6 +15,8 @@ import { useAddRoom, useEditRoom } from '../Rooms/rooms.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddRoom from '../Rooms/Room/Add/AddRoom'
+import { useEditRoomConstraints } from '../Settings/Constraints/Hook/roomConstraints.hook'
+import EditConstraintRoom from '../Rooms/Room/Edit/EditConstraintRoom'
 
 export const Room = () => {
 	const options = [
@@ -24,6 +26,7 @@ export const Room = () => {
 
 	const [addRoom, { loading: addingRoom }] = useAddRoom()
 	const [editRoom, { loading: editingRoom }] = useEditRoom()
+    const [editRoomConstraints, {loading: editingRoomConstraints}] = useEditRoomConstraints()
 
 	const intl = useIntl()
 
@@ -50,9 +53,9 @@ export const Room = () => {
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={AddRoom}
-                        onSecondAction={addRoom}
-                        secondActioning={addingRoom}
+                        SecondForm={EditConstraintRoom}
+                        onSecondAction={editRoomConstraints}
+                        secondActioning={editingRoomConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailRoom />

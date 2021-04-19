@@ -83,6 +83,7 @@ const PROFESSOR_CONSTRAINTS_CREATE_MUTATION = gql`
         }
     }
 `
+
 export const useEditProfessorConstraints = () => {
 	const [editProfessorConstraints, result] = useMutation(
         PROFESSOR_CONSTRAINTS_EDIT_MUTATION

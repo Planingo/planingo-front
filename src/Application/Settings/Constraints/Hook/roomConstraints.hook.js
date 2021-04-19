@@ -1,17 +1,24 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-export const roomConstraintsFragment = gql`
-    fragment roomConstraintsFragment on setting_constraints_room {
+export const roomConstraintsSettingFragment = gql`
+    fragment roomConstraintsSettingFragment on setting_constraints_room {
         id,
         accountId,
         capacity,
     }
 `
 
-export function useRoomConstraints(accountId) {
+export const roomConstraintsFragment = gql`
+    fragment roomConstraintsFragment on room_constraints {
+		roomId
+		constraints
+    }
+`
+
+export function useRoomConstraintsSetting(accountId) {
     const {data, loading} = useQuery(
-        ROOM_CONSTRAINTS,
+        ROOM_CONSTRAINTS_SETTING,
       {
         variables: { accountId: accountId },
       },
@@ -19,17 +26,17 @@ export function useRoomConstraints(accountId) {
     return {data: data?.setting_constraints_room[0], loading}
 }
   
-const ROOM_CONSTRAINTS = gql`
-    query roomConstraints($accountId: uuid!) {
+const ROOM_CONSTRAINTS_SETTING = gql`
+    query roomConstraintsSetting($accountId: uuid!) {
         setting_constraints_room(where: {accountId: {_eq: $accountId}}) {
             id
-            ...roomConstraintsFragment
+            ...roomConstraintsSettingFragment
         }
     }
-    ${roomConstraintsFragment}
+    ${roomConstraintsSettingFragment}
 `
 
-export function useUpdateRoomConstraints(accountId, input) {
+export function useUpdateRoomConstraintsSetting(accountId, input) {
     const [updateRoomConstraints, result] = useMutation(
             ROOM_CONTRAINTS_UPDATE_MUTATION,
         )
@@ -41,16 +48,16 @@ const ROOM_CONTRAINTS_UPDATE_MUTATION = gql`
         update_setting_constraints_room(where: {accountId: {_eq: $accountId}}, _set: $input) {
             affected_rows
             returning {
-                ...roomConstraintsFragment
+                ...roomConstraintsSettingFragment
             }
         }
     }
-    ${roomConstraintsFragment}
+    ${roomConstraintsSettingFragment}
 `
 
 export const useCreateRoomConstraintsSetting = () => {
 	const [createRoomConstraintsSettings] = useMutation(
-        ROOM_CONSTRAINTS_CREATE_MUTATION
+        ROOM_CONSTRAINTS_SETTING_CREATE_MUTATION
     )
 	return accountId =>
     createRoomConstraintsSettings({
@@ -61,7 +68,7 @@ export const useCreateRoomConstraintsSetting = () => {
     })
 }
 
-const ROOM_CONSTRAINTS_CREATE_MUTATION = gql`
+const ROOM_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     mutation createRoomConstraintsSettings($capacity: Boolean!, $accountId: uuid!) {
         insert_setting_constraints_room_one(
             object: {
@@ -72,4 +79,66 @@ const ROOM_CONSTRAINTS_CREATE_MUTATION = gql`
             id
         }
     }
+`
+
+export const useEditRoomConstraints = () => {
+	const [editRoomConstraints, result] = useMutation(
+        ROOM_CONSTRAINTS_EDIT_MUTATION
+    )
+
+	return [(constraints, roomId) =>
+		editRoomConstraints({
+			variables: {
+				roomId: roomId,
+				constraints: constraints,
+			}
+    }), result]
+}
+
+const ROOM_CONSTRAINTS_EDIT_MUTATION = gql`
+    mutation editRoomConstraints(
+		$roomId: uuid!, 
+		$constraints: jsonb!,
+	) {
+        insert_room_constraints_one(
+            object: {
+                roomId: $roomId,
+                constraints: $constraints
+            },
+			on_conflict: {
+				where: {
+					roomId: {
+						_eq: $roomId
+					}
+				}, 
+				update_columns: constraints, 
+				constraint: room_constraints_roomId_key
+			}
+        ) {
+            id,
+			constraints
+        }
+    }
+`
+
+
+export function useGetRoomConstraints(roomId) {
+    const {data, loading} = useQuery(
+        ROOM_CONSTRAINTS,
+      {
+        variables: { roomId: roomId },
+      },
+    )
+
+    return {data: data?.room_constraints[0], loading}
+}
+  
+const ROOM_CONSTRAINTS = gql`
+    query getRoomConstraints($roomId: uuid!) {
+        room_constraints(where: {roomId: {_eq: $roomId}}) {
+            id
+            ...roomConstraintsFragment
+        }
+    }
+    ${roomConstraintsFragment}
 `
