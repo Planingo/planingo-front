@@ -4,14 +4,14 @@ import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { useRoomConstraints, useUpdateRoomConstraints } from '../Hook/roomConstraints.hook'
+import { useRoomConstraintsSetting, useUpdateRoomConstraintsSetting } from '../Hook/roomConstraints.hook'
 
 export const RoomConstraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = useRoomConstraints(accountId)
+    const {data, loading} = useRoomConstraintsSetting(accountId)
     
-    const [updateRoomConstraints] = useUpdateRoomConstraints()
+    const [updateRoomConstraints] = useUpdateRoomConstraintsSetting()
 
     const onUpdate = (input) => updateRoomConstraints(accountId, input)
 
