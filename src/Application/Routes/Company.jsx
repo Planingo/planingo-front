@@ -10,9 +10,13 @@ import {
 	EditOutlined,
 } from '@ant-design/icons'
 import CompaniesList from '../Companies/CompaniesList'
+import DetailCompany from '../Companies/Company/Detail/DetailCompany'
 import { useAddCompany, useEditCompany } from '../Companies/companies.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
+import { useEditCompanyConstraints } from '../Settings/Constraints/Hook/companyConstraints.hook'
+import EditConstraintCompany from '../Companies/Company/Edit/EditConstraintCompany'
+import EditCompany from '../Companies/Company/Edit/EditCompany'
 
 export const Company = () => {
 	const options = [
@@ -22,6 +26,7 @@ export const Company = () => {
 
 	const [addCompany, { loading: addingCompany }] = useAddCompany()
 	const [editCompany, { loading: editingCompany }] = useEditCompany()
+    const [editCompanyConstraints, {loading: editingCompanyConstraints}] = useEditCompanyConstraints()
 
 	const intl = useIntl()
 
@@ -41,19 +46,19 @@ export const Company = () => {
                         backTo="companies"
                         FirstActionIcon={WifiOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.company' })}
-                        // FirstForm={AddCompany}
+                        FirstForm={EditCompany}
                         onFirstAction={editCompany}
                         firstActioning={editingCompany}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        // SecondForm={AddCompany}
-                        onSecondAction={addCompany}
-                        secondActioning={addingCompany}
+                        SecondForm={EditConstraintCompany}
+                        onSecondAction={editCompanyConstraints}
+                        secondActioning={editingCompanyConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
-                    <p>Coucou</p>
+                    <DetailCompany />
                 </Route>
                 <Route path="/companies/">
                     <div className="header">

@@ -4,14 +4,14 @@ import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { useCompanyConstraints, useUpdateCompanyConstraints } from '../Hook/companyConstraints.hook'
+import { useCompanyConstraintsSetting, useUpdateCompanyConstraintsSetting } from '../Hook/companyConstraints.hook'
 
 export const CompanyContraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = useCompanyConstraints(accountId)
+    const {data, loading} = useCompanyConstraintsSetting(accountId)
     
-    const [updateCompanyConstraints] = useUpdateCompanyConstraints()
+    const [updateCompanyConstraints] = useUpdateCompanyConstraintsSetting()
 
     const onUpdate = (input) => updateCompanyConstraints(accountId, input)
 
@@ -54,6 +54,24 @@ export const CompanyContraints = () => {
                     onChange={() => onUpdate({minCompanySession: !data?.minCompanySession})}
                 />
                 <p>Durée des sessions minimum en entreprise</p>
+            </div>
+            <div className="constraint">
+                <Switch
+                    checkedChildren={<CheckOutlined />}
+                    unCheckedChildren={<CloseOutlined />}
+                    checked={data?.schoolMandatory}
+                    onChange={() => onUpdate({schoolMandatory: !data?.schoolMandatory})}
+                />
+                <p>Période en formation obligatoire</p>
+            </div>
+            <div className="constraint">
+                <Switch
+                    checkedChildren={<CheckOutlined />}
+                    unCheckedChildren={<CloseOutlined />}
+                    checked={data?.companyMandatory}
+                    onChange={() => onUpdate({companyMandatory: !data?.companyMandatory})}
+                />
+                <p>Période en entreprise obligatoire</p>
             </div>
         </>
 	)

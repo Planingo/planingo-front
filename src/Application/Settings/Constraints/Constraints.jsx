@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 import { useFindSettingsByAccountId } from '../../../Tools/MagicBook/Settings/settings.hooks'
 import { selectors } from '../../../Account/store'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
-import { useCompanyConstraints, useUpdateCompanyConstraints } from './Hook/companyConstraints.hook'
+import { useCompanyConstraintsSetting, useUpdateCompanyConstraintsSetting } from './Hook/companyConstraints.hook'
 import { useStudentConstraintsSetting, useUpdateStudentConstraints } from './Hook/studentConstraints.hook'
 import { useProfessorConstraintsSetting, useUpdateProfessorConstraints } from './Hook/professorConstraints.hook'
 import { useRoomConstraintsSetting, useUpdateRoomConstraintsSetting } from './Hook/roomConstraints.hook'
@@ -39,7 +39,7 @@ const Constraints = () => {
     const { data: studentData, loading: studentLoading } = useStudentConstraintsSetting(accountId)
     const { data: professorData, loading: professorLoading } = useProfessorConstraintsSetting(accountId)
     const { data: roomData, loading: roomLoading } = useRoomConstraintsSetting(accountId)
-    const { data: companyData, loading: companyLoading } = useCompanyConstraints(accountId)
+    const { data: companyData, loading: companyLoading } = useCompanyConstraintsSetting(accountId)
     const { data: lessonData, loading: lessonLoading } = useLessonConstraintsSetting(accountId)
     const { data: moduleData, loading: moduleLoading } = useModuleConstraintsSetting(accountId)
     const { data: pathwayData, loading: pathwayLoading } = usePathwayConstraintsSetting(accountId)
@@ -47,7 +47,7 @@ const Constraints = () => {
     const [updateStudentConstraints] = useUpdateStudentConstraints()
     const [updateProfessorConstraints] = useUpdateProfessorConstraints()
     const [updateRoomConstraints] = useUpdateRoomConstraintsSetting()
-    const [updateCompanyConstraints] = useUpdateCompanyConstraints()
+    const [updateCompanyConstraints] = useUpdateCompanyConstraintsSetting()
     const [updateLessonConstraints] = useUpdateLessonConstraints()
     const [updateModuleConstraints] = useUpdateModuleConstraints()
     const [updatePathwayConstraints] = useUpdatePathwayConstraintsSetting()
