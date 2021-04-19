@@ -4,14 +4,14 @@ import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { usePathwayConstraints, useUpdatePathwayConstraints } from '../Hook/pathwayConstraints.hook'
+import { usePathwayConstraintsSetting, useUpdatePathwayConstraintsSetting } from '../Hook/pathwayConstraints.hook'
 
 export const PathwayConstraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = usePathwayConstraints(accountId)
+    const {data, loading} = usePathwayConstraintsSetting(accountId)
     
-    const [updatePathwayConstraints] = useUpdatePathwayConstraints()
+    const [updatePathwayConstraints] = useUpdatePathwayConstraintsSetting()
 
     const onUpdate = (input) => updatePathwayConstraints(accountId, input)
 

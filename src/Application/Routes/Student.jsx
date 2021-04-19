@@ -59,7 +59,6 @@ export const Student = () => {
                         SecondForm={EditConstraintStudent}
                         onSecondAction={editStudentConstraints}
                         secondActioning={editingStudentConstraints}
-
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailStudent />

@@ -1,17 +1,13 @@
-.line {
+.ant-select {
+    width: 10%;
+}
+
+p {
+    margin: 0;
+}
+
+.constraints {
+    padding-bottom: 3em;
     display: flex;
-    align-items: center;
-
-    p {
-        margin: 0;
-        margin-left: 0.5em;
-    }
-
-    [role="img"] {
-        cursor: grab;
-    }
-
-    [role="img"]:active {
-        cursor: grabbing;
-    }
+    flex-direction: column;
 }

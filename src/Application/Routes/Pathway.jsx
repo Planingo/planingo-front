@@ -15,6 +15,8 @@ import { useAddPathway, useEditPathway } from '../Pathways/pathways.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddPathway from '../Pathways/Pathway/Add/AddPathway'
+import { useEditPathwayConstraints } from '../Settings/Constraints/Hook/pathwayConstraints.hook'
+import EditConstraintPathway from '../Pathways/Pathway/Detail/Edit/EditConstraintPathway'
 
 export const Pathway = () => {
 	const options = [
@@ -24,6 +26,7 @@ export const Pathway = () => {
 
 	const [addPathway, { loading: addingPathway }] = useAddPathway()
 	const [editPathway, { loading: editingPathway }] = useEditPathway()
+    const [editPathwayConstraints, {loading: editingPathwayConstraints}] = useEditPathwayConstraints()
 
 	const intl = useIntl()
 
@@ -50,9 +53,9 @@ export const Pathway = () => {
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={AddPathway}
-                        onSecondAction={addPathway}
-                        secondActioning={addingPathway}
+                        SecondForm={EditConstraintPathway}
+                        onSecondAction={editPathwayConstraints}
+                        secondActioning={editingPathwayConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailPathway />

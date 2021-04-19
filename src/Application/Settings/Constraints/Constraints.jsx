@@ -22,7 +22,7 @@ import { useProfessorConstraintsSetting, useUpdateProfessorConstraints } from '.
 import { useRoomConstraints, useUpdateRoomConstraints } from './Hook/roomConstraints.hook'
 import { useLessonConstraintsSetting, useUpdateLessonConstraints } from './Hook/lessonConstraints.hook'
 import { useModuleConstraintsSetting, useUpdateModuleConstraints } from './Hook/moduleConstraints.hook'
-import { usePathwayConstraints, useUpdatePathwayConstraints } from './Hook/pathwayConstraints.hook'
+import { usePathwayConstraintsSetting, useUpdatePathwayConstraintsSetting } from './Hook/pathwayConstraints.hook'
 
 const Constraints = () => {
 	const { Panel } = Collapse;
@@ -42,7 +42,7 @@ const Constraints = () => {
     const { data: companyData, loading: companyLoading } = useCompanyConstraints(accountId)
     const { data: lessonData, loading: lessonLoading } = useLessonConstraintsSetting(accountId)
     const { data: moduleData, loading: moduleLoading } = useModuleConstraintsSetting(accountId)
-    const { data: pathwayData, loading: pathwayLoading } = usePathwayConstraints(accountId)
+    const { data: pathwayData, loading: pathwayLoading } = usePathwayConstraintsSetting(accountId)
 	
     const [updateStudentConstraints] = useUpdateStudentConstraints()
     const [updateProfessorConstraints] = useUpdateProfessorConstraints()
@@ -50,7 +50,7 @@ const Constraints = () => {
     const [updateCompanyConstraints] = useUpdateCompanyConstraints()
     const [updateLessonConstraints] = useUpdateLessonConstraints()
     const [updateModuleConstraints] = useUpdateModuleConstraints()
-    const [updatePathwayConstraints] = useUpdatePathwayConstraints()
+    const [updatePathwayConstraints] = useUpdatePathwayConstraintsSetting()
 
     const onUpdate = (toUpdate, data, checked) => {
 		const input = Object.fromEntries( 
