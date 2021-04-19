@@ -15,6 +15,8 @@ import { useAddModule, useEditModule } from '../Modules/modules.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddModule from '../Modules/Module/Add/AddModule'
+import { useEditModuleConstraints } from '../Settings/Constraints/Hook/moduleConstraints.hook'
+import EditConstraintModule from '../Modules/Module/Edit/EditConstraintModule'
 
 export const Module = () => {
 	const options = [
@@ -24,6 +26,7 @@ export const Module = () => {
 
 	const [addModule, { loading: addingModule }] = useAddModule()
 	const [editModule, { loading: editingModule }] = useEditModule()
+    const [editModuleConstraints, {loading: editingModuleConstraints}] = useEditModuleConstraints()
 
 	const intl = useIntl()
 
@@ -50,9 +53,9 @@ export const Module = () => {
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={AddModule}
-                        onSecondAction={addModule}
-                        secondActioning={addingModule}
+                        SecondForm={EditConstraintModule}
+                        onSecondAction={editModuleConstraints}
+                        secondActioning={editingModuleConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailModule />

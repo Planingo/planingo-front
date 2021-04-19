@@ -108,3 +108,4 @@ export const useDeleteModules = () => {
 
 	return [deleteModules, { loading, module: data?.delete_module }]
 }
+

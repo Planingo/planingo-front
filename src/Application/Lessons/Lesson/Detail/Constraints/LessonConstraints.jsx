@@ -13,8 +13,6 @@ export const LessonConstraints = () => {
 
 	if (loadingLessonConstraintsSetting || loadingLessonConstraints) return null
 
-	console.log(lessonConstraints)
-
 	return (
 		<div>
 			{lessonConstraintsSetting?.breakable && 

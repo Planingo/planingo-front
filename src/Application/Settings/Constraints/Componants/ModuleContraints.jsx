@@ -4,12 +4,12 @@ import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { useModuleConstraints, useUpdateModuleConstraints } from '../Hook/moduleConstraints.hook'
+import { useModuleConstraintsSetting, useUpdateModuleConstraints } from '../Hook/moduleConstraints.hook'
 
 export const ModuleContraints = () => {
     const accountId = useSelector(selectors.accountId)
     
-    const {data, loading} = useModuleConstraints(accountId)
+    const {data, loading} = useModuleConstraintsSetting(accountId)
     
     const [updateModuleConstraints] = useUpdateModuleConstraints()
 

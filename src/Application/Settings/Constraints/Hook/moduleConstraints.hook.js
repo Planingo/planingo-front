@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-export const moduleConstraintsFragment = gql`
-    fragment moduleConstraintsFragment on setting_constraints_module {
+export const moduleConstraintsSettingFragment = gql`
+    fragment moduleConstraintsSettingFragment on setting_constraints_module {
         id,
         accountId,
         breakable,
@@ -11,9 +11,16 @@ export const moduleConstraintsFragment = gql`
     }
 `
 
-export function useModuleConstraints(accountId) {
+export const moduleConstraintsFragment = gql`
+    fragment moduleConstraintsFragment on module_constraints {
+		moduleId
+		constraints
+    }
+`
+
+export function useModuleConstraintsSetting(accountId) {
     const {data, loading} = useQuery(
-        MODULE_CONSTRAINTS,
+        MODULE_CONSTRAINTS_SETTING,
         {
             variables: { accountId: accountId },
         },
@@ -21,14 +28,14 @@ export function useModuleConstraints(accountId) {
     return {data: data?.setting_constraints_module[0], loading}
 }
   
-const MODULE_CONSTRAINTS = gql`
+const MODULE_CONSTRAINTS_SETTING = gql`
     query moduleConstraints($accountId: uuid!) {
         setting_constraints_module(where: {accountId: {_eq: $accountId}}) {
             id
-            ...moduleConstraintsFragment
+            ...moduleConstraintsSettingFragment
         }
     }
-    ${moduleConstraintsFragment}
+    ${moduleConstraintsSettingFragment}
 `
 
 export function useUpdateModuleConstraints(accountId, input) {
@@ -43,16 +50,16 @@ const MODULE_CONTRAINTS_UPDATE_MUTATION = gql`
         update_setting_constraints_module(where: {accountId: {_eq: $accountId}}, _set: $input) {
             affected_rows
             returning {
-                ...moduleConstraintsFragment
+                ...moduleConstraintsSettingFragment
             }
         }
     }
-    ${moduleConstraintsFragment}
+    ${moduleConstraintsSettingFragment}
 `
 
 export const useCreateModuleConstraintsSetting = () => {
 	const [createModuleConstraintsSettings] = useMutation(
-        MODULE_CONSTRAINTS_CREATE_MUTATION
+        MODULE_CONSTRAINTS_SETTING_CREATE_MUTATION
     )
 	return accountId =>
     createModuleConstraintsSettings({
@@ -65,7 +72,7 @@ export const useCreateModuleConstraintsSetting = () => {
     })
 }
 
-const MODULE_CONSTRAINTS_CREATE_MUTATION = gql`
+const MODULE_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     mutation createModuleConstraintsSettings($breakable: Boolean!, $accountId: uuid!, $moduleMandatory: Boolean!, $moduleOptionnal: Boolean!) {
         insert_setting_constraints_module_one(
             object: {
@@ -79,3 +86,65 @@ const MODULE_CONSTRAINTS_CREATE_MUTATION = gql`
         }
     }
 `
+
+export const useEditModuleConstraints = () => {
+	const [editModuleConstraints, result] = useMutation(
+        MODULE_CONSTRAINTS_EDIT_MUTATION
+    )
+
+	return [(constraints, moduleId) =>
+		editModuleConstraints({
+			variables: {
+				moduleId: moduleId,
+				constraints: constraints,
+			}
+    }), result]
+}
+
+const MODULE_CONSTRAINTS_EDIT_MUTATION = gql`
+    mutation editModuleConstraints(
+		$moduleId: uuid!, 
+		$constraints: jsonb!,
+	) {
+        insert_module_constraints_one(
+            object: {
+                moduleId: $moduleId,
+                constraints: $constraints
+            },
+			on_conflict: {
+				where: {
+					moduleId: {
+						_eq: $moduleId
+					}
+				}, 
+				update_columns: constraints, 
+				constraint: module_constraints_moduleId_key
+			}
+        ) {
+            id,
+			constraints
+        }
+    }
+`
+
+export function useGetModuleConstraints(moduleId) {
+    const {data, loading} = useQuery(
+        MODULE_CONSTRAINTS,
+      {
+        variables: { moduleId: moduleId },
+      },
+    )
+
+    return {data: data?.module_constraints[0], loading}
+}
+  
+const MODULE_CONSTRAINTS = gql`
+    query getModuleConstraints($moduleId: uuid!) {
+        module_constraints(where: {moduleId: {_eq: $moduleId}}) {
+            id
+            ...moduleConstraintsFragment
+        }
+    }
+    ${moduleConstraintsFragment}
+`
+

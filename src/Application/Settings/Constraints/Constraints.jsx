@@ -21,7 +21,7 @@ import { useStudentConstraintsSetting, useUpdateStudentConstraints } from './Hoo
 import { useProfessorConstraintsSetting, useUpdateProfessorConstraints } from './Hook/professorConstraints.hook'
 import { useRoomConstraints, useUpdateRoomConstraints } from './Hook/roomConstraints.hook'
 import { useLessonConstraintsSetting, useUpdateLessonConstraints } from './Hook/lessonConstraints.hook'
-import { useModuleConstraints, useUpdateModuleConstraints } from './Hook/moduleConstraints.hook'
+import { useModuleConstraintsSetting, useUpdateModuleConstraints } from './Hook/moduleConstraints.hook'
 import { usePathwayConstraints, useUpdatePathwayConstraints } from './Hook/pathwayConstraints.hook'
 
 const Constraints = () => {
@@ -41,7 +41,7 @@ const Constraints = () => {
     const { data: roomData, loading: roomLoading } = useRoomConstraints(accountId)
     const { data: companyData, loading: companyLoading } = useCompanyConstraints(accountId)
     const { data: lessonData, loading: lessonLoading } = useLessonConstraintsSetting(accountId)
-    const { data: moduleData, loading: moduleLoading } = useModuleConstraints(accountId)
+    const { data: moduleData, loading: moduleLoading } = useModuleConstraintsSetting(accountId)
     const { data: pathwayData, loading: pathwayLoading } = usePathwayConstraints(accountId)
 	
     const [updateStudentConstraints] = useUpdateStudentConstraints()
