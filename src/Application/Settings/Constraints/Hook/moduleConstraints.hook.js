@@ -147,4 +147,3 @@ const MODULE_CONSTRAINTS = gql`
     }
     ${moduleConstraintsFragment}
 `
-

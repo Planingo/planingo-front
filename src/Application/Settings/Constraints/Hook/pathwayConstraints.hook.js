@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-export const pathwayConstraintsFragment = gql`
-    fragment pathwayConstraintsFragment on setting_constraints_pathway {
+export const pathwayConstraintsSettingFragment = gql`
+    fragment pathwayConstraintsSettingFragment on setting_constraints_pathway {
         id,
         schoolPlace,
         maxSchool,
@@ -19,9 +19,16 @@ export const pathwayConstraintsFragment = gql`
     }
 `
 
-export function usePathwayConstraints(accountId) {
+export const pathwayConstraintsFragment = gql`
+    fragment pathwayConstraintsFragment on pathway_constraints {
+		pathwayId
+		constraints
+    }
+`
+
+export function usePathwayConstraintsSetting(accountId) {
     const {data, loading} = useQuery(
-        PATHWAY_CONSTRAINTS,
+        PATHWAY_CONSTRAINTS_SETTING,
       {
         variables: { accountId: accountId },
       },
@@ -29,38 +36,38 @@ export function usePathwayConstraints(accountId) {
     return {data: data?.setting_constraints_pathway[0], loading}
 }
   
-const PATHWAY_CONSTRAINTS = gql`
-    query pathwayConstraints($accountId: uuid!) {
+const PATHWAY_CONSTRAINTS_SETTING = gql`
+    query PathwayConstraintsSetting($accountId: uuid!) {
         setting_constraints_pathway(where: {accountId: {_eq: $accountId}}) {
             id
-            ...pathwayConstraintsFragment
+            ...pathwayConstraintsSettingFragment
         }
     }
-    ${pathwayConstraintsFragment}
+    ${pathwayConstraintsSettingFragment}
 `
 
-export function useUpdatePathwayConstraints(accountId, input) {
-    const [updatePathwayConstraints, result] = useMutation(
+export function useUpdatePathwayConstraintsSetting(accountId, input) {
+    const [updatePathwayConstraintsSetting, result] = useMutation(
             PATHWAY_CONTRAINTS_UPDATE_MUTATION,
         )
-    return [(accountId, input) => updatePathwayConstraints({ variables: { accountId, input } }), result]
+    return [(accountId, input) => updatePathwayConstraintsSetting({ variables: { accountId, input } }), result]
 }
 
 const PATHWAY_CONTRAINTS_UPDATE_MUTATION = gql`
-    mutation updatePathwayConstraints($accountId: uuid!, $input: setting_constraints_pathway_set_input) {
+    mutation updatePathwayConstraintsSetting($accountId: uuid!, $input: setting_constraints_pathway_set_input) {
         update_setting_constraints_pathway(where: {accountId: {_eq: $accountId}}, _set: $input) {
             affected_rows
             returning {
-                ...pathwayConstraintsFragment
+                ...pathwayConstraintsSettingFragment
             }
         }
     }
-    ${pathwayConstraintsFragment}
+    ${pathwayConstraintsSettingFragment}
 `
 
 export const useCreatePathwayConstraintsSetting = () => {
 	const [createPathwayConstraintsSettings] = useMutation(
-        PATHWAY_CONSTRAINTS_CREATE_MUTATION
+        PATHWAY_CONSTRAINTS_SETTING_CREATE_MUTATION
     )
 	return accountId =>
     createPathwayConstraintsSettings({
@@ -81,7 +88,7 @@ export const useCreatePathwayConstraintsSetting = () => {
     })
 }
 
-const PATHWAY_CONSTRAINTS_CREATE_MUTATION = gql`
+const PATHWAY_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     mutation createPathwayConstraintsSettings(
         $schoolPlace: Boolean!, 
 		$accountId: uuid!, 
@@ -115,4 +122,65 @@ const PATHWAY_CONSTRAINTS_CREATE_MUTATION = gql`
             id
         }
     }
+`
+
+export const useEditPathwayConstraints = () => {
+	const [editPathwayConstraints, result] = useMutation(
+        PATHWAY_CONSTRAINTS_EDIT_MUTATION
+    )
+
+	return [(constraints, pathwayId) =>
+		editPathwayConstraints({
+			variables: {
+				pathwayId: pathwayId,
+				constraints: constraints,
+			}
+    }), result]
+}
+
+const PATHWAY_CONSTRAINTS_EDIT_MUTATION = gql`
+    mutation editPathwayConstraints(
+		$pathwayId: uuid!, 
+		$constraints: jsonb!,
+	) {
+        insert_pathway_constraints_one(
+            object: {
+                pathwayId: $pathwayId,
+                constraints: $constraints
+            },
+			on_conflict: {
+				where: {
+					pathwayId: {
+						_eq: $pathwayId
+					}
+				}, 
+				update_columns: constraints, 
+				constraint: pathway_constraints_pathwayId_key
+			}
+        ) {
+            id,
+			constraints
+        }
+    }
+`
+
+export function useGetPathwayConstraints(pathwayId) {
+    const {data, loading} = useQuery(
+        PATHWAY_CONSTRAINTS,
+      {
+        variables: { pathwayId: pathwayId },
+      },
+    )
+
+    return {data: data?.pathway_constraints[0], loading}
+}
+  
+const PATHWAY_CONSTRAINTS = gql`
+    query getPathwayConstraints($pathwayId: uuid!) {
+        pathway_constraints(where: {pathwayId: {_eq: $pathwayId}}) {
+            id
+            ...pathwayConstraintsFragment
+        }
+    }
+    ${pathwayConstraintsFragment}
 `
