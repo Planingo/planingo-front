@@ -80,6 +80,7 @@ const LESSON_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
         }
     }
 `
+
 export const useEditLessonConstraints = () => {
 	const [editLessonConstraints, result] = useMutation(
         LESSON_CONSTRAINTS_EDIT_MUTATION
@@ -121,15 +122,12 @@ const LESSON_CONSTRAINTS_EDIT_MUTATION = gql`
 `
 
 export function useGetLessonConstraints(lessonId) {
-    console.log(lessonId)
     const {data, loading} = useQuery(
         LESSON_CONSTRAINTS,
       {
         variables: { lessonId: lessonId },
       },
     )
-
-    console.log(data)
 
     return {data: data?.lesson_constraints[0], loading}
 }

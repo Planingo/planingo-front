@@ -1,0 +1,19 @@
+.editModule {
+	padding: 1em;
+	height: 100%;
+
+	span {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		svg {
+			width: 30%;
+			height: 30%;
+		}
+	}
+
+	.ant-checkbox-wrapper {
+		display: flex;
+		align-items: center;
+	}
+}

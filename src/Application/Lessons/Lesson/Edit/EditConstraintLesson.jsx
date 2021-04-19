@@ -1,6 +1,6 @@
 import React from 'react'
 import './editConstraintLesson.scss'
-import { Form, Select } from 'antd'
+import { Form } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
 import { useGetLessonConstraints, useLessonConstraintsSetting } from '../../../Settings/Constraints/Hook/lessonConstraints.hook'
