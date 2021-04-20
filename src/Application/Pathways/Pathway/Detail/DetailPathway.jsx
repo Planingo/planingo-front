@@ -6,6 +6,7 @@ import { useGetPathwayById } from '../../pathways.hooks'
 import { PathwayConstraintsRead } from './Constraints'
 import './detailPathway.scss'
 import Informations from './Informations/informations'
+import { Modules } from './Modules'
 
 const DetailPathway = () => {
 	const { id } = useParams()
@@ -27,7 +28,12 @@ const DetailPathway = () => {
 						<PathwayConstraintsRead />
 					</div>
 				</TabPane>
-				<TabPane tab="Calendriers" key="3">
+				<TabPane tab="Modules" key="3">
+					<div className="contraints-informations">
+						<Modules />
+					</div>
+				</TabPane>
+				<TabPane tab="Calendriers" key="4">
 					<div>
 						<Calendars />
 					</div>
