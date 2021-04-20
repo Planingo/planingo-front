@@ -7,6 +7,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
 import AddCalendar from '../../Application/Calendars/Calendar/Add/AddCalendar'
+import { useAddCalendar } from '../../Application/Calendars/Calendar/calendar.hooks'
 import AddItem from '../../Application/Layout/Add/AddItem'
 import './refinement.scss'
 
@@ -30,6 +31,8 @@ const Refinement = ({
 	onDeleteText,
 }) => {
 	const intl = useIntl()
+
+	const [addCalendar, { loading: addingCalendar }] = useAddCalendar()
 
 	return (
 		<div className="refinement">
@@ -90,13 +93,15 @@ const Refinement = ({
 					<AddItem
 						mainActionButton={mainActionButton}
 						secondary
+						Form={AddCalendar}
+						adding={addingCalendar}
+						onAdd={addCalendar}
 						title={
 							<div>
 								<CalendarOutlined />
 								<p>{intl.formatMessage({ id: 'add.calendar' })}</p>
 							</div>
 						}
-						Form={AddCalendar}
 					/>
 				</Link>
 			</div>

@@ -12,6 +12,7 @@ import {
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddCalendar from '../Calendars/Calendar/Add/AddCalendar'
+import { useAddCalendar } from '../Calendars/Calendar/calendar.hooks'
 
 export const Calendar = () => {
 	const options = [
@@ -19,7 +20,7 @@ export const Calendar = () => {
 		{ label: <UnorderedListOutlined />, value: 'List' },
 	]
 
-	// const [addCalendar, { loading: addingCalendar }] = useAddCalendar()
+	const [addCalendar, { loading: addingCalendar }] = useAddCalendar()
 	// const [editCalendar, { loading: editingCalendar }] = useEditCalendar()
 
 	const intl = useIntl()
@@ -41,15 +42,15 @@ export const Calendar = () => {
                         FirstActionIcon={UserOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.calendar' })}
                         FirstForm={AddCalendar}
-                        // onFirstAction={editCalendar}
-                        // firstActioning={editingCalendar}
+                        onFirstAction={addCalendar}
+                        firstActioning={addingCalendar}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
                         SecondForm={AddCalendar}
-                        // onSecondAction={addCalendar}
-                        // secondActioning={addingCalendar}
+                        onSecondAction={addCalendar}
+                        secondActioning={addingCalendar}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <p>Coucou</p>
