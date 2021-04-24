@@ -11,13 +11,13 @@ import {
 } from '@ant-design/icons'
 import DetailStudent from '../Students/Student/Detail/DetailStudent'
 import StudentsList from '../Students/StudentsList'
-import EditStudent from '../Students/Student/Edit/EditStudent'
-import EditConstraintStudent from '../Students/Student/Edit/EditConstraintStudent'
-import { useAddStudent, useEditStudent } from '../Students/students.hooks'
+import Edit from '../Students/Student/Edit/Edit'
+import EditConstraint from '../Students/Student/Edit/EditConstraint'
+import { useAddStudent, useEdit } from '../Students/students.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddStudent from '../Students/Student/Add/AddStudent'
-import { useEditStudentConstraints } from '../Settings/Constraints/Hook/studentConstraints.hook'
+import { useEditConstraints } from '../Settings/Constraints/Hook/studentConstraints.hook'
 
 export const Student = () => {
 	const options = [
@@ -26,8 +26,8 @@ export const Student = () => {
 	]
 
 	const [addStudent, { loading: addingStudent }] = useAddStudent()
-	const [editStudent, { loading: editingStudent }] = useEditStudent()
-    const [editStudentConstraints, {loading: editingStudentConstraints}] = useEditStudentConstraints()
+	const [edit, { loading: editingStudent }] = useEdit()
+    const [editConstraints, {loading: editingStudentConstraints}] = useEditConstraints()
 
 
 	const intl = useIntl()
@@ -48,16 +48,16 @@ export const Student = () => {
                         backTo="students"
                         FirstActionIcon={UserOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.student' })}
-                        FirstForm={EditStudent}
-                        onFirstAction={editStudent}
+                        FirstForm={Edit}
+                        onFirstAction={edit}
                         firstActioning={editingStudent}
                         
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={EditConstraintStudent}
-                        onSecondAction={editStudentConstraints}
+                        SecondForm={EditConstraint}
+                        onSecondAction={editConstraints}
                         secondActioning={editingStudentConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />

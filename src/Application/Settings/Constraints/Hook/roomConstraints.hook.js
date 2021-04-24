@@ -81,13 +81,13 @@ const ROOM_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditRoomConstraints = () => {
-	const [editRoomConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         ROOM_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, roomId) =>
-		editRoomConstraints({
+		editConstraints({
 			variables: {
 				roomId: roomId,
 				constraints: constraints,
@@ -96,7 +96,7 @@ export const useEditRoomConstraints = () => {
 }
 
 const ROOM_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editRoomConstraints(
+    mutation editConstraints(
 		$roomId: uuid!, 
 		$constraints: jsonb!,
 	) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './editConstraintModule.scss'
+import './editConstraint.scss'
 import { Form, Select } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
@@ -9,7 +9,7 @@ import { Switch } from '@planingo/ditto'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { useGetAllModules } from '../../modules.hooks'
 
-const EditConstraintModule = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
 
 	const { Option } = Select;
 
@@ -22,11 +22,11 @@ const EditConstraintModule = ({ setItem }) => {
 	if (loadingModuleConstraintsSetting || loadingModuleConstraints || getAllModulesLoading) return null
 
 	return (
-		<div className="editModule">
+		<div className="edit">
 			<Form
 				initialValues={moduleConstraints?.constraints}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...moduleConstraints?.constraints, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -77,4 +77,4 @@ const EditConstraintModule = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintModule
+export default EditConstraint

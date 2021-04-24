@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import Calendars from '../../../Calendars/Calendars'
 import { useGetModulesByOrder, useGetModulesByPathwayId, useGetPathwayById } from '../../pathways.hooks'
-import { PathwayConstraintsRead } from './Constraints'
+import { Constraints } from './Constraints'
 import './detailPathway.scss'
 import Informations from './Informations/informations'
 import { Modules } from './Modules'
@@ -27,8 +27,8 @@ const DetailPathway = () => {
 
 	if (loading || loadingPathwayConstraints || modulesLoading || modulesByOrderLoading) return null
 
-	const allModulesMandatory = modules.module.filter(module => pathwayConstraints?.constraints?.moduleMandatory.includes(module.id))
-	const allModulesOptionnal = modules.module.filter(module => pathwayConstraints?.constraints?.moduleOptionnal.includes(module.id))
+	const allModulesMandatory = modules.module.filter(module => pathwayConstraints?.constraints?.moduleMandatory?.includes(module.id))
+	const allModulesOptionnal = modules.module.filter(module => pathwayConstraints?.constraints?.moduleOptionnal?.includes(module.id))
 
 	const modulesMandatory = modulesByOrder.map(module => {
 		const result = allModulesMandatory.filter(m => module.moduleId === m.id)
@@ -62,7 +62,7 @@ const DetailPathway = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-						<PathwayConstraintsRead />
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Modules" key="3">

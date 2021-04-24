@@ -1,5 +1,5 @@
 import React from 'react'
-import './editConstraintStudent.scss'
+import './editConstraint.scss'
 import { Form, Select, DatePicker, InputNumber } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
@@ -7,7 +7,7 @@ import { useGetStudentConstraints, useStudentConstraintsSetting } from '../../..
 import { useParams } from 'react-router'
 import { useCity } from '../../../Cities/city.hook'
 
-const EditConstraintStudent = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
 	const { RangePicker } = DatePicker;
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
@@ -25,7 +25,7 @@ const EditConstraintStudent = ({ setItem }) => {
 			<Form
 				initialValues={studentConstraints?.constraints}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...studentConstraints?.constraints, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -138,4 +138,4 @@ const EditConstraintStudent = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintStudent
+export default EditConstraint

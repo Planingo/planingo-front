@@ -11,12 +11,12 @@ import {
 } from '@ant-design/icons'
 import DetailPathway from '../Pathways/Pathway/Detail/DetailPathway'
 import PathwaysList from '../Pathways/PathwaysList'
-import { useAddPathway, useEditPathway } from '../Pathways/pathways.hooks'
+import { useAddPathway, useEdit } from '../Pathways/pathways.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddPathway from '../Pathways/Pathway/Add/AddPathway'
-import { useEditPathwayConstraints } from '../Settings/Constraints/Hook/pathwayConstraints.hook'
-import EditConstraintPathway from '../Pathways/Pathway/Detail/Edit/EditConstraintPathway'
+import { useEditConstraints } from '../Settings/Constraints/Hook/pathwayConstraints.hook'
+import EditConstraint from '../Pathways/Pathway/Detail/Edit/EditConstraint'
 
 export const Pathway = () => {
 	const options = [
@@ -25,8 +25,8 @@ export const Pathway = () => {
 	]
 
 	const [addPathway, { loading: addingPathway }] = useAddPathway()
-	const [editPathway, { loading: editingPathway }] = useEditPathway()
-    const [editPathwayConstraints, {loading: editingPathwayConstraints}] = useEditPathwayConstraints()
+	const [edit, { loading: editingPathway }] = useEdit()
+    const [editConstraints, {loading: editingPathwayConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
@@ -47,14 +47,14 @@ export const Pathway = () => {
                         FirstActionIcon={TeamOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.pathway' })}
                         FirstForm={AddPathway}
-                        onFirstAction={editPathway}
+                        onFirstAction={edit}
                         firstActioning={editingPathway}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={EditConstraintPathway}
-                        onSecondAction={editPathwayConstraints}
+                        SecondForm={EditConstraint}
+                        onSecondAction={editConstraints}
                         secondActioning={editingPathwayConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />

@@ -55,10 +55,10 @@ export const useAddModule = () => {
 	return [(module) => addModule({ variables: { module } }), result]
 }
 
-export const useEditModule = () => {
-	const [editModule, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editModule($id: uuid!, $module: module_set_input) {
+			mutation edit($id: uuid!, $module: module_set_input) {
 				update_module_by_pk(pk_columns: { id: $id }, _set: $module) {
 					description
 					id
@@ -68,7 +68,7 @@ export const useEditModule = () => {
 		`,
 	)
 
-	return [(module, id) => editModule({ variables: { id, module } }), result]
+	return [(module, id) => edit({ variables: { id, module } }), result]
 }
 
 export const useDeleteModuleById = () => {

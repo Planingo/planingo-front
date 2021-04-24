@@ -5,7 +5,7 @@ import { useGetProfessorConstraints, useProfessorConstraintsSetting } from '../.
 import './constraints.scss'
 import { useParams } from 'react-router'
 
-export const ProfessorConstraints = () => {
+export const Constraints = () => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const {data: professorConstraintsSetting, loading: loadingProfessorConstraintsSetting} = useProfessorConstraintsSetting(accountId)

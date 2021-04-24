@@ -71,10 +71,10 @@ export const useAddProfessor = () => {
 	return [(professor) => addProfessor({ variables: { professor } }), result]
 }
 
-export const useEditProfessor = () => {
-	const [editProfessor, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editProfessor($id: uuid!, $professor: professor_set_input) {
+			mutation edit($id: uuid!, $professor: professor_set_input) {
 				update_professor_by_pk(pk_columns: { id: $id }, _set: $professor) {
 					firstName
 					id
@@ -85,7 +85,7 @@ export const useEditProfessor = () => {
 	)
 
 	return [
-		(professor, id) => editProfessor({ variables: { id, professor } }),
+		(professor, id) => edit({ variables: { id, professor } }),
 		result,
 	]
 }

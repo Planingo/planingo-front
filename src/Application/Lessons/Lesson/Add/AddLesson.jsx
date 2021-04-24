@@ -16,7 +16,7 @@ const AddLesson = ({ setItem }) => {
 				initialValues={lesson}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...lesson, ...item, ...values }
 					})
 				}}
 				layout="vertical"

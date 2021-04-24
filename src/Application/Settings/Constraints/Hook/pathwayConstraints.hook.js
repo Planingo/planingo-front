@@ -126,13 +126,13 @@ const PATHWAY_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditPathwayConstraints = () => {
-	const [editPathwayConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         PATHWAY_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, pathwayId) =>
-		editPathwayConstraints({
+		editConstraints({
 			variables: {
 				pathwayId: pathwayId,
 				constraints: constraints,
@@ -141,7 +141,7 @@ export const useEditPathwayConstraints = () => {
 }
 
 const PATHWAY_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editPathwayConstraints(
+    mutation editConstraints(
 		$pathwayId: uuid!, 
 		$constraints: jsonb!,
 	) {

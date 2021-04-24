@@ -1,1 +1,1 @@
-export { PathwayConstraintsRead } from './PathwayConstraintsRead'
+export { Constraints } from './Constraints'

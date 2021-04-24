@@ -5,7 +5,7 @@ import './constraints.scss'
 import { useParams } from 'react-router'
 import { useGetLessonConstraints, useLessonConstraintsSetting } from '../../../../Settings/Constraints/Hook/lessonConstraints.hook'
 
-export const LessonConstraints = () => {
+export const Constraints = () => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const {data: lessonConstraintsSetting, loading: loadingLessonConstraintsSetting} = useLessonConstraintsSetting(accountId)

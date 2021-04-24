@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './editStudent.scss'
+import './edit.scss'
 import { Form, Input, Select, Switch } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
@@ -7,7 +7,7 @@ import { useGetStudentById } from '../../students.hooks'
 import { useParams } from 'react-router'
 import { useGetAllCompanies } from '../../../Companies/companies.hooks'
 
-const EditStudent = ({ setItem }) => {
+const Edit = ({ setItem }) => {
 	const { id } = useParams()
 
 	const [apprentice, setApprentice] = useState(false)
@@ -24,7 +24,7 @@ const EditStudent = ({ setItem }) => {
 			<Form
 				initialValues={student}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...student, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -85,4 +85,4 @@ const EditStudent = ({ setItem }) => {
 	)
 }
 
-export default EditStudent
+export default Edit

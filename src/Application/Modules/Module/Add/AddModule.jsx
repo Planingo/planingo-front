@@ -16,7 +16,7 @@ const AddModule = ({ setItem }) => {
 				initialValues={module}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...module, ...item, ...values }
 					})
 				}}
 				layout="vertical"

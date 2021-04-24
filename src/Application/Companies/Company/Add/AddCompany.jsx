@@ -16,7 +16,7 @@ const AddCompany = ({ setItem }) => {
 				initialValues={company}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...company, ...item, ...values }
 					})
 				}}
 				layout="vertical"

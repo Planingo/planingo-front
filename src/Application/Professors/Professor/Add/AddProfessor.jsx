@@ -16,7 +16,7 @@ const AddProfessor = ({ setItem }) => {
 				initialValues={professor}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...professor, ...item, ...values }
 					})
 				}}
 				layout="vertical"

@@ -130,10 +130,10 @@ export const useAddPathway = () => {
 	return [(pathway) => addPathway({ variables: { pathway } }), result]
 }
 
-export const useEditPathway = () => {
-	const [editPathway, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editPathway($id: uuid!, $pathway: pathway_set_input) {
+			mutation edit($id: uuid!, $pathway: pathway_set_input) {
 				update_pathway_by_pk(pk_columns: { id: $id }, _set: $pathway) {
 					description
 					id
@@ -143,7 +143,7 @@ export const useEditPathway = () => {
 		`,
 	)
 
-	return [(pathway, id) => editPathway({ variables: { id, pathway } }), result]
+	return [(pathway, id) => edit({ variables: { id, pathway } }), result]
 }
 
 export const useDeletePathwayById = () => {

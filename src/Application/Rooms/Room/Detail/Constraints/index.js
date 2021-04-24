@@ -1,1 +1,1 @@
-export { ProfessorConstraints } from './ProfessorConstraints'
+export { Constraints } from './Constraints'

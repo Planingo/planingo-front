@@ -3,16 +3,16 @@ import { Button } from '@planingo/ditto'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Redirect } from 'react-router'
-import { useDeleteCompanyById } from '../../../companies.hooks'
+import { useDeleteById } from '../../../companies.hooks'
 import './informations.scss'
 
 const Informations = ({ loading, company }) => {
 	const intl = useIntl()
 
 	const [
-		deleteCompanyById,
+		deleteById,
 		{ loading: deletedLoading, company: deletedCompany },
-	] = useDeleteCompanyById(company.id)
+	] = useDeleteById(company.id)
 
 	if (loading) return null
 	if (deletedLoading) return null
@@ -30,7 +30,7 @@ const Informations = ({ loading, company }) => {
 			</div>
 			<Button
 				className="delete"
-				onClick={() => deleteCompanyById()}
+				onClick={() => deleteById()}
 				type="primary"
 				danger
 			>

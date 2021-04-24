@@ -55,10 +55,10 @@ export const useAddLesson = () => {
 	return [(lesson) => addLesson({ variables: { lesson } }), result]
 }
 
-export const useEditLesson = () => {
-	const [editLesson, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editLesson($id: uuid!, $lesson: lesson_set_input) {
+			mutation edit($id: uuid!, $lesson: lesson_set_input) {
 				update_lesson_by_pk(pk_columns: { id: $id }, _set: $lesson) {
 					description
 					id
@@ -68,7 +68,7 @@ export const useEditLesson = () => {
 		`,
 	)
 
-	return [(lesson, id) => editLesson({ variables: { id, lesson } }), result]
+	return [(lesson, id) => edit({ variables: { id, lesson } }), result]
 }
 
 export const useDeleteLessonById = () => {

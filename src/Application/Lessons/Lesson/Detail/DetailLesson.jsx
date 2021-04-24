@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
 import { useGetLessonById } from '../../lessons.hooks'
-import { LessonConstraints } from './Constraints/LessonConstraints'
+import { Constraints } from './Constraints'
 import Informations from './Informations/informations'
 import Calendars from './Calendars/calendars'
 
@@ -23,7 +23,7 @@ const DetailLesson = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-					<LessonConstraints />
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">

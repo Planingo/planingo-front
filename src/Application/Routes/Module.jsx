@@ -11,12 +11,12 @@ import {
 } from '@ant-design/icons'
 import DetailModule from '../Modules/Module/Detail/DetailModule'
 import ModulesList from '../Modules/ModulesList'
-import { useAddModule, useEditModule } from '../Modules/modules.hooks'
+import { useAddModule, useEdit } from '../Modules/modules.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddModule from '../Modules/Module/Add/AddModule'
-import { useEditModuleConstraints } from '../Settings/Constraints/Hook/moduleConstraints.hook'
-import EditConstraintModule from '../Modules/Module/Edit/EditConstraintModule'
+import { useEditConstraints } from '../Settings/Constraints/Hook/moduleConstraints.hook'
+import EditConstraint from '../Modules/Module/Edit/EditConstraint'
 
 export const Module = () => {
 	const options = [
@@ -25,8 +25,8 @@ export const Module = () => {
 	]
 
 	const [addModule, { loading: addingModule }] = useAddModule()
-	const [editModule, { loading: editingModule }] = useEditModule()
-    const [editModuleConstraints, {loading: editingModuleConstraints}] = useEditModuleConstraints()
+	const [edit, { loading: editingModule }] = useEdit()
+    const [editConstraints, {loading: editingConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
@@ -47,15 +47,15 @@ export const Module = () => {
                         FirstActionIcon={TagsOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.module' })}
                         FirstForm={AddModule}
-                        onFirstAction={editModule}
+                        onFirstAction={edit}
                         firstActioning={editingModule}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={EditConstraintModule}
-                        onSecondAction={editModuleConstraints}
-                        secondActioning={editingModuleConstraints}
+                        SecondForm={EditConstraint}
+                        onSecondAction={editConstraints}
+                        secondActioning={editingConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailModule />

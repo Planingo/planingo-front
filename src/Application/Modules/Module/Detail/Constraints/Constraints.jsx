@@ -6,7 +6,7 @@ import './constraints.scss'
 import { useParams } from 'react-router'
 import { useGetModuleById } from '../../../modules.hooks'
 
-export const ModuleConstraints = () => {
+export const Constraints = () => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const {data: moduleConstraintsSetting, loading: loadingModuleConstraintsSetting} = useModuleConstraintsSetting(accountId)

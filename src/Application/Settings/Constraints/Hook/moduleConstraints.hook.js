@@ -87,13 +87,13 @@ const MODULE_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditModuleConstraints = () => {
-	const [editModuleConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         MODULE_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, moduleId) =>
-		editModuleConstraints({
+		editConstraints({
 			variables: {
 				moduleId: moduleId,
 				constraints: constraints,
@@ -102,7 +102,7 @@ export const useEditModuleConstraints = () => {
 }
 
 const MODULE_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editModuleConstraints(
+    mutation editConstraints(
 		$moduleId: uuid!, 
 		$constraints: jsonb!,
 	) {

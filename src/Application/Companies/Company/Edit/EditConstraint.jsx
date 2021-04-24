@@ -1,12 +1,12 @@
 import React from 'react'
-import './editConstraintCompany.scss'
+import './editConstraint.scss'
 import { DatePicker, Form, InputNumber } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
 import { useGetCompanyConstraints, useCompanyConstraintsSetting } from '../../../Settings/Constraints/Hook/companyConstraints.hook'
 import { useParams } from 'react-router'
 
-const EditConstraintCompany = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
 
 	const { RangePicker } = DatePicker;
 	const dateFormat = 'DD/MM/YYYY';
@@ -19,11 +19,11 @@ const EditConstraintCompany = ({ setItem }) => {
 	if (loadingCompanyConstraintsSetting || loadingCompanyConstraints) return null
 
 	return (
-		<div className="editCompany">
+		<div className="edit">
 			<Form
 				initialValues={companyConstraints?.constraints}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...companyConstraints?.constraints, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -85,4 +85,4 @@ const EditConstraintCompany = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintCompany
+export default EditConstraint

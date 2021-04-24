@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
 import { useGetModuleById } from '../../modules.hooks'
-import { ModuleConstraints } from './Constraints/ModuleConstraints'
+import { Constraints } from './Constraints'
 import Informations from './Informations/informations'
 import Calendars from './Calendars/calendars'
 
@@ -23,7 +23,7 @@ const DetailModule = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-					<ModuleConstraints />
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">
