@@ -6,6 +6,7 @@ import { useParams } from 'react-router'
 import { selectors } from '../../../../../Account/store'
 import { useCity } from '../../../../Cities/city.hook'
 import { useGetPathwayConstraints, usePathwayConstraintsSetting } from '../../../../Settings/Constraints/Hook/pathwayConstraints.hook'
+import { useGetAllModules } from '../../../../Modules/modules.hooks'
 
 const EditConstraintPathway = ({ setItem }) => {
 	const { RangePicker } = DatePicker;
@@ -14,11 +15,12 @@ const EditConstraintPathway = ({ setItem }) => {
 	const dateFormat = 'DD/MM/YYYY';
     const {data: pathwayConstraintsSetting, loading: loadingPathwayConstraintsSetting} = usePathwayConstraintsSetting(accountId)
 	const { data: pathwayConstraints, loading: loadingPathwayConstraints } = useGetPathwayConstraints(id)
+	const { data: getAllModules, loading: moduleLoading} = useGetAllModules()
 	const { data: cities, loading: citiesLoading } = useCity()
 
 	const { Option } = Select
 
-	if (citiesLoading || loadingPathwayConstraintsSetting || loadingPathwayConstraints) return null
+	if (citiesLoading || loadingPathwayConstraintsSetting || loadingPathwayConstraints || moduleLoading) return null
 
 	return (
 		<div className="addPathway">
@@ -30,6 +32,36 @@ const EditConstraintPathway = ({ setItem }) => {
 				layout="vertical"
 				hideRequiredMark
 			>
+				{pathwayConstraintsSetting?.moduleMandatory && 
+				<Form.Item 
+					name="moduleMandatory" 
+					label="Module obligatoire"
+				>
+					<Select
+						mode="multiple"
+						allowClear
+					>
+						{getAllModules.module.map(m =>
+							<Option key={m.id}>{m.name}</Option>
+						)}
+					</Select>
+				</Form.Item>
+			}
+			{pathwayConstraintsSetting?.moduleOptionnal && 
+				<Form.Item 
+					name="moduleOptionnal" 
+					label="Module optionnel"
+				>
+					<Select
+						mode="multiple"
+						allowClear
+					>
+						{getAllModules.module.map(m =>
+							<Option key={m.id}>{m.name}</Option>
+						)}
+					</Select>
+				</Form.Item>
+			}
 				{pathwayConstraintsSetting?.schoolPlace && 
 					<Form.Item 
 						name="schoolPlace" 

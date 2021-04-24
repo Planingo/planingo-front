@@ -4,6 +4,7 @@ import { useGetPathwayConstraints, usePathwayConstraintsSetting } from '../../..
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../../Account/store'
+import { useGetModuleById } from '../../../../Modules/modules.hooks'
 
 export const PathwayConstraintsRead = () => {
 	const { id } = useParams()
@@ -15,6 +16,26 @@ export const PathwayConstraintsRead = () => {
 
 	return (
 		<div>
+			{pathwayConstraintsSetting?.moduleMandatory &&
+				<>
+					<p className='constraints'>Liste des modules obligatoires : {!pathwayConstraints?.constraints?.moduleMandatory && '-'}</p>
+					{pathwayConstraints?.constraints?.moduleMandatory && 
+						<ul>
+							{pathwayConstraints.constraints.moduleMandatory.map(module => <Module key={module} id={module} />)}
+						</ul>
+					}
+				</>
+			}
+			{pathwayConstraintsSetting?.moduleOptionnal && 
+				<>
+					<p className='constraints'>Liste des modules optionnels : {!pathwayConstraints?.constraints?.moduleOptionnal && '-'}</p>
+					{pathwayConstraints?.constraints?.moduleOptionnal && 
+						<ul>
+							{pathwayConstraints?.constraints?.moduleOptionnal?.map(module => <Module key={module} id={module} />)}
+						</ul>
+					}
+				</>
+			}
 			{pathwayConstraintsSetting?.schoolPlace && 
 				<p className='constraints'>{`Lieu de la formation : ${pathwayConstraints?.constraints.schoolPlace || '-'}`}</p>
 			}
@@ -50,4 +71,12 @@ export const PathwayConstraintsRead = () => {
 			}
 		</div>
 	)
+}
+
+const Module = ({id}) => {
+	const {module, loading} = useGetModuleById(id)
+
+	if (loading) return null
+
+	return <li>{module.name ?? 'Module non trouvé'}</li>
 }

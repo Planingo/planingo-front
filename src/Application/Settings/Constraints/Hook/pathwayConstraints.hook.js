@@ -15,6 +15,8 @@ export const pathwayConstraintsSettingFragment = gql`
         minCompanySession,
         schoolMandatory,
         companyMandatory,
+        moduleMandatory,
+        moduleOptionnal,
         accountId,
     }
 `
