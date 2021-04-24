@@ -11,12 +11,12 @@ import {
 } from '@ant-design/icons'
 import CompaniesList from '../Companies/CompaniesList'
 import DetailCompany from '../Companies/Company/Detail/DetailCompany'
-import { useAddCompany, useEditCompany } from '../Companies/companies.hooks'
+import { useAddCompany, useEdit } from '../Companies/companies.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
-import { useEditCompanyConstraints } from '../Settings/Constraints/Hook/companyConstraints.hook'
-import EditConstraintCompany from '../Companies/Company/Edit/EditConstraintCompany'
-import EditCompany from '../Companies/Company/Edit/EditCompany'
+import { useEditConstraints } from '../Settings/Constraints/Hook/companyConstraints.hook'
+import EditConstraint from '../Companies/Company/Edit/EditConstraint'
+import Edit from '../Companies/Company/Edit/Edit'
 
 export const Company = () => {
 	const options = [
@@ -25,8 +25,8 @@ export const Company = () => {
 	]
 
 	const [addCompany, { loading: addingCompany }] = useAddCompany()
-	const [editCompany, { loading: editingCompany }] = useEditCompany()
-    const [editCompanyConstraints, {loading: editingCompanyConstraints}] = useEditCompanyConstraints()
+	const [edit, { loading: editingCompany }] = useEdit()
+    const [editConstraints, {loading: editingCompanyConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
@@ -46,15 +46,15 @@ export const Company = () => {
                         backTo="companies"
                         FirstActionIcon={WifiOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.company' })}
-                        FirstForm={EditCompany}
-                        onFirstAction={editCompany}
+                        FirstForm={Edit}
+                        onFirstAction={edit}
                         firstActioning={editingCompany}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={EditConstraintCompany}
-                        onSecondAction={editCompanyConstraints}
+                        SecondForm={EditConstraint}
+                        onSecondAction={editConstraints}
                         secondActioning={editingCompanyConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />

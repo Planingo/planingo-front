@@ -11,12 +11,12 @@ import {
 } from '@ant-design/icons'
 import DetailLesson from '../Lessons/Lesson/Detail/DetailLesson'
 import LessonsList from '../Lessons/LessonsList'
-import { useAddLesson, useEditLesson } from '../Lessons/lessons.hooks'
+import { useAddLesson, useEdit } from '../Lessons/lessons.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddLesson from '../Lessons/Lesson/Add/AddLesson'
-import { useEditLessonConstraints } from '../Settings/Constraints/Hook/lessonConstraints.hook'
-import EditConstraintLesson from '../Lessons/Lesson/Edit/EditConstraintLesson'
+import { useEditConstraints } from '../Settings/Constraints/Hook/lessonConstraints.hook'
+import EditConstraint from '../Lessons/Lesson/Edit/EditConstraint'
 
 export const Lesson = () => {
 	const options = [
@@ -25,8 +25,8 @@ export const Lesson = () => {
 	]
 
 	const [addLesson, { loading: addingLesson }] = useAddLesson()
-	const [editLesson, { loading: editingLesson }] = useEditLesson()
-    const [editLessonConstraints, {loading: editingLessonConstraints}] = useEditLessonConstraints()
+	const [edit, { loading: editingLesson }] = useEdit()
+    const [editConstraints, {loading: editingConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
@@ -47,15 +47,15 @@ export const Lesson = () => {
                         FirstActionIcon={TagsOutlined}
                         firstActionText={intl.formatMessage({ id: 'edit.lesson' })}
                         FirstForm={AddLesson}
-                        onFirstAction={editLesson}
+                        onFirstAction={edit}
                         firstActioning={editingLesson}
                         SecondActionIcon={EditOutlined}
                         secondActionText={intl.formatMessage({
                             id: 'edit.constraints',
                         })}
-                        SecondForm={EditConstraintLesson}
-                        onSecondAction={editLessonConstraints}
-                        secondActioning={editingLessonConstraints}
+                        SecondForm={EditConstraint}
+                        onSecondAction={editConstraints}
+                        secondActioning={editingConstraints}
                         mainActionButton={intl.formatMessage({ id: 'edit' })}
                     />
                     <DetailLesson />

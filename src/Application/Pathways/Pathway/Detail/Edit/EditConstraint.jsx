@@ -1,5 +1,5 @@
 import React from 'react'
-import './editConstraintPathway.scss'
+import './editConstraint.scss'
 import { Form, Select, DatePicker, InputNumber } from 'antd'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
@@ -8,7 +8,7 @@ import { useCity } from '../../../../Cities/city.hook'
 import { useGetPathwayConstraints, usePathwayConstraintsSetting } from '../../../../Settings/Constraints/Hook/pathwayConstraints.hook'
 import { useGetAllModules } from '../../../../Modules/modules.hooks'
 
-const EditConstraintPathway = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
 	const { RangePicker } = DatePicker;
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
@@ -26,9 +26,9 @@ const EditConstraintPathway = ({ setItem }) => {
 		<div className="addPathway">
 			<Form
 				initialValues={pathwayConstraints?.constraints}
-				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
-				}}
+				onValuesChange={(values) =>
+					setItem((item) => ({ ...pathwayConstraints?.constraints, ...item, ...values }))
+				}
 				layout="vertical"
 				hideRequiredMark
 			>
@@ -46,22 +46,22 @@ const EditConstraintPathway = ({ setItem }) => {
 						)}
 					</Select>
 				</Form.Item>
-			}
-			{pathwayConstraintsSetting?.moduleOptionnal && 
-				<Form.Item 
-					name="moduleOptionnal" 
-					label="Module optionnel"
-				>
-					<Select
-						mode="multiple"
-						allowClear
+				}
+				{pathwayConstraintsSetting?.moduleOptionnal && 
+					<Form.Item 
+						name="moduleOptionnal" 
+						label="Module optionnel"
 					>
-						{getAllModules.module.map(m =>
-							<Option key={m.id}>{m.name}</Option>
-						)}
-					</Select>
-				</Form.Item>
-			}
+						<Select
+							mode="multiple"
+							allowClear
+						>
+							{getAllModules.module.map(m =>
+								<Option key={m.id}>{m.name}</Option>
+							)}
+						</Select>
+					</Form.Item>
+				}
 				{pathwayConstraintsSetting?.schoolPlace && 
 					<Form.Item 
 						name="schoolPlace" 
@@ -170,4 +170,4 @@ const EditConstraintPathway = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintPathway
+export default EditConstraint

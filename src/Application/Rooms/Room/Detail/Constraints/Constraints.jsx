@@ -5,7 +5,7 @@ import './constraints.scss'
 import { useParams } from 'react-router'
 import { useGetRoomConstraints, useRoomConstraintsSetting } from '../../../../Settings/Constraints/Hook/roomConstraints.hook'
 
-export const RoomConstraints = () => {
+export const Constraints = () => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const {data: roomConstraintsSetting, loading: loadingRoomConstraintsSetting} = useRoomConstraintsSetting(accountId)

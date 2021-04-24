@@ -16,7 +16,7 @@ const AddRoom = ({ setItem }) => {
 				initialValues={room}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...room, ...item, ...values }
 					})
 				}}
 				layout="vertical"

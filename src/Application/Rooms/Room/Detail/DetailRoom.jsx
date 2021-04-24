@@ -2,7 +2,7 @@ import { Tabs } from 'antd'
 import React from 'react'
 import { useParams } from 'react-router'
 import { useGetRoomById } from '../../rooms.hooks'
-import { RoomConstraints } from './Constraints/RoomConstraints'
+import { Constraints } from './Constraints'
 import Informations from './Informations/informations'
 import Calendars from '../../../Calendars/Calendars'
 
@@ -23,7 +23,7 @@ const DetailRoom = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-					<RoomConstraints />
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">

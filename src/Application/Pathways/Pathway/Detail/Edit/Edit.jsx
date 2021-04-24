@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
-import './editCompany.scss'
+import './edit.scss'
 import { Form, Input, Select, Switch } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
-import { useGetCompanyById } from '../../companies.hooks'
+import { useGetPathwayById } from '../../pathways.hooks'
 import { useParams } from 'react-router'
 import { useGetAllCompanies } from '../../../Companies/companies.hooks'
 
-const EditCompany = ({ setItem }) => {
+const Edit = ({ setItem }) => {
 	const { id } = useParams()
 
 	const [apprentice, setApprentice] = useState(false)
 	const { Option } = Select
 
-	const { loading: companyLoading, company } = useGetCompanyById(id)
+	const { loading: pathwayLoading, pathway } = useGetPathwayById(id)
 	const { data, loading } = useGetAllPathways()
 	const companies = useGetAllCompanies()
 	
-	if (companyLoading || companies.loading) return null
+	if (pathwayLoading || companies.loading) return null
 
 	return (
-		<div className="addCompany">
+		<div className="addPathway">
 			<Form
-				initialValues={company}
+				initialValues={pathway}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...pathway, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -85,4 +85,4 @@ const EditCompany = ({ setItem }) => {
 	)
 }
 
-export default EditCompany
+export default Edit

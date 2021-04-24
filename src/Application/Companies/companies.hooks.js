@@ -70,10 +70,10 @@ export const useAddCompany = () => {
 	return [(company) => addCompany({ variables: { company } }), result]
 }
 
-export const useEditCompany = () => {
-	const [editCompany, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editCompany($id: uuid!, $company: company_set_input) {
+			mutation edit($id: uuid!, $company: company_set_input) {
 				update_company_by_pk(pk_columns: { id: $id }, _set: $company) {
 					apprenticeships {
 						id
@@ -88,13 +88,13 @@ export const useEditCompany = () => {
 		`,
 	)
 
-	return [(company, id) => editCompany({ variables: { id, company } }), result]
+	return [(company, id) => edit({ variables: { id, company } }), result]
 }
 
-export const useDeleteCompanyById = () => {
-	const [deleteCompanyById, { loading, data }] = useMutation(
+export const useDeleteById = () => {
+	const [deleteById, { loading, data }] = useMutation(
 		gql`
-			mutation deleteCompanyById($id: uuid!) {
+			mutation deleteById($id: uuid!) {
 				delete_company_by_pk(id: $id) {
 					id
 				}
@@ -110,7 +110,7 @@ export const useDeleteCompanyById = () => {
 	)
 
 	return [
-		(id) => deleteCompanyById({ variables: { id } }),
+		(id) => deleteById({ variables: { id } }),
 		{ loading, company: data?.delete_company_by_pk },
 	]
 }

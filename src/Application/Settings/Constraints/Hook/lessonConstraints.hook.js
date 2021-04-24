@@ -81,13 +81,13 @@ const LESSON_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditLessonConstraints = () => {
-	const [editLessonConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         LESSON_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, lessonId) =>
-		editLessonConstraints({
+		editConstraints({
 			variables: {
 				lessonId: lessonId,
 				constraints: constraints,
@@ -96,7 +96,7 @@ export const useEditLessonConstraints = () => {
 }
 
 const LESSON_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editLessonConstraints(
+    mutation editConstraints(
 		$lessonId: uuid!, 
 		$constraints: jsonb!,
 	) {

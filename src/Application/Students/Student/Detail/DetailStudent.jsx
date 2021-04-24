@@ -8,7 +8,7 @@ import Informations from './Informations/informations'
 import { useStudentConstraintsSetting } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
-import { StudentConstraintsRead } from './Constraints'
+import { Constraints } from './Constraints'
 
 const DetailStudent = () => {
 	const { id } = useParams()
@@ -33,7 +33,7 @@ const DetailStudent = () => {
 				{haveConstraint &&
 					<TabPane tab="Contraintes" key="2">
 						<div className="contraints-informations">
-							<StudentConstraintsRead />
+							<Constraints />
 						</div>
 					</TabPane>
 				}

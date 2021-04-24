@@ -1,5 +1,5 @@
 import React from 'react'
-import './editConstraintProfessor.scss'
+import './editConstraint.scss'
 import { Form, Select, Checkbox } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
@@ -7,7 +7,7 @@ import { useGetProfessorConstraints, useProfessorConstraintsSetting } from '../.
 import { useParams } from 'react-router'
 import { useCity } from '../../../Cities/city.hook'
 
-const EditConstraintProfessor = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const {data: professorConstraintsSetting, loading: loadingProfessorConstraintsSetting} = useProfessorConstraintsSetting(accountId)
@@ -21,11 +21,11 @@ const EditConstraintProfessor = ({ setItem }) => {
 	if (citiesLoading || loadingProfessorConstraintsSetting || loadingProfessorConstraints) return null
 
 	return (
-		<div className="editProfessor">
+		<div className="edit">
 			<Form
 				initialValues={professorConstraints?.constraints}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...professorConstraints?.constraints, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -99,4 +99,4 @@ const EditConstraintProfessor = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintProfessor
+export default EditConstraint

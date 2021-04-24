@@ -1,1 +1,1 @@
-export { CompanyConstraintsRead } from './CompanyConstraintsRead'
+export { Constraints } from './Constraints'

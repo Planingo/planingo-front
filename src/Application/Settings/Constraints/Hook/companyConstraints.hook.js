@@ -96,13 +96,13 @@ const COMPANY_CONSTRAINTS_SETTING_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditCompanyConstraints = () => {
-	const [editCompanyConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         COMPANY_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, companyId) =>
-		editCompanyConstraints({
+		editConstraints({
 			variables: {
 				companyId: companyId,
 				constraints: constraints,
@@ -111,7 +111,7 @@ export const useEditCompanyConstraints = () => {
 }
 
 const COMPANY_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editCompanyConstraints(
+    mutation editConstraints(
 		$companyId: uuid!, 
 		$constraints: jsonb!,
 	) {

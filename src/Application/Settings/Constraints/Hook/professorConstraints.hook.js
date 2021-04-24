@@ -84,13 +84,13 @@ const PROFESSOR_CONSTRAINTS_CREATE_MUTATION = gql`
     }
 `
 
-export const useEditProfessorConstraints = () => {
-	const [editProfessorConstraints, result] = useMutation(
+export const useEditConstraints = () => {
+	const [editConstraints, result] = useMutation(
         PROFESSOR_CONSTRAINTS_EDIT_MUTATION
     )
 
 	return [(constraints, professorId) =>
-		editProfessorConstraints({
+		editConstraints({
 			variables: {
 				professorId: professorId,
 				constraints: constraints,
@@ -99,7 +99,7 @@ export const useEditProfessorConstraints = () => {
 }
 
 const PROFESSOR_CONSTRAINTS_EDIT_MUTATION = gql`
-    mutation editProfessorConstraints(
+    mutation editConstraints(
 		$professorId: uuid!, 
 		$constraints: jsonb!,
 	) {

@@ -24,7 +24,7 @@ const AddStudent = ({ setItem }) => {
 			<Form
 				initialValues={student}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...student, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark

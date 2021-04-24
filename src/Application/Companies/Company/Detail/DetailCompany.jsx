@@ -3,7 +3,7 @@ import React from 'react'
 import { useParams } from 'react-router'
 import Calendars from '../../../Calendars/Calendars'
 import { useGetCompanyById } from '../../companies.hooks'
-import { CompanyConstraintsRead } from './Constraints'
+import { Constraints } from './Constraints'
 import './detailCompany.scss'
 import Informations from './Informations/informations'
 
@@ -24,7 +24,7 @@ const DetailCompany = () => {
 				</TabPane>
 				<TabPane tab="Contraintes" key="2">
 					<div className="contraints-informations">
-						<CompanyConstraintsRead />
+						<Constraints />
 					</div>
 				</TabPane>
 				<TabPane tab="Calendriers" key="3">

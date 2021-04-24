@@ -58,10 +58,10 @@ export const useAddRoom = () => {
 	return [(room) => addRoom({ variables: { room } }), result]
 }
 
-export const useEditRoom = () => {
-	const [editRoom, result] = useMutation(
+export const useEdit = () => {
+	const [edit, result] = useMutation(
 		gql`
-			mutation editRoom($id: uuid!, $room: room_set_input) {
+			mutation edit($id: uuid!, $room: room_set_input) {
 				update_room_by_pk(pk_columns: { id: $id }, _set: $room) {
 					description
 					id
@@ -72,7 +72,7 @@ export const useEditRoom = () => {
 		`,
 	)
 
-	return [(room, id) => editRoom({ variables: { id, room } }), result]
+	return [(room, id) => edit({ variables: { id, room } }), result]
 }
 
 export const useDeleteRoomById = () => {

@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
-import './editProfessor.scss'
+import './edit.scss'
 import { Form, Input, Select, Switch } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
-import { useGetProfessorById } from '../../professors.hooks'
+import { useGetRoomById } from '../../rooms.hooks'
 import { useParams } from 'react-router'
 import { useGetAllCompanies } from '../../../Companies/companies.hooks'
 
-const EditProfessor = ({ setItem }) => {
+const Edit = ({ setItem }) => {
 	const { id } = useParams()
 
 	const [apprentice, setApprentice] = useState(false)
 	const { Option } = Select
 
-	const { loading: professorLoading, professor } = useGetProfessorById(id)
+	const { loading: roomLoading, room } = useGetRoomById(id)
 	const { data, loading } = useGetAllPathways()
 	const companies = useGetAllCompanies()
 	
-	if (professorLoading || companies.loading) return null
+	if (roomLoading || companies.loading) return null
 
 	return (
-		<div className="addProfessor">
+		<div className="addRoom">
 			<Form
-				initialValues={professor}
+				initialValues={room}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...room, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -85,4 +85,4 @@ const EditProfessor = ({ setItem }) => {
 	)
 }
 
-export default EditProfessor
+export default Edit

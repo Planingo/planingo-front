@@ -16,7 +16,7 @@ const AddPathway = ({ setItem }) => {
 				initialValues={pathway}
 				onValuesChange={(values) => {
 					setItem((item) => {
-						return { ...item, ...values }
+						return { ...pathway, ...item, ...values }
 					})
 				}}
 				layout="vertical"

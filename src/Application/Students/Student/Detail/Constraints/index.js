@@ -1,1 +1,1 @@
-export { StudentConstraintsRead } from './StudentConstraintsRead'
+export { Constraints } from './Constraints'

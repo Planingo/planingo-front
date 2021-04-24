@@ -1,5 +1,5 @@
 import React from 'react'
-import './editConstraintLesson.scss'
+import './editConstraint.scss'
 import { Form } from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
@@ -8,7 +8,7 @@ import { useParams } from 'react-router'
 import { Switch } from '@planingo/ditto'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 
-const EditConstraintLesson = ({ setItem }) => {
+const EditConstraint = ({ setItem }) => {
     const accountId = useSelector(selectors.accountId)
 	const { id } = useParams()
     const { data: lessonConstraintsSetting, loading: loadingLessonConstraintsSetting} = useLessonConstraintsSetting(accountId)
@@ -17,11 +17,11 @@ const EditConstraintLesson = ({ setItem }) => {
 	if (loadingLessonConstraintsSetting || loadingLessonConstraints) return null
 
 	return (
-		<div className="editLesson">
+		<div className="edit">
 			<Form
 				initialValues={lessonConstraints?.constraints}
 				onValuesChange={(values) => {
-					setItem((item) => ({ ...item, ...values }))
+					setItem((item) => ({ ...lessonConstraints?.constraints, ...item, ...values }))
 				}}
 				layout="vertical"
 				hideRequiredMark
@@ -42,4 +42,4 @@ const EditConstraintLesson = ({ setItem }) => {
 	)
 }
 
-export default EditConstraintLesson
+export default EditConstraint

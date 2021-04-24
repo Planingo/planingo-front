@@ -5,7 +5,7 @@ import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../../Account/store'
 
-export const CompanyConstraintsRead = () => {
+export const Constraints = () => {
 	const { id } = useParams()
     const accountId = useSelector(selectors.accountId)
     const {data: companyConstraintsSetting, loading: loadingCompanyConstraintsSetting} = useCompanyConstraintsSetting(accountId)

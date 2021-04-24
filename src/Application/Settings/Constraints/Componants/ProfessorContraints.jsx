@@ -2,7 +2,7 @@ import React from 'react'
 import '../constraints.scss'
 import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
-import { useEditProfessorConstraints, useGetProfessorConstraints } from '../Hook/professorConstraints.hook'
+import { useEditConstraints, useGetProfessorConstraints } from '../Hook/professorConstraints.hook'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../../../Account/store'
 
@@ -11,7 +11,7 @@ export const ProfessorContraints = () => {
     
     const {data, loading} = useGetProfessorConstraints(accountId)
     
-    const [updateProfessorConstraints] = useEditProfessorConstraints()
+    const [updateProfessorConstraints] = useEditConstraints()
 
     const onUpdate = (input) => updateProfessorConstraints(accountId, input)
 

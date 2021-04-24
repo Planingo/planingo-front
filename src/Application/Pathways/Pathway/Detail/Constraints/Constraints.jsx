@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectors } from '../../../../../Account/store'
 import { useGetModuleById } from '../../../../Modules/modules.hooks'
 
-export const PathwayConstraintsRead = () => {
+export const Constraints = () => {
 	const { id } = useParams()
     const accountId = useSelector(selectors.accountId)
     const {data: pathwayConstraintsSetting, loading: loadingPathwayConstraintsSetting} = usePathwayConstraintsSetting(accountId)
