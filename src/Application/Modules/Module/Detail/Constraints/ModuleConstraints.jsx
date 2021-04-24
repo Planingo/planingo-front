@@ -43,7 +43,6 @@ export const ModuleConstraints = () => {
 	)
 }
 
-
 const Module = ({id}) => {
 	const {module, loading} = useGetModuleById(id)
 

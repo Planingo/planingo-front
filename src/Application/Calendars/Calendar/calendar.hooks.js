@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
 
-
 export const calendarFragment = gql`
     fragment calendarFragment on calendar {
         id,

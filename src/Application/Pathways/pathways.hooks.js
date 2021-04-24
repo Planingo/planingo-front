@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useCallback } from 'react'
 
 const getPathwaysQuerie = gql`
 	query getAllPathways {
@@ -7,6 +8,68 @@ const getPathwaysQuerie = gql`
 			description
 			id
 			name
+		}
+	}
+`
+
+export const constraintsPrerequisModuleFragment = gql`
+    fragment constraintsPrerequisModuleFragment on contraints_prerequis_module {
+        id,
+        created_at,
+        updated_at,
+        moduleId,
+        pathwayId,
+        order,
+    }
+`
+
+export const useGetModulesByOrder = (id) => {
+	const {loading, data} = useQuery(MODULES_BY_ORDER, 
+		{
+			variables: {
+				id: id
+			}
+		})
+	return {loading, data: data?.contraints_prerequis_module}
+}
+
+const MODULES_BY_ORDER = gql`
+	query getModulesByOrder($id: uuid!) {
+		contraints_prerequis_module(where: {pathwayId: {_eq: $id}}, order_by: {order: asc}) {
+			...constraintsPrerequisModuleFragment
+		}
+	}
+	${constraintsPrerequisModuleFragment}
+`
+
+export const useUpdateModuleOrderByPathway = () => {
+	const [updateModuleOrderByPathway, result] = useMutation(
+        UPDATE_MODULE_ORDER_BY_PATHWAY
+    )
+
+	return [useCallback((moduleId, pathwayId, order) =>
+		updateModuleOrderByPathway({
+			variables: {
+				moduleId: moduleId,
+				pathwayId: pathwayId,
+				order: order,
+			}
+    }), [updateModuleOrderByPathway]), result]
+}
+
+const UPDATE_MODULE_ORDER_BY_PATHWAY = gql`
+	mutation updateModuleOrderByPathway($moduleId: uuid!, $pathwayId: uuid!, $order: Int!) {
+		insert_contraints_prerequis_module_one(
+			object: {
+				moduleId: $moduleId, order: $order, pathwayId: $pathwayId
+			}, 
+			on_conflict: {
+				constraint: contraints_prerequis_module_moduleId_pathwayId_key, 
+				update_columns: order
+			}) {
+			id
+			moduleId
+			order
 		}
 	}
 `
@@ -106,3 +169,35 @@ export const useDeletePathwayById = () => {
 		{ loading, company: data?.delete_pathway_by_pk },
 	]
 }
+
+export function useGetModulesByPathwayId(pathwayId) {
+    const {data, loading} = useQuery(
+        MODULES_BY_PATHWAY_ID,
+      {
+        variables: { pathwayId: pathwayId },
+      },
+    )
+
+    return {
+		data: data?.module.map(d => (
+			{
+			order: d?.contraints_prerequis_modules[0]?.order,
+			id: d.id,
+			name: d.name
+		}))?.sort((obj1, obj2) => obj1?.order - obj2?.order), 
+		loading
+	}
+}
+  
+const MODULES_BY_PATHWAY_ID = gql`
+    query getPathwayConstraints($pathwayId: uuid!) {
+		module {
+			contraints_prerequis_modules(where: {pathwayId: {_eq: $pathwayId}}) {
+				id
+				order
+			}
+			id
+			name
+		}
+    }
+`
