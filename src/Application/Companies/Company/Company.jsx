@@ -1,25 +1,16 @@
 import React from 'react'
 import './company.scss'
-import { Card } from 'antd'
-import { Link } from 'react-router-dom'
+import { Card } from '../../Layout/Card'
 
 const Company = ({ data }) => {
-	const { Meta } = Card
 	return (
 		<div className="company">
-			<Link to={`/companies/${data.id}`}>
-				<Card
-					hoverable
-					cover={
-						<img
-							alt="example"
-							src={`https://avatars.bugsyaya.dev/285/${data.id}`}
-						/>
-					}
-				>
-					<Meta title={`${data.name}`} />
-				</Card>
-			</Link>
+			<Card
+				link={`/companies/${data.id}`}
+				title={data.name}
+				alt={data.name}
+				src={`https://avatars.bugsyaya.dev/285/${data.id}`}
+			/>
 		</div>
 	)
 }

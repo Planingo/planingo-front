@@ -9,7 +9,7 @@ import {
 	EditOutlined,
     TeamOutlined
 } from '@ant-design/icons'
-import DetailProfessor from '../Professors/Professor/Detail/DetailProfessor'
+import { DetailProfessor } from '../Professors/Professor/Detail/DetailProfessor'
 import ProfessorsList from '../Professors/ProfessorsList'
 import { useAddProfessor, useEdit } from '../Professors/professors.hooks'
 import Refinement from '../../Components/Refinement/refinement'
