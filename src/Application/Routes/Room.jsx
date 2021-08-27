@@ -42,22 +42,6 @@ export const Room = () => {
 		<div>
             <Switch>
                 <Route path="/rooms/:id">
-                    <Refinement
-                        backTo="rooms"
-                        FirstActionIcon={ShopOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.room' })}
-                        FirstForm={AddRoom}
-                        onFirstAction={edit}
-                        firstActioning={editingRoom}
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingRoomConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailRoom />
                 </Route>
                 <Route path="/rooms/">

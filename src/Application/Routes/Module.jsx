@@ -42,22 +42,6 @@ export const Module = () => {
 		<div>
             <Switch>
                 <Route path="/modules/:id">
-                    <Refinement
-                        backTo="modules"
-                        FirstActionIcon={TagsOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.module' })}
-                        FirstForm={AddModule}
-                        onFirstAction={edit}
-                        firstActioning={editingModule}
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailModule />
                 </Route>
                 <Route path="/modules/">

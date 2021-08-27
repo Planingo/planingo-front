@@ -27,21 +27,21 @@ const StudentsList = ({ studentSearch }) => {
 					<img src={picture} alt={`${record.id} student`} />
 				) : (
 					<img
-						src={`https://avatars.bugsyaya.dev/285/${record.id}_${record.pathway.id}`}
+						src={`https://avatars.bugsyaya.dev/285/${record.id}`}
 						alt="placeholder"
 					/>
 				),
 		},
 		{
-			title: 'First name',
+			title: 'Prénom',
 			dataIndex: 'firstName',
 		},
 		{
-			title: 'Last name',
+			title: 'Nom',
 			dataIndex: 'lastName',
 		},
 		{
-			title: 'Pathway',
+			title: 'Formation',
 			dataIndex: 'pathway',
 			render: (pathway) => pathway.name,
 			filters: [...uniqueP].map((s) => ({ text: s, value: s })),

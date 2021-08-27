@@ -44,23 +44,6 @@ export const Student = () => {
 		<div>
             <Switch>
                 <Route path="/students/:id">
-                    <Refinement
-                        backTo="students"
-                        FirstActionIcon={UserOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.student' })}
-                        FirstForm={Edit}
-                        onFirstAction={edit}
-                        firstActioning={editingStudent}
-                        
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingStudentConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailStudent />
                 </Route>
                 <Route path="/students/">

@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+
+    img {
+        border-radius: 50%;
+        height: 60px;
+    }
+
+    .info-container {
+        margin-left: 20px;
+    }
+
+    .name {
+        display: flex;
+    }
+
+    .lastName {
+        margin-left: 5px;
+        text-transform: uppercase;
+    }
+}

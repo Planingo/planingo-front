@@ -42,22 +42,6 @@ export const Pathway = () => {
 		<div>
             <Switch>
                 <Route path="/pathways/:id">
-                    <Refinement
-                        backTo="pathways"
-                        FirstActionIcon={TeamOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.pathway' })}
-                        FirstForm={AddPathway}
-                        onFirstAction={edit}
-                        firstActioning={editingPathway}
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingPathwayConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailPathway />
                 </Route>
                 <Route path="/pathways/">

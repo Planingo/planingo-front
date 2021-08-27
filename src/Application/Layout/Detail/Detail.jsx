@@ -5,11 +5,11 @@ export const Detail = ({Constraints, Calendars}) => {
 	return (
 		<div className="details">
 			<div className="constraints">
-				<h1>Contraintes</h1>
+				<h2>Contraintes</h2>
 				{Constraints}
 			</div>
 			<div className="calendars">
-				<h1>Calendrier</h1>
+				<h2>Calendrier</h2>
 				{Calendars}
 			</div>
 		</div>
