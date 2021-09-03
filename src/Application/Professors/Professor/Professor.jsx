@@ -1,28 +1,19 @@
 import React from 'react'
 import './professor.scss'
-import { Card } from 'antd'
-import { Link } from 'react-router-dom'
+import { Card } from '../../Layout/Card'
 
 const Professor = ({ data }) => {
-	const { Meta } = Card
 	return (
 		<div className="professor">
-			<Link to={`/professors/${data.id}`}>
-				<Card
-					hoverable
-					cover={
-						<img
-							alt="example"
-							src={`https://avatars.bugsyaya.dev/285/${data.id}`}
-						/>
-					}
-				>
-					<Meta
-						title={`${data.firstName} ${data.lastName}`}
-						description={data?.modules[0]?.module?.name}
-					/>
-				</Card>
-			</Link>
+			<Card
+				downloadTitle={`Télécharger le calendrier de ${data.firstName} ${data.lastName}`}
+				cloudTitle={`Envoyer le calendrier`}
+				deleteTitle={`Supprimer le professeur ${data.firstName} ${data.lastName}`}
+				link={`/professors/${data.id}`}
+				title={<div className="professorInfo">{data.firstName} <div className="lastName">{data.lastName}</div></div>}
+				alt={`${data.firstName} ${data.lastName}`}
+				src={`https://avatars.bugsyaya.dev/285/${data.id}`}
+			/>
 		</div>
 	)
 }

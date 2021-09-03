@@ -6,13 +6,9 @@ import { Table } from 'antd'
 import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 import AddModule from './Module/Add/AddModule'
-import { useGetAllModules } from './modules.hooks'
 
-const ModulesList = ({ moduleSearch }) => {
+const ModulesList = ({ modules, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllModules()
-	function onChange(pagination, filters, sorter, extra) {
-	}
 
 	const columns = [
 		{
@@ -41,7 +37,7 @@ const ModulesList = ({ moduleSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (modules.length === 0)
 		return (
 			<NoData
 				Add={AddModule}
@@ -51,22 +47,16 @@ const ModulesList = ({ moduleSearch }) => {
 			/>
 		)
 
-	const modules = moduleSearch
-		? data.module.filter((c) =>
-				c.name.toLowerCase().includes(moduleSearch.toLowerCase()),
-		  )
-		: data.module
-
 	return (
 		<>
 			<div className="modules">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={modules}
-					onChange={onChange}
 				/>
 			</div>
 		</>

@@ -1,5 +1,36 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_COMPANIES = gql`
+  query getAllCompanies($searchText: String) {
+    company(order_by: {name: asc}, where: { name: { _ilike: $searchText }}) {
+		apprenticeships {
+			id
+		}
+		created_at
+		description
+		id
+		name
+		updated_at
+	}
+  }
+`
+
+export const useSearchCompanies = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_COMPANIES, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		if (searchText) setU({ searchText: `%${searchText}%` })
+		else setU(null)
+    }, 500)
+
+    const companies = data?.company
+    return { search, companies, ...result }
+}
 
 const getCompaniesQuerie = gql`
 	query getAllCompanies {

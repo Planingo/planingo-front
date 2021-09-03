@@ -1,17 +1,19 @@
 import React from 'react'
 import './module.scss'
-import { Card } from 'antd'
-import { Link } from 'react-router-dom'
+import { Card } from '../../Layout/Card'
 
 const Module = ({ data }) => {
-	const { Meta } = Card
 	return (
 		<div className="module">
-			<Link to={`/modules/${data.id}`}>
-				<Card hoverable>
-					<Meta title={data.name} description={data.description} />
-				</Card>
-			</Link>
+			<Card
+				downloadTitle={`Télécharger le calendrier de ${data.name}`}
+				cloudTitle={`Envoyer le calendrier à toutes les personnes programmées pour ${data.name}`}
+				deleteTitle={`Supprimer le module ${data.name}`}
+				link={`/modules/${data.id}`}
+				title={data.name}
+				alt={data.name}
+				src={`https://avatars.bugsyaya.dev/285/${data.id}`}
+			/>
 		</div>
 	)
 }

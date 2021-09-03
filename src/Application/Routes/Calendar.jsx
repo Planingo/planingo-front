@@ -13,6 +13,7 @@ import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddCalendar from '../Calendars/Calendar/Add/AddCalendar'
 import { useAddCalendar } from '../Calendars/Calendar/calendar.hooks'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Calendar = () => {
 	const options = [
@@ -67,7 +68,8 @@ export const Calendar = () => {
                             isGrid={isGrid}
                         />
                     </div>
-                        <Calendars calendarSearch={calendarSearch} />
+                    <Calendars calendarSearch={calendarSearch} />
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

@@ -3,16 +3,12 @@ import { useIntl } from 'react-intl'
 import React from 'react'
 import './professors.scss'
 import AddProfessor from './Professor/Add/AddProfessor'
-import { useGetAllProfessors } from './professors.hooks'
 import { Table } from 'antd'
 import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 
-const ProfessorsList = ({ professorSearch }) => {
+const ProfessorsList = ({ professors, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllProfessors()
-	function onChange(pagination, filters, sorter, extra) {
-	}
 
 	const columns = [
 		{
@@ -45,7 +41,7 @@ const ProfessorsList = ({ professorSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (professors.length === 0)
 		return (
 			<NoData
 				Add={AddProfessor}
@@ -55,23 +51,16 @@ const ProfessorsList = ({ professorSearch }) => {
 			/>
 		)
 
-	const professors = professorSearch
-		? data.professor.filter(
-				(s) =>
-					s.lastName.toLowerCase().includes(professorSearch.toLowerCase()) ||
-					s.firstName.toLowerCase().includes(professorSearch.toLowerCase()),
-		  )
-		: data.professor
 	return (
 		<>
 			<div className="professors">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={professors}
-					onChange={onChange}
 				/>
 			</div>
 		</>

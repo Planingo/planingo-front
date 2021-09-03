@@ -1,39 +1,61 @@
-import { Tabs } from 'antd'
 import React from 'react'
+import Calendars from '../../../Layout/Detail/Calendars/calendars'
+import { Detail } from '../../../Layout/Detail/Detail'
+import { Constraints } from './Constraints/Constraints'
+import { useEditConstraints } from '../../../Settings/Constraints/Hook/professorConstraints.hook'
+import { useEdit, useGetProfessorById } from '../../professors.hooks'
+import EditConstraint from '../Edit/EditConstraint'
+import Edit from '../Edit/Edit'
+import {
+	WifiOutlined,
+	EditOutlined,
+} from '@ant-design/icons'
 import { useParams } from 'react-router'
-import Calendars from '../../../Calendars/Calendars'
-import { useGetProfessorById } from '../../professors.hooks'
-import Informations from './Informations/informations'
-import {Constraints} from './Constraints'
+import { useIntl } from 'react-intl'
+import Refinement from '../../../../Components/Refinement/refinement'
+import './detailProfessor.scss'
+import { Tag } from '@planingo/ditto'
+import { Footer } from '../../../Layout/Footer/Footer'
 
-const DetailProfessor = () => {
-	const { id } = useParams()
+export const DetailProfessor = () => {
+	const intl = useIntl()
+	const [edit, { loading: editingProfessor }] = useEdit()
+    const [editConstraints, {loading: editingProfessorConstraints}] = useEditConstraints()
 
-	const { TabPane } = Tabs
-
-	const { loading, professor } = useGetProfessorById(id)
+	const {id} = useParams()
+	const {loading, professor} = useGetProfessorById(id)
 
 	if (loading) return null
 
 	return (
-		<div className="details">
-			<Tabs defaultActiveKey="1">
-				<TabPane tab={`${professor.firstName} ${professor.lastName}`} key="1">
-					<Informations professor={professor} loading={loading} />
-				</TabPane>
-				<TabPane tab="Contraintes" key="2">
-					<div className="contraints-informations">
-						<Constraints />
+		<>
+			<Refinement
+				backTo="professors"
+				FirstActionIcon={WifiOutlined}
+				firstActionText={intl.formatMessage({ id: 'edit.professor' })}
+				FirstForm={Edit}
+				onFirstAction={edit}
+				firstActioning={editingProfessor}
+				SecondActionIcon={EditOutlined}
+				secondActionText={intl.formatMessage({
+					id: 'edit.constraints',
+				})}
+				SecondForm={EditConstraint}
+				onSecondAction={editConstraints}
+				secondActioning={editingProfessorConstraints}
+				mainActionButton={intl.formatMessage({ id: 'edit' })}
+				Info={
+					<div className='container'>
+						<img alt={`${professor.firstName} ${professor.lastName}`} src={`https://avatars.bugsyaya.dev/50/${professor.id}`}/>
+						<div className='info-container'>
+							<div className='name'><h1>{professor.firstName}</h1> <h1 className='lastName'>{professor.lastName}</h1></div>
+							{professor.modules.map(m => m.module.name).map(module => <Tag key={module} type='lesson'>{module}</Tag>)}
+						</div>
 					</div>
-				</TabPane>
-				<TabPane tab="Calendriers" key="3">
-					<div>
-						<Calendars />
-					</div>
-				</TabPane>
-			</Tabs>
-		</div>
+				}
+			/>
+			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
+		</>
 	)
 }
-
-export default DetailProfessor

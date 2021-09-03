@@ -6,14 +6,10 @@ import { Table } from 'antd'
 import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 import AddPathway from './Pathway/Add/AddPathway'
-import { useGetAllPathways } from './pathways.hooks'
 
-const PathwaysList = ({ pathwaySearch }) => {
+const PathwaysList = ({ pathways, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllPathways()
-	function onChange(pagination, filters, sorter, extra) {
-	}
-
+	
 	const columns = [
 		{
 			title: 'Photo',
@@ -41,7 +37,7 @@ const PathwaysList = ({ pathwaySearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (!pathways.length === 0)
 		return (
 			<NoData
 				Add={AddPathway}
@@ -51,22 +47,16 @@ const PathwaysList = ({ pathwaySearch }) => {
 			/>
 		)
 
-	const pathways = pathwaySearch
-		? data.pathway.filter((c) =>
-				c.name.toLowerCase().includes(pathwaySearch.toLowerCase()),
-		  )
-		: data.pathway
-
 	return (
 		<>
 			<div className="pathways">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={pathways}
-					onChange={onChange}
 				/>
 			</div>
 		</>

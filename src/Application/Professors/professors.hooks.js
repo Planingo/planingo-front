@@ -1,5 +1,58 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_PROFESSORS = gql`
+  query getAllProfessors($searchText: String, $searchText2: String) {
+    professor(order_by: {lastName: asc}, where: {
+      _or: [
+        {
+            firstName: {
+              _ilike: $searchText
+            },
+            lastName: {
+              _ilike: $searchText2
+            }
+        },
+        {
+            firstName: {
+              _ilike: $searchText2
+            },
+            lastName: {
+              _ilike: $searchText
+            },
+        }
+	]}) {
+		firstName
+		id
+		lastName
+		modules {
+			id
+			module {
+				id
+				name
+				description
+			}
+		}
+	}
+  }
+`
+
+export const useSearchProfessors = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_PROFESSORS, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		const searchsTmp = searchText.split(" ").map(st => `%${st}%`)
+		if (searchText) setU({ searchText: searchsTmp[0], searchText2: searchsTmp[1] })
+		else setU(null)
+    }, 500)
+
+    const professors = data?.professor
+    return { search, professors, ...result }
+}
 
 const getProfessorsQuerie = gql`
 	query getAllProfessors {

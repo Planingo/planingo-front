@@ -7,16 +7,13 @@ import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
 	WifiOutlined,
-	EditOutlined,
 } from '@ant-design/icons'
 import CompaniesList from '../Companies/CompaniesList'
 import DetailCompany from '../Companies/Company/Detail/DetailCompany'
-import { useAddCompany, useEdit } from '../Companies/companies.hooks'
+import { useAddCompany, useSearchCompanies } from '../Companies/companies.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
-import { useEditConstraints } from '../Settings/Constraints/Hook/companyConstraints.hook'
-import EditConstraint from '../Companies/Company/Edit/EditConstraint'
-import Edit from '../Companies/Company/Edit/Edit'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Company = () => {
 	const options = [
@@ -25,46 +22,24 @@ export const Company = () => {
 	]
 
 	const [addCompany, { loading: addingCompany }] = useAddCompany()
-	const [edit, { loading: editingCompany }] = useEdit()
-    const [editConstraints, {loading: editingCompanyConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onCompanySearch = (value) => {
-		setCompanySearch(value)
-	}
-
-	const [companySearch, setCompanySearch] = useState()
+    
+    const { search, companies, loading } = useSearchCompanies()
 	
 	return (
 		<div>
             <Switch>
                 <Route path="/companies/:id">
-                    <Refinement
-                        backTo="companies"
-                        FirstActionIcon={WifiOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.company' })}
-                        FirstForm={Edit}
-                        onFirstAction={edit}
-                        firstActioning={editingCompany}
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingCompanyConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailCompany />
                 </Route>
                 <Route path="/companies/">
                     <div className="header">
                         <Search
                             placeholder="Rechercher une entreprise"
-                            onSearch={onCompanySearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -78,10 +53,11 @@ export const Company = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <CompaniesList companySearch={companySearch} />
+                        <CompaniesList companies={companies} loading={loading} />
                     ) : (
-                        <Companies companySearch={companySearch} />
+                        <Companies companies={companies}loading={loading}  />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

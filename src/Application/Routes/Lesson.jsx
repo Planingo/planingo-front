@@ -11,12 +11,13 @@ import {
 } from '@ant-design/icons'
 import DetailLesson from '../Lessons/Lesson/Detail/DetailLesson'
 import LessonsList from '../Lessons/LessonsList'
-import { useAddLesson, useEdit } from '../Lessons/lessons.hooks'
+import { useAddLesson, useEdit, useSearchLessons } from '../Lessons/lessons.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddLesson from '../Lessons/Lesson/Add/AddLesson'
 import { useEditConstraints } from '../Settings/Constraints/Hook/lessonConstraints.hook'
 import EditConstraint from '../Lessons/Lesson/Edit/EditConstraint'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Lesson = () => {
 	const options = [
@@ -31,40 +32,20 @@ export const Lesson = () => {
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onLessonSearch = (value) => {
-		setLessonSearch(value)
-	}
-
-	const [lessonSearch, setLessonSearch] = useState()
+    
+    const { search, lessons, loading } = useSearchLessons()
 	
 	return (
 		<div>
             <Switch>
                 <Route path="/lessons/:id">
-                    <Refinement
-                        backTo="lessons"
-                        FirstActionIcon={TagsOutlined}
-                        firstActionText={intl.formatMessage({ id: 'edit.lesson' })}
-                        FirstForm={AddLesson}
-                        onFirstAction={edit}
-                        firstActioning={editingLesson}
-                        SecondActionIcon={EditOutlined}
-                        secondActionText={intl.formatMessage({
-                            id: 'edit.constraints',
-                        })}
-                        SecondForm={EditConstraint}
-                        onSecondAction={editConstraints}
-                        secondActioning={editingConstraints}
-                        mainActionButton={intl.formatMessage({ id: 'edit' })}
-                    />
                     <DetailLesson />
                 </Route>
                 <Route path="/lessons/">
                     <div className="header">
                         <Search
                             placeholder="Rechercher un cours"
-                            onSearch={onLessonSearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -78,10 +59,11 @@ export const Lesson = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <LessonsList lessonSearch={lessonSearch} />
+                        <LessonsList lessons={lessons} loading={loading} />
                     ) : (
-                        <Lessons lessonSearch={lessonSearch} />
+                        <Lessons lessons={lessons} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

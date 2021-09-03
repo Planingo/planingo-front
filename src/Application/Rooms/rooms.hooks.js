@@ -1,5 +1,31 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_ROOMS = gql`
+  query getAllRooms($searchText: String) {
+    room(order_by: {name: asc}, where: { name: { _ilike: $searchText }}) {
+		description
+		id
+		name
+	}
+  }
+`
+
+export const useSearchRooms = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_ROOMS, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		if (searchText) setU({ searchText: `%${searchText}%` })
+		else setU(null)
+    }, 500)
+
+    const rooms = data?.room
+    return { search, rooms, ...result }
+}
 
 const getRoomsQuerie = gql`
 	query getAllRooms {

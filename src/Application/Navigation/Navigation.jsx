@@ -14,11 +14,10 @@ import {
 	TagOutlined,
 	ShopOutlined,
 } from '@ant-design/icons'
-import {Tooltip} from 'antd'
 import { useSelector } from 'react-redux'
 import { selectors } from '../../Account/store'
 import { useFindSettingsByAccountId } from '../../Tools/MagicBook/Settings/settings.hooks'
-import { Spin } from '@planingo/ditto'
+import { Spin, Tooltip } from '@planingo/ditto'
 import { useAccountById } from '../../Tools/MagicBook/Account/account.hooks'
 
 const { SubMenu } = Menu;

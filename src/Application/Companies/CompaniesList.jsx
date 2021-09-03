@@ -3,16 +3,12 @@ import { useIntl } from 'react-intl'
 import React from 'react'
 import './companies.scss'
 import AddCompany from './Company/Add/AddCompany'
-import { useGetAllCompanies } from './companies.hooks'
 import { Table } from 'antd'
 import { withSize } from 'react-sizeme'
 import { Spin } from '@planingo/ditto'
 
-const CompaniesList = ({ companySearch }) => {
+const CompaniesList = ({ companies, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllCompanies()
-	function onChange(pagination, filters, sorter, extra) {
-	}
 
 	const columns = [
 		{
@@ -41,7 +37,7 @@ const CompaniesList = ({ companySearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (companies.length === 0)
 		return (
 			<NoData
 				Add={AddCompany}
@@ -51,22 +47,16 @@ const CompaniesList = ({ companySearch }) => {
 			/>
 		)
 
-	const companies = companySearch
-		? data.company.filter((c) =>
-				c.name.toLowerCase().includes(companySearch.toLowerCase()),
-		  )
-		: data.company
-
 	return (
 		<>
-			<div className="professors">
+			<div className="companies">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={companies}
-					onChange={onChange}
 				/>
 			</div>
 		</>

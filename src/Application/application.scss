@@ -7,12 +7,60 @@
 
 	.body {
 		height: 100vh;
-		padding: 1em;
 		.middle {
 			height: 100%;
 			display: grid;
 			grid-template-rows: max-content 1fr;
 			box-sizing: border-box;
+			
+			.header,
+			.footer {
+				z-index: 2;
+				background-color: var(--WHITE);
+			}
+
+			.header {
+				position: sticky;
+				top: 0;
+			}
+
+			.footer {
+				position: fixed;
+				bottom: 0;
+				height: 4vh;
+				width: 96vw;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 12px;
+				color: var(--PRIMARY-160);
+				font-weight: 400;
+			}
+
+			.header,
+			.students,
+			.professors,
+			.calendars,
+			.lessons,
+			.modules,
+			.pathways,
+			.companies,
+			.rooms,
+			.settings {
+				padding: 1em;
+			}
+
+			.students,
+			.professors,
+			.calendars,
+			.lessons,
+			.modules,
+			.pathways,
+			.companies,
+			.rooms {
+				padding-top: 0;
+				padding-bottom: 2em;
+			}
 		}
 	}
 
@@ -31,6 +79,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding-top: 1em;
+		padding-bottom: 0;
 	}
 
 	.refinement-item {

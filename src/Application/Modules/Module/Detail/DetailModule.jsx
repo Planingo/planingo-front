@@ -1,38 +1,54 @@
-import { Tabs } from 'antd'
 import React from 'react'
-import { useParams } from 'react-router'
-import { useGetModuleById } from '../../modules.hooks'
+import Calendars from '../../../Layout/Detail/Calendars/calendars'
+import { Detail } from '../../../Layout/Detail/Detail'
 import { Constraints } from './Constraints'
-import Informations from './Informations/informations'
-import Calendars from './Calendars/calendars'
+import { useEditConstraints } from '../../../Settings/Constraints/Hook/moduleConstraints.hook'
+import { useEdit, useGetModuleById } from '../../modules.hooks'
+import EditConstraint from '../Edit/EditConstraint'
+import Edit from '../Edit/Edit'
+import {
+	WifiOutlined,
+	EditOutlined,
+} from '@ant-design/icons'
+import { useParams } from 'react-router'
+import { useIntl } from 'react-intl'
+import Refinement from '../../../../Components/Refinement/refinement'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailModule = () => {
-	const { id } = useParams()
+	const intl = useIntl()
+	const [edit, { loading: editingModule }] = useEdit()
+    const [editConstraints, {loading: editingModuleConstraints}] = useEditConstraints()
 
-	const { TabPane } = Tabs
-
-	const { loading, module } = useGetModuleById(id)
+	const {id} = useParams()
+	const {loading, module} = useGetModuleById(id)
 
 	if (loading) return null
 
 	return (
-		<div className="details">
-			<Tabs defaultActiveKey="1">
-				<TabPane tab={`${module.name}`} key="1">
-					<Informations module={module} loading={loading} />
-				</TabPane>
-				<TabPane tab="Contraintes" key="2">
-					<div className="contraints-informations">
-						<Constraints />
-					</div>
-				</TabPane>
-				<TabPane tab="Calendriers" key="3">
-					<div>
-						<Calendars />
-					</div>
-				</TabPane>
-			</Tabs>
-		</div>
+		<>
+			<Refinement
+				backTo="modules"
+				FirstActionIcon={WifiOutlined}
+				firstActionText={intl.formatMessage({ id: 'edit.module' })}
+				FirstForm={Edit}
+				onFirstAction={edit}
+				firstActioning={editingModule}
+				SecondActionIcon={EditOutlined}
+				secondActionText={intl.formatMessage({
+					id: 'edit.constraints',
+				})}
+				SecondForm={EditConstraint}
+				onSecondAction={editConstraints}
+				secondActioning={editingModuleConstraints}
+				mainActionButton={intl.formatMessage({ id: 'edit' })}
+				Info={
+					<h1>{module.name}</h1>
+				}
+			/>
+			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
+		</>
 	)
 }
 

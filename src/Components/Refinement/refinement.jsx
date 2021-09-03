@@ -2,7 +2,7 @@ import {
 	ArrowLeftOutlined,
 	CalendarOutlined,
 } from '@ant-design/icons'
-import { RadioGroup } from '@planingo/ditto'
+import { Button } from '@planingo/ditto'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Link } from 'react-router-dom'
@@ -29,6 +29,7 @@ const Refinement = ({
 	mainActionButton,
 	onDelete,
 	onDeleteText,
+	Info
 }) => {
 	const intl = useIntl()
 
@@ -37,17 +38,22 @@ const Refinement = ({
 	return (
 		<div className="refinement">
 			{options ? (
-				<RadioGroup
-					options={options}
+				<Button
+					switch
 					onChange={() => setIsGrid(!isGrid)}
 					value={isGrid ? 'Grille' : 'List'}
-					optionType="button"
-					buttonStyle="solid"
+					activeGrid={isGrid}
+					activeList={!isGrid}
 				/>
 			) : (
-				<Link to={`/${backTo}`}>
-					<ArrowLeftOutlined />
-				</Link>
+				<div className='left'>
+					<Link to={`/${backTo}`}>
+						<ArrowLeftOutlined />
+					</Link> 
+					<div className="info">
+						{Info}
+					</div>
+				</div>
 			)}
 
 			<div className="refinement-item">

@@ -1,49 +1,61 @@
-import { Tabs } from 'antd'
+import { Tag } from '@planingo/ditto'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { useParams } from 'react-router'
-import Calendars from '../../../Calendars/Calendars'
-import { useGetStudentById } from '../../students.hooks'
-import './detailStudent.scss'
-import Informations from './Informations/informations'
-import { useStudentConstraintsSetting } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
-import { useSelector } from 'react-redux'
-import { selectors } from '../../../../Account/store'
-import { Constraints } from './Constraints'
+import Refinement from '../../../../Components/Refinement/refinement'
+import Calendars from '../../../Layout/Detail/Calendars/calendars'
+import { Detail } from '../../../Layout/Detail/Detail'
+import { useEditConstraints } from '../../../Settings/Constraints/Hook/studentConstraints.hook'
+import { useEdit, useGetStudentById } from '../../students.hooks'
+import { Constraints } from './Constraints/Constraints'
+import {
+	WifiOutlined,
+	EditOutlined,
+} from '@ant-design/icons'
+import EditConstraint from '../Edit/EditConstraint'
+import Edit from '../Edit/Edit'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailStudent = () => {
-	const { id } = useParams()
+	const intl = useIntl()
+	const [edit, { loading: editingStudent }] = useEdit()
+    const [editConstraints, {loading: editingStudentConstraints}] = useEditConstraints()
 
-	const { TabPane } = Tabs
+	const {id} = useParams()
+	const {loading, student} = useGetStudentById(id)
 
-	const { loading, student } = useGetStudentById(id)
+	if (loading) return null
 
-    const accountId = useSelector(selectors.accountId)
-    const { data: studentData, loading: studentLoading } = useStudentConstraintsSetting(accountId)
-
-	if (loading || studentLoading) return null
-
-	const haveConstraint = Object.values(studentData).includes(true)
-	
 	return (
-		<div className="details">
-			<Tabs defaultActiveKey="1">
-				<TabPane tab={`${student.firstName} ${student.lastName}`} key="1">
-					<Informations student={student} loading={loading} />
-				</TabPane>
-				{haveConstraint &&
-					<TabPane tab="Contraintes" key="2">
-						<div className="contraints-informations">
-							<Constraints />
+		<>
+			<Refinement
+				backTo="students"
+				FirstActionIcon={WifiOutlined}
+				firstActionText={intl.formatMessage({ id: 'edit.student' })}
+				FirstForm={Edit}
+				onFirstAction={edit}
+				firstActioning={editingStudent}
+				SecondActionIcon={EditOutlined}
+				secondActionText={intl.formatMessage({
+					id: 'edit.constraints',
+				})}
+				SecondForm={EditConstraint}
+				onSecondAction={editConstraints}
+				secondActioning={editingStudentConstraints}
+				mainActionButton={intl.formatMessage({ id: 'edit' })}
+				Info={
+					<div className='container'>
+						<img alt={`${student.firstName} ${student.lastName}`} src={`https://avatars.bugsyaya.dev/50/${student.id}`}/>
+						<div className='info-container'>
+							<div className='name'><h1>{student.firstName}</h1> <h1 className='lastName'>{student.lastName}</h1></div>
+							{<Tag>{student.pathway.name}</Tag>}
 						</div>
-					</TabPane>
-				}
-				<TabPane tab="Calendriers" key="3">
-					<div>
-						<Calendars />
 					</div>
-				</TabPane>
-			</Tabs>
-		</div>
+				}
+			/>
+			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
+		</>
 	)
 }
 

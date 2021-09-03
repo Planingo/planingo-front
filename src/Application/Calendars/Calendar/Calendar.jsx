@@ -11,7 +11,7 @@ const Calendar = () => {
 	return (
 		<div className="calendar">
 			<FullCalendar
-				height='85vh'
+				height='79vh'
 				plugins={[ dayGridPlugin, listPlugin, timeGridPlugin, interactionPlugin ]}
 				initialView="dayGridMonth"
 				locale={frLocale}

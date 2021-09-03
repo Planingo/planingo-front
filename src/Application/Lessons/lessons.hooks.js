@@ -1,5 +1,31 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_LESSONS = gql`
+  query getAllLessons($searchText: String) {
+    lesson(order_by: {name: asc}, where: { name: { _ilike: $searchText }}) {
+		description
+		id
+		name
+	}
+  }
+`
+
+export const useSearchLessons = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_LESSONS, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		if (searchText) setU({ searchText: `%${searchText}%` })
+		else setU(null)
+    }, 500)
+
+    const lessons = data?.lesson
+    return { search, lessons, ...result }
+}
 
 const getLessonsQuerie = gql`
 	query getAllLessons {

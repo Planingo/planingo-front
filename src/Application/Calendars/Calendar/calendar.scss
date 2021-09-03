@@ -2,15 +2,15 @@
 	padding: 1em;
 
 	button {
-		background-color: #1890ff !important;
-		border-color: #1890ff !important;
+		background-color: var(--PRIMARY) !important;
+		border-color: var(--PRIMARY) !important;
 		&:focus {
 			box-shadow: none !important;
 		}
 	}
 
 	.fc-button-active {
-		background-color: white !important;
-		color: #1890ff !important;
+		background-color: var(--WHITE) !important;
+		color: var(--PRIMARY) !important;
 	}
 }

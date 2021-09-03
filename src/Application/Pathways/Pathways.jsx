@@ -2,15 +2,13 @@ import React from 'react'
 import './pathways.scss'
 import Pathway from './Pathway/Pathway'
 import AddPathway from './Pathway/Add/AddPathway'
-import { useGetAllPathways } from './pathways.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from '@planingo/ditto'
 
-const Pathways = ({ pathwaySearch }) => {
+const Pathways = ({ pathways, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllPathways()
 
 	if (loading)
 		return (
@@ -19,7 +17,7 @@ const Pathways = ({ pathwaySearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (pathways.length === 0)
 		return (
 			<NoData
 				Add={AddPathway}
@@ -28,13 +26,7 @@ const Pathways = ({ pathwaySearch }) => {
 				title={intl.formatMessage({ id: 'add.pathway' })}
 			/>
 		)
-
-	const pathways = pathwaySearch
-		? data.pathway.filter((c) =>
-				c.name.toLowerCase().includes(pathwaySearch.toLowerCase()),
-		  )
-		: data.pathway
-
+		
 	return (
 		<div className="pathways">
 			<Gallery

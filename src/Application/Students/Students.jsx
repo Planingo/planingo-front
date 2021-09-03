@@ -2,16 +2,13 @@ import React from 'react'
 import './students.scss'
 import Student from './Student/Student'
 import AddStudent from './Student/Add/AddStudent'
-import { useGetAllStudents } from './students.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from '@planingo/ditto'
 
-const Students = ({ studentSearch }) => {
+const Students = ({ students, loading }) => {
 	const intl = useIntl()
-
-	const { data, loading } = useGetAllStudents()
 
 	if (loading)
 		return (
@@ -20,7 +17,7 @@ const Students = ({ studentSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (students.length === 0)
 		return (
 			<NoData
 				Add={AddStudent}
@@ -29,14 +26,6 @@ const Students = ({ studentSearch }) => {
 				title={intl.formatMessage({ id: 'add.student' })}
 			/>
 		)
-
-	const students = studentSearch
-		? data.student.filter(
-				(s) =>
-					s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
-					s.firstName.toLowerCase().includes(studentSearch.toLowerCase()),
-		  )
-		: data.student
 
 	return (
 		<>

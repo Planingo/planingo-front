@@ -1,33 +1,19 @@
 import React from 'react'
 import './student.scss'
-import { Card } from 'antd'
-import { Link } from 'react-router-dom'
-import { head } from 'lodash'
+import { Card } from '../../Layout/Card'
 
 const Student = ({ data }) => {
-	const { Meta } = Card
 	return (
-		<div className="student">
-			<Link to={`/students/${data.id}`}>
-				<Card
-					hoverable
-					cover={
-						<img
-							alt="example"
-							src={`https://avatars.bugsyaya.dev/285/${data.id}_${data.pathway.id}`}
-						/>
-					}
-				>
-					<Meta
-						title={`${data.firstName} ${data.lastName}`}
-						description={`${data.pathway.name}${
-							data.apprenticeships.length
-								? ' - ' + head(data.apprenticeships).company.name
-								: ''
-						}`}
-					/>
-				</Card>
-			</Link>
+			<div className="student">
+			<Card
+				downloadTitle={`Télécharger le calendrier de ${data.firstName} ${data.lastName}`}
+				cloudTitle={`Envoyer le calendrier`}
+				deleteTitle={`Supprimer l'étudiant ${data.firstName} ${data.lastName}`}
+				link={`/students/${data.id}`}
+				title={<div className="studentInfo">{data.firstName} <div className="lastName">{data.lastName}</div></div>}
+				alt={`${data.firstName} ${data.lastName}`}
+				src={`https://avatars.bugsyaya.dev/285/${data.id}`}
+			/>
 		</div>
 	)
 }

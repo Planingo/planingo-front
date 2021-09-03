@@ -1,38 +1,54 @@
-import { Tabs } from 'antd'
 import React from 'react'
-import { useParams } from 'react-router'
-import { useGetRoomById } from '../../rooms.hooks'
+import Calendars from '../../../Layout/Detail/Calendars/calendars'
+import { Detail } from '../../../Layout/Detail/Detail'
 import { Constraints } from './Constraints'
-import Informations from './Informations/informations'
-import Calendars from '../../../Calendars/Calendars'
+import { useEditConstraints } from '../../../Settings/Constraints/Hook/roomConstraints.hook'
+import { useEdit, useGetRoomById } from '../../rooms.hooks'
+import EditConstraint from '../Edit/EditConstraint'
+import Edit from '../Edit/Edit'
+import {
+	WifiOutlined,
+	EditOutlined,
+} from '@ant-design/icons'
+import { useParams } from 'react-router'
+import { useIntl } from 'react-intl'
+import Refinement from '../../../../Components/Refinement/refinement'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailRoom = () => {
-	const { id } = useParams()
+	const intl = useIntl()
+	const [edit, { loading: editingRoom }] = useEdit()
+    const [editConstraints, {loading: editingRoomConstraints}] = useEditConstraints()
 
-	const { TabPane } = Tabs
-
-	const { loading, room } = useGetRoomById(id)
+	const {id} = useParams()
+	const {loading, room} = useGetRoomById(id)
 
 	if (loading) return null
 
 	return (
-		<div className="details">
-			<Tabs defaultActiveKey="1">
-				<TabPane tab={`${room.name}`} key="1">
-					<Informations room={room} loading={loading} />
-				</TabPane>
-				<TabPane tab="Contraintes" key="2">
-					<div className="contraints-informations">
-						<Constraints />
-					</div>
-				</TabPane>
-				<TabPane tab="Calendriers" key="3">
-					<div>
-						<Calendars />
-					</div>
-				</TabPane>
-			</Tabs>
-		</div>
+		<>
+			<Refinement
+				backTo="rooms"
+				FirstActionIcon={WifiOutlined}
+				firstActionText={intl.formatMessage({ id: 'edit.room' })}
+				FirstForm={Edit}
+				onFirstAction={edit}
+				firstActioning={editingRoom}
+				SecondActionIcon={EditOutlined}
+				secondActionText={intl.formatMessage({
+					id: 'edit.constraints',
+				})}
+				SecondForm={EditConstraint}
+				onSecondAction={editConstraints}
+				secondActioning={editingRoomConstraints}
+				mainActionButton={intl.formatMessage({ id: 'edit' })}
+				Info={
+					<h1>{room.name}</h1>
+				}
+			/>
+			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
+		</>
 	)
 }
 
