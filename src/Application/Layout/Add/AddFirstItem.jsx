@@ -4,12 +4,13 @@ import { Button, Modal } from '@planingo/ditto'
 
 const AddFirstItem = ({ children, title, cta }) => {
 	return (
-		<div className="addItem">
+		<div className="addItemEmpty">
 			<Modal
 				OpenModal={
-					(showModal) => <Button type="text" label="add" onClick={showModal}>
-					{cta && <Button type="primary">{cta}</Button>}
-				</Button>
+					(showModal) =>
+					<>
+						{cta && <Button className="cta" onClick={showModal}>{cta}</Button>}
+					</>
 			  	}
 				title={title}
 			>

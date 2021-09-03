@@ -1,17 +1,15 @@
 import React from 'react'
 import './modules.scss'
 import Module from './Module/Module'
-import { useGetAllModules } from './modules.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import AddModule from './Module/Add/AddModule'
 import { Spin } from '@planingo/ditto'
 
-const Modules = ({ moduleSearch }) => {
+const Modules = ({ modules, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllModules()
-
+	
 	if (loading)
 		return (
 			<div>
@@ -19,7 +17,7 @@ const Modules = ({ moduleSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (modules.length === 0)
 		return (
 			<NoData
 				Add={AddModule}
@@ -28,13 +26,7 @@ const Modules = ({ moduleSearch }) => {
 				title={intl.formatMessage({ id: 'add.module' })}
 			/>
 		)
-
-	const modules = moduleSearch
-		? data.module.filter((c) =>
-				c.name.toLowerCase().includes(moduleSearch.toLowerCase()),
-		  )
-		: data.module
-
+		
 	return (
 		<div className="modules">
 			<Gallery

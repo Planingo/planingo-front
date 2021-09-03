@@ -6,13 +6,9 @@ import { Table } from 'antd'
 import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 import AddLesson from './Lesson/Add/AddLesson'
-import { useGetAllLessons } from './lessons.hooks'
 
-const LessonsList = ({ lessonSearch }) => {
+const LessonsList = ({ lessons, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllLessons()
-	function onChange(pagination, filters, sorter, extra) {
-	}
 
 	const columns = [
 		{
@@ -41,7 +37,7 @@ const LessonsList = ({ lessonSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (lessons.lentgh === 0)
 		return (
 			<NoData
 				Add={AddLesson}
@@ -51,22 +47,16 @@ const LessonsList = ({ lessonSearch }) => {
 			/>
 		)
 
-	const lessons = lessonSearch
-		? data.lesson.filter((c) =>
-				c.name.toLowerCase().includes(lessonSearch.toLowerCase()),
-		  )
-		: data.lesson
-
 	return (
 		<>
 			<div className="lessons">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={lessons}
-					onChange={onChange}
 				/>
 			</div>
 		</>

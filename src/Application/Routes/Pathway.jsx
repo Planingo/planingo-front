@@ -11,12 +11,13 @@ import {
 } from '@ant-design/icons'
 import DetailPathway from '../Pathways/Pathway/Detail/DetailPathway'
 import PathwaysList from '../Pathways/PathwaysList'
-import { useAddPathway, useEdit } from '../Pathways/pathways.hooks'
+import { useAddPathway, useEdit, useSearchPathways } from '../Pathways/pathways.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddPathway from '../Pathways/Pathway/Add/AddPathway'
 import { useEditConstraints } from '../Settings/Constraints/Hook/pathwayConstraints.hook'
 import EditConstraint from '../Pathways/Pathway/Detail/Edit/EditConstraint'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Pathway = () => {
 	const options = [
@@ -31,12 +32,8 @@ export const Pathway = () => {
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onPathwaySearch = (value) => {
-		setPathwaySearch(value)
-	}
-
-	const [pathwaySearch, setPathwaySearch] = useState()
+    
+    const { search, pathways, loading } = useSearchPathways()
 	
 	return (
 		<div>
@@ -48,7 +45,7 @@ export const Pathway = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher une formation"
-                            onSearch={onPathwaySearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -62,10 +59,11 @@ export const Pathway = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <PathwaysList pathwaySearch={pathwaySearch} />
+                        <PathwaysList pathways={pathways} loading={loading} />
                     ) : (
-                        <Pathways pathwaySearch={pathwaySearch} />
+                        <Pathways pathways={pathways} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

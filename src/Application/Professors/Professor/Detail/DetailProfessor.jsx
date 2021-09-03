@@ -15,6 +15,7 @@ import { useIntl } from 'react-intl'
 import Refinement from '../../../../Components/Refinement/refinement'
 import './detailProfessor.scss'
 import { Tag } from '@planingo/ditto'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 export const DetailProfessor = () => {
 	const intl = useIntl()
@@ -54,6 +55,7 @@ export const DetailProfessor = () => {
 				}
 			/>
 			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
 		</>
 	)
 }

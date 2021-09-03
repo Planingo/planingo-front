@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons'
 import Refinement from '../../../../Components/Refinement/refinement'
 import AddPathway from '../Add/AddPathway'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailPathway = () => {
 	const intl = useIntl()
@@ -46,6 +47,7 @@ const DetailPathway = () => {
 				}
 			/>
 			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
 		</>
 	)
 }

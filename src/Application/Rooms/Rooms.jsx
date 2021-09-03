@@ -2,15 +2,13 @@ import React from 'react'
 import './rooms.scss'
 import Room from './Room/Room'
 import AddRoom from './Room/Add/AddRoom'
-import { useGetAllRooms } from './rooms.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from '@planingo/ditto'
 
-const Rooms = ({ roomSearch }) => {
+const Rooms = ({ rooms, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllRooms()
 
 	if (loading)
 		return (
@@ -19,7 +17,7 @@ const Rooms = ({ roomSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (rooms.length === 0)
 		return (
 			<NoData
 				Add={AddRoom}
@@ -28,12 +26,6 @@ const Rooms = ({ roomSearch }) => {
 				title={intl.formatMessage({ id: 'add.room' })}
 			/>
 		)
-
-	const rooms = roomSearch
-		? data.room.filter((c) =>
-				c.name.toLowerCase().includes(roomSearch.toLowerCase()),
-		  )
-		: data.room
 
 	return (
 		<div className="rooms">

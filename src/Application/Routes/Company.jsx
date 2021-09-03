@@ -10,9 +10,10 @@ import {
 } from '@ant-design/icons'
 import CompaniesList from '../Companies/CompaniesList'
 import DetailCompany from '../Companies/Company/Detail/DetailCompany'
-import { useAddCompany } from '../Companies/companies.hooks'
+import { useAddCompany, useSearchCompanies } from '../Companies/companies.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Company = () => {
 	const options = [
@@ -25,12 +26,8 @@ export const Company = () => {
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onCompanySearch = (value) => {
-		setCompanySearch(value)
-	}
-
-	const [companySearch, setCompanySearch] = useState()
+    
+    const { search, companies, loading } = useSearchCompanies()
 	
 	return (
 		<div>
@@ -42,7 +39,7 @@ export const Company = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher une entreprise"
-                            onSearch={onCompanySearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -56,10 +53,11 @@ export const Company = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <CompaniesList companySearch={companySearch} />
+                        <CompaniesList companies={companies} loading={loading} />
                     ) : (
-                        <Companies companySearch={companySearch} />
+                        <Companies companies={companies}loading={loading}  />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

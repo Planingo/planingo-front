@@ -3,8 +3,6 @@
 	background-color: var(--PRIMARY-120);
 	position: sticky;
 	top: 0;
-	// background: transparent linear-gradient(180deg, var(--PRIMARY-120) 0%, #ffce48 100%) 0%
-	// 	0% no-repeat padding-box;
 	color: white;
 	width: 4vw;
 	display: flex;
@@ -24,8 +22,8 @@
     	padding-bottom: 1em;
 
 		span {
-			height: 3em;
-			width: 3em;
+			height: 2em;
+			width: 2em;
 			svg {
 				height: 100%;
 				width: 100%;

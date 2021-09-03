@@ -13,6 +13,7 @@ import {
 import { useParams } from 'react-router'
 import { useIntl } from 'react-intl'
 import Refinement from '../../../../Components/Refinement/refinement'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailRoom = () => {
 	const intl = useIntl()
@@ -46,6 +47,7 @@ const DetailRoom = () => {
 				}
 			/>
 			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
 		</>
 	)
 }

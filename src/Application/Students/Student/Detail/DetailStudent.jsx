@@ -14,6 +14,7 @@ import {
 } from '@ant-design/icons'
 import EditConstraint from '../Edit/EditConstraint'
 import Edit from '../Edit/Edit'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailStudent = () => {
 	const intl = useIntl()
@@ -24,8 +25,6 @@ const DetailStudent = () => {
 	const {loading, student} = useGetStudentById(id)
 
 	if (loading) return null
-
-	console.log(student)
 
 	return (
 		<>
@@ -55,6 +54,7 @@ const DetailStudent = () => {
 				}
 			/>
 			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
 		</>
 	)
 }

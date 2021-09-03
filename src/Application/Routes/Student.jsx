@@ -13,11 +13,12 @@ import DetailStudent from '../Students/Student/Detail/DetailStudent'
 import StudentsList from '../Students/StudentsList'
 import Edit from '../Students/Student/Edit/Edit'
 import EditConstraint from '../Students/Student/Edit/EditConstraint'
-import { useAddStudent, useEdit } from '../Students/students.hooks'
+import { useAddStudent, useEdit, useSearchStudents } from '../Students/students.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddStudent from '../Students/Student/Add/AddStudent'
 import { useEditConstraints } from '../Settings/Constraints/Hook/studentConstraints.hook'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Student = () => {
 	const options = [
@@ -34,11 +35,7 @@ export const Student = () => {
 
 	const [isGrid, setIsGrid] = useState(true)
 
-	const onStudentSearch = (value) => {
-		setStudentSearch(value)
-	}
-
-	const [studentSearch, setStudentSearch] = useState()
+    const { search, students, loading } = useSearchStudents()
 	
 	return (
 		<div>
@@ -50,13 +47,12 @@ export const Student = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher un étudiant"
-                            onSearch={onStudentSearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
                             setIsGrid={setIsGrid}
                             isGrid={isGrid}
-                            
                             FirstActionIcon={UserOutlined}
                             firstActionText={intl.formatMessage({ id: 'add.student' })}
                             FirstForm={AddStudent}
@@ -65,10 +61,11 @@ export const Student = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <StudentsList studentSearch={studentSearch} />
+                        <StudentsList students={students} loading={loading} />
                     ) : (
-                        <Students studentSearch={studentSearch} />
+                        <Students students={students} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

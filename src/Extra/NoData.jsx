@@ -9,8 +9,8 @@ const NoData = ({ description, cta, Add, title }) => {
 	return (
 		<div className="noData">
 			<Empty description={description || intl.formatMessage({ id: 'no.data' })}>
-				<AddFirstItem title={title} cta={cta}>
-					<Add />
+				<AddFirstItem title={title || ''} cta={cta || ''}>
+					{Add && <Add />}
 				</AddFirstItem>
 			</Empty>
 		</div>

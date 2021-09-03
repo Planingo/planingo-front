@@ -1,5 +1,63 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
+import { useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_STUDENTS = gql`
+  query getAllStudents($searchText: String, $searchText2: String) {
+    student(order_by: {lastName: asc}, where: {
+      _or: [
+        {
+            firstName: {
+              _ilike: $searchText
+            },
+            lastName: {
+              _ilike: $searchText2
+            }
+        },
+        {
+            firstName: {
+              _ilike: $searchText2
+            },
+            lastName: {
+              _ilike: $searchText
+            },
+        }
+      ]}) {
+    	apprenticeships {
+			company {
+				id
+				name
+			}
+			id
+		}
+		created_at
+		firstName
+		id
+		lastName
+		pathway {
+			id
+			name
+		}
+    }
+  }
+`
+
+export const useSearchStudents = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_STUDENTS, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		const searchsTmp = searchText.split(" ").map(st => `%${st}%`)
+		if (searchText) setU({ searchText: searchsTmp[0], searchText2: searchsTmp[1] })
+		else setU(null)
+    }, 500)
+
+    const students = data?.student
+    return { search, students, ...result }
+}
+
 
 const getStudentsQuerie = gql`
 	query getAllStudents {

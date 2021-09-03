@@ -11,12 +11,13 @@ import {
 } from '@ant-design/icons'
 import DetailRoom from '../Rooms/Room/Detail/DetailRoom'
 import RoomsList from '../Rooms/RoomsList'
-import { useAddRoom, useEdit } from '../Rooms/rooms.hooks'
+import { useAddRoom, useEdit, useSearchRooms } from '../Rooms/rooms.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddRoom from '../Rooms/Room/Add/AddRoom'
 import { useEditConstraints } from '../Settings/Constraints/Hook/roomConstraints.hook'
 import EditConstraint from '../Rooms/Room/Edit/EditConstraint'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Room = () => {
 	const options = [
@@ -31,12 +32,8 @@ export const Room = () => {
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onRoomSearch = (value) => {
-		setRoomSearch(value)
-	}
-
-	const [roomSearch, setRoomSearch] = useState()
+    
+    const { search, rooms, loading } = useSearchRooms()
 	
 	return (
 		<div>
@@ -48,7 +45,7 @@ export const Room = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher une salle"
-                            onSearch={onRoomSearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -62,10 +59,11 @@ export const Room = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <RoomsList roomSearch={roomSearch} />
+                        <RoomsList rooms={rooms} loading={loading} />
                     ) : (
-                        <Rooms roomSearch={roomSearch} />
+                        <Rooms rooms={rooms} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

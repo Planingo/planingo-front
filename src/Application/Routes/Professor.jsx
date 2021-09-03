@@ -11,12 +11,14 @@ import {
 } from '@ant-design/icons'
 import { DetailProfessor } from '../Professors/Professor/Detail/DetailProfessor'
 import ProfessorsList from '../Professors/ProfessorsList'
-import { useAddProfessor, useEdit } from '../Professors/professors.hooks'
+import { useAddProfessor, useEdit, useSearchProfessors } from '../Professors/professors.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddProfessor from '../Professors/Professor/Add/AddProfessor'
 import { useEditConstraints } from '../Settings/Constraints/Hook/professorConstraints.hook'
 import EditConstraint from '../Professors/Professor/Edit/EditConstraint'
+import './style.scss'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Professor = () => {
 	const options = [
@@ -32,11 +34,7 @@ export const Professor = () => {
 
 	const [isGrid, setIsGrid] = useState(true)
 
-	const onProfessorSearch = (value) => {
-		setProfessorSearch(value)
-	}
-
-	const [professorSearch, setProfessorSearch] = useState()
+    const { search, professors, loading } = useSearchProfessors()
 	
 	return (
 		<div>
@@ -48,7 +46,7 @@ export const Professor = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher un professeur"
-                            onSearch={onProfessorSearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -62,10 +60,11 @@ export const Professor = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <ProfessorsList professorSearch={professorSearch} />
+                        <ProfessorsList professors={professors} loading={loading} />
                     ) : (
-                        <Professors professorSearch={professorSearch} />
+                        <Professors professors={professors} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>

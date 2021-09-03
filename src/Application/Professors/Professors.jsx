@@ -2,15 +2,13 @@ import React from 'react'
 import './professors.scss'
 import Professor from './Professor/Professor'
 import AddProfessor from './Professor/Add/AddProfessor'
-import { useGetAllProfessors } from './professors.hooks'
 import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from '@planingo/ditto'
 
-const Professors = ({ professorSearch }) => {
+const Professors = ({ professors, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllProfessors()
 
 	if (loading)
 		return (
@@ -19,7 +17,7 @@ const Professors = ({ professorSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (professors.length === 0)
 		return (
 			<NoData
 				Add={AddProfessor}
@@ -28,14 +26,6 @@ const Professors = ({ professorSearch }) => {
 				title={intl.formatMessage({ id: 'add.professor' })}
 			/>
 		)
-
-	const professors = professorSearch
-		? data.professor.filter(
-				(p) =>
-					p.lastName.toLowerCase().includes(professorSearch.toLowerCase()) ||
-					p.firstName.toLowerCase().includes(professorSearch.toLowerCase()),
-		  )
-		: data.professor
 
 	return (
 		<div className="professors">

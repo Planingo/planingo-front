@@ -3,3 +3,13 @@
 	width: 100%;
 	height: 100%;
 }
+
+.studentInfo {
+	display: flex;
+	text-transform: capitalize;
+
+	.lastName {
+		margin-left: 0.4em;
+		text-transform: uppercase;
+	}
+}

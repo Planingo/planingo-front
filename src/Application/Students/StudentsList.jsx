@@ -3,20 +3,12 @@ import { useIntl } from 'react-intl'
 import React from 'react'
 import './students.scss'
 import AddStudent from './Student/Add/AddStudent'
-import { useGetAllStudents } from './students.hooks'
 import { Table } from 'antd'
 import { Spin } from '@planingo/ditto'
 import { withSize } from 'react-sizeme'
 
-const StudentsList = ({ studentSearch }) => {
+const StudentsList = ({ students, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllStudents()
-	function onChange(pagination, filters, sorter, extra) {
-	}
-
-	const uniqueP =
-		(data && new Set(data.student.map((s) => s.pathway.name))) || []
-
 
 	const columns = [
 		{
@@ -44,8 +36,6 @@ const StudentsList = ({ studentSearch }) => {
 			title: 'Formation',
 			dataIndex: 'pathway',
 			render: (pathway) => pathway.name,
-			filters: [...uniqueP].map((s) => ({ text: s, value: s })),
-			onFilter: (value, record) => record.pathway.name === value,
 		},
 	]
 
@@ -56,7 +46,7 @@ const StudentsList = ({ studentSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (students.length === 0)
 		return (
 			<NoData
 				Add={AddStudent}
@@ -66,21 +56,16 @@ const StudentsList = ({ studentSearch }) => {
 			/>
 		)
 
-	const students = studentSearch
-		? data.student.filter((s) =>
-			s.lastName.toLowerCase().includes(studentSearch.toLowerCase()) ||
-			s.firstName.toLowerCase().includes(studentSearch.toLowerCase()))
-		: data.student
 	return (
 		<>
 			<div className="students">
 				<Table
+					scroll={{ y: Math.floor((window.screen.height - 350)) }}
 					tableLayout="fixed"
 					pagination={false}
 					rowKey={(record) => record.id}
 					columns={columns}
 					dataSource={students}
-					onChange={onChange}
 				/>
 			</div>
 		</>

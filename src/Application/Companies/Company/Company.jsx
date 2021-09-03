@@ -6,6 +6,9 @@ const Company = ({ data }) => {
 	return (
 		<div className="company">
 			<Card
+				downloadTitle={`Télécharger le calendrier de ${data.name}`}
+				cloudTitle={`Envoyer le calendrier à toutes les personnes de ${data.name}`}
+				deleteTitle={`Supprimer l'entreprise ${data.name}`}
 				link={`/companies/${data.id}`}
 				title={data.name}
 				alt={data.name}

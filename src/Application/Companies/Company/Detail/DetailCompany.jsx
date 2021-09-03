@@ -13,6 +13,7 @@ import {
 	EditOutlined,
 } from '@ant-design/icons'
 import { useParams } from 'react-router'
+import { Footer } from '../../../Layout/Footer/Footer'
 
 const DetailCompany = () => {
 	const intl = useIntl()
@@ -46,6 +47,7 @@ const DetailCompany = () => {
 				}
 			/>
 			<Detail Constraints={<Constraints/>} Calendars={<Calendars/>} />
+			<Footer />
 		</>
 	)
 }

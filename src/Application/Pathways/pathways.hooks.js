@@ -1,6 +1,31 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { gql } from '@apollo/client'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+
+const SEARCH_PATHWAYS = gql`
+  query getAllPathways($searchText: String) {
+    pathway(order_by: {name: asc}, where: { name: { _ilike: $searchText }}) {
+		description
+		id
+		name
+	}
+  }
+`
+
+export const useSearchPathways = () => {
+	const [u, setU] = useState()
+
+    const {data,...result } = useQuery(SEARCH_PATHWAYS, {variables: { ...u }})
+  
+    const search = useDebouncedCallback((searchText) => {
+		if (searchText) setU({ searchText: `%${searchText}%` })
+		else setU(null)
+    }, 500)
+
+    const pathways = data?.pathway
+    return { search, pathways, ...result }
+}
 
 const getPathwaysQuerie = gql`
 	query getAllPathways {

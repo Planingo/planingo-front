@@ -6,11 +6,9 @@ import Gallery from '../Layout/Gallery'
 import NoData from '../../Extra/NoData'
 import { useIntl } from 'react-intl'
 import { Spin } from '@planingo/ditto'
-import { useGetAllLessons } from './lessons.hooks'
 
-const Lessons = ({ lessonSearch }) => {
+const Lessons = ({ lessons, loading }) => {
 	const intl = useIntl()
-	const { data, loading } = useGetAllLessons()
 
 	if (loading)
 		return (
@@ -19,7 +17,7 @@ const Lessons = ({ lessonSearch }) => {
 			</div>
 		)
 
-	if (!data)
+	if (lessons.lentgh === 0)
 		return (
 			<NoData
 				Add={AddLesson}
@@ -28,12 +26,6 @@ const Lessons = ({ lessonSearch }) => {
 				title={intl.formatMessage({ id: 'add.lesson' })}
 			/>
 		)
-
-	const lessons = lessonSearch
-		? data.lesson.filter((c) =>
-				c.name.toLowerCase().includes(lessonSearch.toLowerCase()),
-		  )
-		: data.lesson
 
 	return (
 		<div className="lessons">

@@ -11,12 +11,13 @@ import {
 } from '@ant-design/icons'
 import DetailModule from '../Modules/Module/Detail/DetailModule'
 import ModulesList from '../Modules/ModulesList'
-import { useAddModule, useEdit } from '../Modules/modules.hooks'
+import { useAddModule, useEdit, useSearchModules } from '../Modules/modules.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddModule from '../Modules/Module/Add/AddModule'
 import { useEditConstraints } from '../Settings/Constraints/Hook/moduleConstraints.hook'
 import EditConstraint from '../Modules/Module/Edit/EditConstraint'
+import { Footer } from '../Layout/Footer/Footer'
 
 export const Module = () => {
 	const options = [
@@ -31,12 +32,8 @@ export const Module = () => {
 	const intl = useIntl()
 
 	const [isGrid, setIsGrid] = useState(true)
-
-	const onModuleSearch = (value) => {
-		setModuleSearch(value)
-	}
-
-	const [moduleSearch, setModuleSearch] = useState()
+    
+    const { search, modules, loading } = useSearchModules()
 	
 	return (
 		<div>
@@ -48,7 +45,7 @@ export const Module = () => {
                     <div className="header">
                         <Search
                             placeholder="Rechercher un module"
-                            onSearch={onModuleSearch}
+                            onSearch={search}
                         />
                         <Refinement
                             options={options}
@@ -62,10 +59,11 @@ export const Module = () => {
                         />
                     </div>
                     {!isGrid ? (
-                        <ModulesList moduleSearch={moduleSearch} />
+                        <ModulesList modules={modules} loading={loading} />
                     ) : (
-                        <Modules moduleSearch={moduleSearch} />
+                        <Modules modules={modules} loading={loading} />
                     )}
+                    <Footer />
                 </Route>
             </Switch>
 		</div>
