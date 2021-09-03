@@ -1,6 +1,6 @@
 {
 	"name": "planingo-front",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "Planingo front",
 	"private": true,
 	"dependencies": {
