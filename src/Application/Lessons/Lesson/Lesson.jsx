@@ -6,6 +6,7 @@ const Lesson = ({ data }) => {
 	return (
 		<div className="lesson-container">
 			<Card
+				tags={[]}
 				downloadTitle={`Télécharger le calendrier de ${data.name}`}
 				cloudTitle={`Envoyer le calendrier à toutes les personnes programmées pour ${data.name}`}
 				deleteTitle={`Supprimer le cours ${data.name}`}

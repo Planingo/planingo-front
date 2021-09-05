@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './addItem.scss'
-import { Button, Modal } from '@planingo/ditto'
+import { Button, Modal, Notification } from '@planingo/ditto'
 import { useParams } from 'react-router'
 
 const AddItem = ({
@@ -29,6 +29,16 @@ const AddItem = ({
 				>
 					{cta || title}
 				</Button>
+				}
+				ValidateButton={
+				  (handleOk) => <Notification
+				  	OpenNotification={(openNotification) => 
+						<Button key="validate" className="cta" onClick={() => {
+						openNotification()
+						handleOk()
+						}}>Valider</Button>
+						
+					}/>
 				}
 				title={title}
 			>

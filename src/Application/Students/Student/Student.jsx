@@ -6,6 +6,7 @@ const Student = ({ data }) => {
 	return (
 			<div className="student">
 			<Card
+				tags={[data.pathway.name]}
 				downloadTitle={`Télécharger le calendrier de ${data.firstName} ${data.lastName}`}
 				cloudTitle={`Envoyer le calendrier`}
 				deleteTitle={`Supprimer l'étudiant ${data.firstName} ${data.lastName}`}

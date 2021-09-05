@@ -1,11 +1,13 @@
 import React from 'react'
 import './company.scss'
 import { Card } from '../../Layout/Card'
+import { TagsOutlined } from '@ant-design/icons'
 
 const Company = ({ data }) => {
 	return (
 		<div className="company">
 			<Card
+				tags={[]}
 				downloadTitle={`Télécharger le calendrier de ${data.name}`}
 				cloudTitle={`Envoyer le calendrier à toutes les personnes de ${data.name}`}
 				deleteTitle={`Supprimer l'entreprise ${data.name}`}

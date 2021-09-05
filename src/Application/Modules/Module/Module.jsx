@@ -6,6 +6,7 @@ const Module = ({ data }) => {
 	return (
 		<div className="module">
 			<Card
+				tags={[]}
 				downloadTitle={`Télécharger le calendrier de ${data.name}`}
 				cloudTitle={`Envoyer le calendrier à toutes les personnes programmées pour ${data.name}`}
 				deleteTitle={`Supprimer le module ${data.name}`}

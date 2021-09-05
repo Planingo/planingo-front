@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import './navigation.scss'
 import { NavLink } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { Menu, Modal } from 'antd'
+import { Menu } from 'antd'
+import { Button, Modal, Notification } from '@planingo/ditto'
 import {
 	CalendarOutlined,
 	ExperimentOutlined,
@@ -158,9 +159,25 @@ const Navigation = () => {
 				))
 			}
 			</div>
-			<Modal title="Mon compte" visible={isModalVisible} okText="Enregistrer" onOk={handleOk} onCancel={handleCancel}>
+			{/* <Modal
+				title="Mon compte" 
+				visible={isModalVisible} 
+				okText="Enregistrer" 
+				onOk={handleOk} 
+				onCancel={handleCancel}
+				ValidateButton={
+					(handleOk) => <Notification
+						OpenNotification={(openNotification) => 
+							<Button key="validate" className="cta" onClick={() => {
+							openNotification()
+							handleOk()
+							}}>Valider</Button>
+							
+						}/>
+					}
+			  >
 				<p>{email}</p>
-			</Modal>
+			</Modal> */}
 		</div>
 	)
 }
