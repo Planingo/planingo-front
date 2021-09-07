@@ -31,13 +31,12 @@ const AddItem = ({
 				</Button>
 				}
 				ValidateButton={
-				  (handleOk) => <Notification
-				  	OpenNotification={(openNotification) => 
-						<Button key="validate" className="cta" onClick={() => {
-						openNotification()
-						handleOk()
-						}}>Valider</Button>
-						
+					(handleOk) => <Notification
+						OpenNotification={(openNotification) => 
+							<Button key="validate" className="cta" onClick={() => {
+								openNotification()
+								handleOk()
+							}}>Valider</Button>
 					}/>
 				}
 				title={title}

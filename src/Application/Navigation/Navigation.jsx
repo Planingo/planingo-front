@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './navigation.scss'
 import { NavLink } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { Menu } from 'antd'
-import { Button, Modal, Notification } from '@planingo/ditto'
 import {
 	CalendarOutlined,
 	ExperimentOutlined,
 	UserOutlined,
 	TeamOutlined,
-	SettingOutlined,
 	WifiOutlined,
 	TagsOutlined,
 	TagOutlined,
@@ -25,7 +23,6 @@ const { SubMenu } = Menu;
 
 const Navigation = () => {
 	const intl = useIntl()
-	const [isModalVisible, setIsModalVisible] = useState(false);
 
 	const userId = useSelector(selectors.accountId)
 	const {email, loadingAccount} = useAccountById(userId)
@@ -96,31 +93,11 @@ const Navigation = () => {
 				<WifiOutlined />
 			</Tooltip>
 		},
-		// {
-		// 	key: 'setting',
-		// 	to: '/settings',
-		// 	message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.settings' })}>
-		// 		<SettingOutlined />
-		// 	</Tooltip>
-		// }
 	]
 
 	function handleClick(e) {
 	}
 
-
-	const showModal = () => {
-		setIsModalVisible(true);
-	};
-
-	const handleOk = () => {
-		setIsModalVisible(false);
-	};
-
-	const handleCancel = () => {
-		setIsModalVisible(false);
-	};
-	
 	return (
 		<div className="navigation">
 			<div className="top">
@@ -132,7 +109,7 @@ const Navigation = () => {
 						/>}>
 						<Menu.Item key="1">{email}</Menu.Item>
 						<Menu.Item key="2">
-							<p onClick={showModal}>
+							<p>
 								Mon compte
 							</p>
 						</Menu.Item>
@@ -159,25 +136,6 @@ const Navigation = () => {
 				))
 			}
 			</div>
-			{/* <Modal
-				title="Mon compte" 
-				visible={isModalVisible} 
-				okText="Enregistrer" 
-				onOk={handleOk} 
-				onCancel={handleCancel}
-				ValidateButton={
-					(handleOk) => <Notification
-						OpenNotification={(openNotification) => 
-							<Button key="validate" className="cta" onClick={() => {
-							openNotification()
-							handleOk()
-							}}>Valider</Button>
-							
-						}/>
-					}
-			  >
-				<p>{email}</p>
-			</Modal> */}
 		</div>
 	)
 }

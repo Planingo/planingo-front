@@ -6,17 +6,14 @@ import { useIntl } from 'react-intl'
 import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
-	EditOutlined,
     TeamOutlined
 } from '@ant-design/icons'
 import { DetailProfessor } from '../Professors/Professor/Detail/DetailProfessor'
 import ProfessorsList from '../Professors/ProfessorsList'
-import { useAddProfessor, useEdit, useSearchProfessors } from '../Professors/professors.hooks'
+import { useAddProfessor, useSearchProfessors } from '../Professors/professors.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddProfessor from '../Professors/Professor/Add/AddProfessor'
-import { useEditConstraints } from '../Settings/Constraints/Hook/professorConstraints.hook'
-import EditConstraint from '../Professors/Professor/Edit/EditConstraint'
 import './style.scss'
 import { Footer } from '../Layout/Footer/Footer'
 
@@ -27,8 +24,6 @@ export const Professor = () => {
 	]
 
 	const [addProfessor, { loading: addingProfessor }] = useAddProfessor()
-	const [edit, { loading: editingProfessor }] = useEdit()
-    const [editConstraints, {loading: editingConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
@@ -57,6 +52,7 @@ export const Professor = () => {
                             FirstForm={AddProfessor}
                             onFirstAction={addProfessor}
                             firstActioning={addingProfessor}
+
                         />
                     </div>
                     {!isGrid ? (

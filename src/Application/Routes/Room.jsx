@@ -6,17 +6,14 @@ import { useIntl } from 'react-intl'
 import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
-	EditOutlined,
     ShopOutlined
 } from '@ant-design/icons'
 import DetailRoom from '../Rooms/Room/Detail/DetailRoom'
 import RoomsList from '../Rooms/RoomsList'
-import { useAddRoom, useEdit, useSearchRooms } from '../Rooms/rooms.hooks'
+import { useAddRoom, useSearchRooms } from '../Rooms/rooms.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddRoom from '../Rooms/Room/Add/AddRoom'
-import { useEditConstraints } from '../Settings/Constraints/Hook/roomConstraints.hook'
-import EditConstraint from '../Rooms/Room/Edit/EditConstraint'
 import { Footer } from '../Layout/Footer/Footer'
 
 export const Room = () => {
@@ -26,8 +23,6 @@ export const Room = () => {
 	]
 
 	const [addRoom, { loading: addingRoom }] = useAddRoom()
-	const [edit, { loading: editingRoom }] = useEdit()
-    const [editConstraints, {loading: editingRoomConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 

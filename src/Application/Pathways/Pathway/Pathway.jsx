@@ -4,7 +4,7 @@ import { Card } from '../../Layout/Card'
 
 const Pathway = ({ data }) => {
 	return (
-		<div className="pathway">
+		<div className="pathway-container">
 			<Card
 				tags={[]}
 				downloadTitle={`Télécharger le calendrier de ${data.name}`}

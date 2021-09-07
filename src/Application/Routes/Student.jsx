@@ -7,17 +7,13 @@ import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
 	UserOutlined,
-	EditOutlined,
 } from '@ant-design/icons'
 import DetailStudent from '../Students/Student/Detail/DetailStudent'
 import StudentsList from '../Students/StudentsList'
-import Edit from '../Students/Student/Edit/Edit'
-import EditConstraint from '../Students/Student/Edit/EditConstraint'
-import { useAddStudent, useEdit, useSearchStudents } from '../Students/students.hooks'
+import { useAddStudent, useSearchStudents } from '../Students/students.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddStudent from '../Students/Student/Add/AddStudent'
-import { useEditConstraints } from '../Settings/Constraints/Hook/studentConstraints.hook'
 import { Footer } from '../Layout/Footer/Footer'
 
 export const Student = () => {
@@ -27,8 +23,6 @@ export const Student = () => {
 	]
 
 	const [addStudent, { loading: addingStudent }] = useAddStudent()
-	const [edit, { loading: editingStudent }] = useEdit()
-    const [editConstraints, {loading: editingStudentConstraints}] = useEditConstraints()
 
 
 	const intl = useIntl()

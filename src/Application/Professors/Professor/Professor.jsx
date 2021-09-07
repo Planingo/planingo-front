@@ -4,7 +4,6 @@ import { Card } from '../../Layout/Card'
 import { TagsOutlined } from '@ant-design/icons'
 
 const Professor = ({ data }) => {
-	console.log(data.modules.map(m => m.module.name))
 	return (
 		<div className="professor">
 			<Card
@@ -12,7 +11,7 @@ const Professor = ({ data }) => {
 				tags={data.modules.map(m => m.module.name)}
 				downloadTitle={`Télécharger le calendrier de ${data.firstName} ${data.lastName}`}
 				cloudTitle={`Envoyer le calendrier`}
-				type='lesson'
+				type='module'
 				deleteTitle={`Supprimer le professeur ${data.firstName} ${data.lastName}`}
 				link={`/professors/${data.id}`}
 				title={<div className="professorInfo">{data.firstName} <div className="lastName">{data.lastName}</div></div>}

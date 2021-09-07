@@ -22,7 +22,6 @@ export const Calendar = () => {
 	]
 
 	const [addCalendar, { loading: addingCalendar }] = useAddCalendar()
-	// const [editCalendar, { loading: editingCalendar }] = useEditCalendar()
 
 	const intl = useIntl()
 

@@ -6,17 +6,14 @@ import { useIntl } from 'react-intl'
 import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
-	EditOutlined,
     TeamOutlined
 } from '@ant-design/icons'
 import DetailPathway from '../Pathways/Pathway/Detail/DetailPathway'
 import PathwaysList from '../Pathways/PathwaysList'
-import { useAddPathway, useEdit, useSearchPathways } from '../Pathways/pathways.hooks'
+import { useAddPathway, useSearchPathways } from '../Pathways/pathways.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddPathway from '../Pathways/Pathway/Add/AddPathway'
-import { useEditConstraints } from '../Settings/Constraints/Hook/pathwayConstraints.hook'
-import EditConstraint from '../Pathways/Pathway/Detail/Edit/EditConstraint'
 import { Footer } from '../Layout/Footer/Footer'
 
 export const Pathway = () => {
@@ -26,8 +23,6 @@ export const Pathway = () => {
 	]
 
 	const [addPathway, { loading: addingPathway }] = useAddPathway()
-	const [edit, { loading: editingPathway }] = useEdit()
-    const [editConstraints, {loading: editingPathwayConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 

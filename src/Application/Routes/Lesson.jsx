@@ -6,17 +6,14 @@ import { useIntl } from 'react-intl'
 import {
 	AppstoreOutlined,
 	UnorderedListOutlined,
-	EditOutlined,
     TagsOutlined
 } from '@ant-design/icons'
 import DetailLesson from '../Lessons/Lesson/Detail/DetailLesson'
 import LessonsList from '../Lessons/LessonsList'
-import { useAddLesson, useEdit, useSearchLessons } from '../Lessons/lessons.hooks'
+import { useAddLesson, useSearchLessons } from '../Lessons/lessons.hooks'
 import Refinement from '../../Components/Refinement/refinement'
 import Search from '../../Components/Search/search'
 import AddLesson from '../Lessons/Lesson/Add/AddLesson'
-import { useEditConstraints } from '../Settings/Constraints/Hook/lessonConstraints.hook'
-import EditConstraint from '../Lessons/Lesson/Edit/EditConstraint'
 import { Footer } from '../Layout/Footer/Footer'
 
 export const Lesson = () => {
@@ -26,8 +23,6 @@ export const Lesson = () => {
 	]
 
 	const [addLesson, { loading: addingLesson }] = useAddLesson()
-	const [edit, { loading: editingLesson }] = useEdit()
-    const [editConstraints, {loading: editingConstraints}] = useEditConstraints()
 
 	const intl = useIntl()
 
