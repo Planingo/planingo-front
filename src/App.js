@@ -19,15 +19,15 @@ const { store, persistor } = configureStore()
 const App = () => {
 	return (
 		<ConfigProvider locale={frFR}>
-		<ReduxProvider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<IntlProvider>
-					<ApolloProvider client={hogwarts}>
-						<Routes />
-					</ApolloProvider>
-				</IntlProvider>
-			</PersistGate>
-		</ReduxProvider>
+			<ReduxProvider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
+					<IntlProvider>
+						<ApolloProvider client={hogwarts}>
+							<Routes />
+						</ApolloProvider>
+					</IntlProvider>
+				</PersistGate>
+			</ReduxProvider>
 		</ConfigProvider>
 	)
 }

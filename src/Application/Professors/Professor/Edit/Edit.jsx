@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './edit.scss'
-import { Form, Input, Select, Switch } from 'antd'
+import { Form, Input, Select } from 'antd'
+import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
 import { useGetProfessorById } from '../../professors.hooks'
@@ -29,20 +30,22 @@ const Edit = ({ setItem }) => {
 				layout="vertical"
 				hideRequiredMark
 			>
-				<Form.Item
-					name="lastName"
-					label="Nom"
-					rules={[{ required: true, message: 'Please enter user name' }]}
-				>
-					<Input placeholder="Please enter user name" />
-				</Form.Item>
-				<Form.Item
-					name="firstName"
-					label="Prénom"
-					rules={[{ required: true, message: 'Please enter user name' }]}
-				>
-					<Input placeholder="Please enter user name" />
-				</Form.Item>
+				<div className="add-professor-form">
+					<Form.Item
+						name="lastName"
+						label="Nom"
+						rules={[{ required: true, message: 'Merci de renseigner le nom' }]}
+					>
+						<Input placeholder="Potter" />
+					</Form.Item>
+					<Form.Item
+						name="firstName"
+						label="Prénom"
+						rules={[{ required: true, message: 'Merci de renseigner le prénom' }]}
+					>
+						<Input placeholder="Harry" />
+					</Form.Item>
+				</div>
 				<Form.Item
 					name="pathwayId"
 					label="Formation"

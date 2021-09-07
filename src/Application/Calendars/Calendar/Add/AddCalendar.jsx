@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './addCalendar.scss'
-import { Form, Switch, Select } from 'antd'
+import { Form, Select } from 'antd'
+import { Switch } from '@planingo/ditto'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons'
 import { useGetAllStudents } from '../../../Students/students.hooks'

@@ -22,20 +22,22 @@ const AddProfessor = ({ setItem }) => {
 				layout="vertical"
 				hideRequiredMark
 			>
-				<Form.Item
-					name="lastName"
-					label="Nom"
-					rules={[{ required: true, message: 'Please enter user name' }]}
-				>
-					<Input placeholder="Please enter user name" />
-				</Form.Item>
-				<Form.Item
-					name="firstName"
-					label="Prénom"
-					rules={[{ required: true, message: 'Please enter user name' }]}
-				>
-					<Input placeholder="Please enter user name" />
-				</Form.Item>
+				<div className="add-professor-form">
+					<Form.Item
+						name="lastName"
+						label="Nom"
+						rules={[{ required: true, message: 'Merci de renseigner le nom' }]}
+					>
+						<Input placeholder="Babbling" />
+					</Form.Item>
+					<Form.Item
+						name="firstName"
+						label="Prénom"
+						rules={[{ required: true, message: 'Merci de renseigner le prénom' }]}
+					>
+						<Input placeholder="Horace" />
+					</Form.Item>
+				</div>
 			</Form>
 		</div>
 	)

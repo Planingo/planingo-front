@@ -5,7 +5,7 @@ import Navigation from './Navigation/Navigation'
 import {Student, Professor, Calendar, Lesson, Room, Company} from './Routes'
 import { Pathway } from './Routes/Pathway'
 import { Module } from './Routes/Module'
-import Settings from './Settings/Settings'
+// import Settings from './Settings/Settings'
 
 const Application = () => {
 
@@ -39,9 +39,9 @@ const Application = () => {
 						<Route path="/companies">
 							<Company/>
 						</Route>
-						<Route path="/settings">
+						{/* <Route path="/settings">
 							<Settings />
-						</Route>
+						</Route> */}
 					</Switch>
 				</div>
 			</div>

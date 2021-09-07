@@ -1,21 +1,6 @@
-.addProfessor {
-	padding: 1em;
-	width: 100%;
-	height: 100%;
-
-	span {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		svg {
-			width: 30%;
-			height: 30%;
-		}
-	}
-
-	.ant-checkbox-wrapper {
-		display: flex;
-		align-items: center;
+.edit {
+	.prof-date-constraints {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;	
 	}
 }

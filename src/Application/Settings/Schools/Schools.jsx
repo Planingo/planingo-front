@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './schools.scss'
-import { Radio, Button, Card, Select, TimePicker, Tooltip } from 'antd'
+import { Select, TimePicker } from 'antd'
+import { Tooltip, Card, Button, Radio } from '@planingo/ditto'
 import { useIntl } from 'react-intl'
 import { DeleteOutlined } from '@ant-design/icons'
 import { RadioGroup } from '@planingo/ditto'

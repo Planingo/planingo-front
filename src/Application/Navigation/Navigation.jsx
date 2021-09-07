@@ -96,13 +96,13 @@ const Navigation = () => {
 				<WifiOutlined />
 			</Tooltip>
 		},
-		{
-			key: 'setting',
-			to: '/settings',
-			message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.settings' })}>
-				<SettingOutlined />
-			</Tooltip>
-		}
+		// {
+		// 	key: 'setting',
+		// 	to: '/settings',
+		// 	message: <Tooltip placement='right' title={intl.formatMessage({ id: 'navigation.settings' })}>
+		// 		<SettingOutlined />
+		// 	</Tooltip>
+		// }
 	]
 
 	function handleClick(e) {

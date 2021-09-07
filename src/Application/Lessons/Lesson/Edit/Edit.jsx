@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './edit.scss'
-import { Form, Input, Select, Switch } from 'antd'
+import { Form, Input, Select } from 'antd'
+import { Switch } from '@planingo/ditto'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import { useGetAllPathways } from '../../../Pathways/pathways.hooks'
 import { useGetLessonById } from '../../lessons.hooks'
