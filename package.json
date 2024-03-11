@@ -17,7 +17,7 @@
 		"craco-babel-loader": "^0.1.4",
 		"craco-less": "^1.17.0",
 		"cypress": "^6.4.0",
-		"final-form": "^4.20.0",
+		"final-form": "^4.20.10",
 		"graphql": "^15.5.0",
 		"minio": "^7.0.33",
 		"redux": "^4.0.5",
